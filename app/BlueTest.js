@@ -5,20 +5,16 @@ import { BleManager } from 'react-native-ble-plx';
 export class BlueTest extends React.Component {
     constructor() {
         super()
-        this.state = { bleState: 'NOT READY', devices: [], names: [] }
+        this.state = { bleState: 'NOT READY', devicesIds: [], names: [] }
         this.manager = new BleManager();
-        this.devNames = "dispositivo random";
         this.disp1 = "No hay nada";
     }
 
 
     async componentDidMount() {
-
-
-        const bleState = await this.manager.state()
-        console.log({ bleState })
-        this.setState({ bleState })
-        //manager.startDeviceScan();
+        const currentState = await this.manager.state()
+        console.log({ currentState })
+        this.setState({ bleState: currentState })
 
         const subscription = this.manager.onStateChange((state) => {
             this.scanAndConnect();
@@ -39,31 +35,28 @@ export class BlueTest extends React.Component {
             }
             // device.name
             console.log(device)
-            if (!this.state.devices.includes(device)) {
-                this.setState({ devices: [device, ...this.state.devices] })
+            if (!this.state.devicesIds.includes(device.id)) {
+                this.setState({ devicesIds: [device.id, ...this.state.devices] })
             }
             if (!this.state.names.includes(device.name)) {
                 this.setState({ names: [device.name, ...this.state.names] })
+                console.log({polla: this.state.names})
             }
-            if (this.state.devices.length > 0) {
-                this.disp1 = this.state.devices[this.state.devices.length - 1].name;
+            if (this.state.devicesIds.length > 0) {
+                this.disp1 = this.state.devicesIds[this.state.devicesIds.length - 1].name;
             }
-            // Check if it is a device you are looking for based on advertisement data
-            // or other criteria.
-            if (device.name === 'TI BLE Sensor Tag' ||
-                device.name === 'asd') {
-
-                // Stop scanning as it's not necessary if you are scanning for one device.
+            // Si ha encontrado mi dispositvo dejamos de escanear
+            if (device.name === 'nombre de mi dispositivo') {
                 this.manager.stopDeviceScan();
-
-                // Proceed with connection.
             }
+            
         });
     }
 
     resetDevices() {
-
-        this.state.devices = [];
+        // Reseteamos los devices
+        this.setState({devicesIds: []});
+        this.setState({names: []});
     }
 
     render() {
@@ -71,20 +64,17 @@ export class BlueTest extends React.Component {
             <View>
                 <View>
                     <Text>BLE state= {JSON.stringify(this.state.bleState)}</Text>
-                    <Text>devices.length = {this.state.devices.length}</Text>
+                    <Text>devices.length = {this.state.devicesIds.length}</Text>
                     <Text>names.length = {this.state.names.length}</Text>
                     <Text>device.name = {this.disp1}</Text>
 
                     <Button
+                        // Propiedades del botón ("props")                    
                         title="Reset devices list"
                         onPress={() => { this.resetDevices() }}
                     ></Button>
-                </View>
-                <View>
-
-                </View>
+                </View>          
             </View>
-
         )
     }
 }
