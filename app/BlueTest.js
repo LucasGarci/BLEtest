@@ -8,6 +8,7 @@ export class BlueTest extends React.Component {
         this.state = { bleState: 'NOT READY', devicesIds: [], names: [], devicesData: [] }
         this.manager = new BleManager();
         this.lastDevice = "No hay nada";
+
     }
 
 
