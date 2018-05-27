@@ -5,9 +5,9 @@ import { BleManager } from 'react-native-ble-plx';
 export class BlueTest extends React.Component {
     constructor() {
         super()
-        this.state = { bleState: 'NOT READY', devicesIds: [], names: [] }
+        this.state = { bleState: 'NOT READY', devicesIds: [], names: [], devicesData: [] }
         this.manager = new BleManager();
-        this.disp1 = "No hay nada";
+        this.lastDevice = "No hay nada";
     }
 
 
@@ -34,16 +34,22 @@ export class BlueTest extends React.Component {
                 return console.error(error)
             }
             // device.name
-            console.log(device)
+            // console.log(device)
             if (!this.state.devicesIds.includes(device.id)) {
-                this.setState({ devicesIds: [device.id, ...this.state.devices] })
+                this.setState({ devicesIds: [device.id, ...this.state.devicesIds] });
+                var newDevice = {};
+                newDevice ["name"] = device.name;
+                newDevice ["id"] = device.id;
+                newDevice ["rssi"] = device.rssi;
+                this.setState({devicesData: this.state.devicesData.push(newDevice)})
+                console.log({estadoActual: this.state})
             }
             if (!this.state.names.includes(device.name)) {
                 this.setState({ names: [device.name, ...this.state.names] })
-                console.log({polla: this.state.names})
+                console.log({polla: this.state.devicesIds})
             }
             if (this.state.devicesIds.length > 0) {
-                this.disp1 = this.state.devicesIds[this.state.devicesIds.length - 1].name;
+                this.lastDevice = this.state.devicesIds[this.state.devicesIds.length - 1];
             }
             // Si ha encontrado mi dispositvo dejamos de escanear
             if (device.name === 'nombre de mi dispositivo') {
@@ -64,9 +70,9 @@ export class BlueTest extends React.Component {
             <View>
                 <View>
                     <Text>BLE state= {JSON.stringify(this.state.bleState)}</Text>
-                    <Text>devices.length = {this.state.devicesIds.length}</Text>
+                    <Text>devicesIds.length = {this.state.devicesIds.length}</Text>
                     <Text>names.length = {this.state.names.length}</Text>
-                    <Text>device.name = {this.disp1}</Text>
+                    <Text>LastDevice.id = {this.lastDevice}</Text>
 
                     <Button
                         // Propiedades del botón ("props")                    
