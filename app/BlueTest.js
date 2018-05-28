@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { BleManager } from 'react-native-ble-plx';
+import { DeviceItem } from './components/DeviceItem'
 
 
 export class BlueTest extends React.Component {
@@ -22,7 +23,6 @@ export class BlueTest extends React.Component {
         const currentState = await this.manager.state()
         console.log({ currentState })
         this.setState({ bleState: currentState })
-
         const subscription = this.manager.onStateChange((state) => {
             this.scanAndConnect();
             subscription.remove();
@@ -44,10 +44,11 @@ export class BlueTest extends React.Component {
             if (!this.state.devicesIds.includes(device.id)) {
                 this.setState({ devicesIds: [device.id, ...this.state.devicesIds] });
                 var newDevice = {};
-                newDevice["name"] = device.name;
                 newDevice["id"] = device.id;
+                newDevice["name"] = device.name;
                 newDevice["rssi"] = device.rssi;
-                console.log({ oldDeviceData: this.state.devicesData });
+                newDevice["isConnectable"] = device.isConnectable;
+
                 this.setState({
                     devicesData: [...this.state.devicesData, newDevice]
                 });
@@ -55,7 +56,6 @@ export class BlueTest extends React.Component {
             }
             if (!this.state.names.includes(device.name)) {
                 this.setState({ names: [device.name, ...this.state.names] })
-                console.log({ deviceIds: this.state.devicesIds })
             }
             if (this.state.devicesIds.length > 0) {
                 this.lastDevice = this.state.devicesIds[this.state.devicesIds.length - 1];
@@ -92,10 +92,10 @@ export class BlueTest extends React.Component {
                     <Text>LastDevice.id = {this.lastDevice}</Text>
                     <FlatList
                         data={this.state.devicesData}
-                        renderItem={({ item }) => <Text>{item.id}</Text>}
+                        renderItem={({ item }) => <DeviceItem device={item} />}
                     />
 
-                    
+
                 </View>
             </View>
         )
