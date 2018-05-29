@@ -3,8 +3,6 @@ import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { BleManager } from 'react-native-ble-plx';
 import { DeviceItem } from './components/DeviceItem'
 
-
-
 export class BlueTest extends React.Component {
     constructor() {
         super()
@@ -18,7 +16,6 @@ export class BlueTest extends React.Component {
         this.lastDevice = "No hay nada";
 
     }
-
 
     async componentDidMount() {
         const currentState = await this.manager.state()
@@ -95,7 +92,6 @@ export class BlueTest extends React.Component {
                     <Text>LastDevice.id = {this.lastDevice}</Text>
                     <FlatList
                         data={this.state.devicesData}
-
                         renderItem={({ item }) => <DeviceItem device={item} />}
                     />
 
