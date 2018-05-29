@@ -11,45 +11,58 @@ export class DeviceItem extends React.Component {
             rssi: null,
             isConnectable: null,
         }
-      this.manager = new BleManager();
+        this.manager = new BleManager();
+        this.device = {}
     }
 
-    componentDidMount () {
-        const {device} = this.props
+    componentDidMount() {
+        const { device } = this.props
         this.setState({
             id: device.id,
-            name: device.name || 'Anonimo',  
+            name: device.name || 'Anonimo',
             rssi: device.rssi,
             isConnectable: device.isConnectable,
         })
+        this.device = this.props.device;
     }
 
     onPress = () => {
-        this.manager.connectToDevice(this.state.id).then(function(value) {
-            console.log({result: value}); // Success!
-          }, function(reason) {
-            console.log({result: reason}); // Error!
-          });
+        this.manager.connectToDevice(this.state.id)
+            .then((device) => {
+                device.discoverAllServicesAndCharacteristics().then((result) => {
+                    console.log({ fullData: result })
+                })
+            })
+            .catch((reason) => {
+                console.log({ result: reason }); // Error!
+            })
     };
 
     render() {
         return (
-            <TouchableOpacity onPress={this.onPress}>
+            <TouchableOpacity style={styles.list} onPress={this.onPress}>
                 <View>
                     <Text>
-                        {this.state.id}
+                        Id: {this.state.id}
                     </Text>
                     <Text>
-                        {this.state.name}
+                        Name: {this.state.name}
                     </Text>
                     <Text>
-                        {this.state.rssi}
-                    </Text>
-                    <Text>
-                        {this.state.isConnectable}
+                        Rssi: {this.state.rssi}
                     </Text>
                 </View>
             </TouchableOpacity>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    list: {
+        margin: 1,
+        padding: 2,
+        borderWidth: 1,
+        borderRadius: 4,
+        borderColor: '#505050',
+    },
+})
