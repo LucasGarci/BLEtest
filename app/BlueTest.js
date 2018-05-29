@@ -14,17 +14,13 @@ export class BlueTest extends React.Component {
         }
         this.manager = new BleManager();
         this.lastDevice = "No hay nada";
-
+        this.isDiscovering = false
     }
 
     async componentDidMount() {
-        const currentState = await this.manager.state()
-        console.log({ currentState })
-        this.setState({ bleState: currentState })
-        const subscription = this.manager.onStateChange((state) => {
-            this.scanAndConnect();
-            subscription.remove();
-        }, true);
+        const bluetoothState = await this.manager.state()
+        console.log({ bluetoothState })
+        this.setState({ bleState: bluetoothState })
     }
 
     scanAndConnect() {
@@ -37,67 +33,70 @@ export class BlueTest extends React.Component {
                 // Handle error (scanning will be stopped automatically)
                 return console.error(error)
             }
-            // device.name
-            // console.log(device)
+            //Comprobamos que el dispositivo no ha sido encontrado anteriormente
             if (!this.state.devicesIds.includes(device.id)) {
                 this.setState({ devicesIds: [device.id, ...this.state.devicesIds] });
-                var newDevice = {};
-
-                newDevice["id"] = device.id;
-                newDevice["name"] = device.name;
-                newDevice["rssi"] = device.rssi;
-                newDevice["isConnectable"] = device.isConnectable;
-
+                // Añadimos el dispositivo completo a la lista
                 this.setState({
-                    devicesData: [...this.state.devicesData, newDevice]
+                    devicesData: [...this.state.devicesData, device]
                 });
                 console.log({ estadoActual: this.state });
             }
-            if (!this.state.names.includes(device.name)) {
-                this.setState({ names: [device.name, ...this.state.names] })
-
-            }
-            if (this.state.devicesIds.length > 0) {
-                this.lastDevice = this.state.devicesIds[this.state.devicesIds.length - 1];
-            }
-            // Si ha encontrado mi dispositvo dejamos de escanear
-            if (device.name === 'nombre de mi dispositivo') {
-                this.manager.stopDeviceScan();
-            }
-
         });
     }
 
     resetDevices() {
-        // Reseteamos los devices
+        // Reseteamos los devices y los ids
         this.setState({ devicesIds: [] });
-        this.setState({ names: [] });
+        this.setState({ devicesData: [] })
+    }
+
+    startStop() {
+        // Limpiamos y empezamos nuevo escaner o detenemos el actual
+        if (this.state.isDiscovering) {
+            console.log('Stoped scanner')
+            this.manager.stopDeviceScan();
+            this.setState({ isDiscovering: false })
+        } else {
+            console.log('Starting scanner')
+            const subscription = this.manager.onStateChange((state) => {
+                this.scanAndConnect();
+                subscription.remove();
+            }, true);
+            this.setState({ isDiscovering: true })
+            this.resetDevices()
+        }
     }
 
     render() {
-        if (this.state.devicesIds.length > 0) {
-            this.lastDevice = this.state.devicesIds[this.state.devicesIds.length - 1];
-        }
+
         return (
             <View>
                 <View>
                     <Button
                         // Propiedades del botón ("props")                    
-                        title="Reset devices list"
-                        onPress={() => { this.resetDevices() }}
+                        title={this.state.isDiscovering ? "Stop scanner" : "Start new scan"}
+                        onPress={() => { this.startStop() }}
                     ></Button>
-                    <Text>BLE state= {JSON.stringify(this.state.bleState)}</Text>
-                    <Text>devicesIds.length = {this.state.devicesIds.length}</Text>
-                    <Text>names.length = {this.state.names.length}</Text>
-                    <Text>LastDevice.id = {this.lastDevice}</Text>
-                    <FlatList
-                        data={this.state.devicesData}
-                        renderItem={({ item }) => <DeviceItem device={item} />}
-                    />
-
-
+                    <View style={styles.container}>
+                        <Text>BLE state: {JSON.stringify(this.state.bleState)}</Text>
+                        <Text>Devices found: {this.state.devicesIds.length}</Text>
+                        <FlatList
+                            // Le pasamos el array de dispositivos de nuetro estado
+                            data={this.state.devicesData}
+                            renderItem={({ item }) => <DeviceItem device={item} />}
+                        />
+                    </View>
                 </View>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 9,
+        borderRadius: 9,
+        borderColor: '#d6d7da',
+    },
+});
