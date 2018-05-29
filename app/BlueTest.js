@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { BleManager } from 'react-native-ble-plx';
 import { DeviceItem } from './components/DeviceItem'
 
-
 export class BlueTest extends React.Component {
     constructor() {
         super()
@@ -17,7 +16,6 @@ export class BlueTest extends React.Component {
         this.lastDevice = "No hay nada";
 
     }
-
 
     async componentDidMount() {
         const currentState = await this.manager.state()
@@ -44,6 +42,7 @@ export class BlueTest extends React.Component {
             if (!this.state.devicesIds.includes(device.id)) {
                 this.setState({ devicesIds: [device.id, ...this.state.devicesIds] });
                 var newDevice = {};
+
                 newDevice["id"] = device.id;
                 newDevice["name"] = device.name;
                 newDevice["rssi"] = device.rssi;
@@ -56,6 +55,7 @@ export class BlueTest extends React.Component {
             }
             if (!this.state.names.includes(device.name)) {
                 this.setState({ names: [device.name, ...this.state.names] })
+
             }
             if (this.state.devicesIds.length > 0) {
                 this.lastDevice = this.state.devicesIds[this.state.devicesIds.length - 1];

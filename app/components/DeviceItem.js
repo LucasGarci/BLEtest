@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { BleManager } from 'react-native-ble-plx';
 
-
 export class DeviceItem extends React.Component {
     constructor() {
         super()
@@ -12,14 +11,14 @@ export class DeviceItem extends React.Component {
             rssi: null,
             isConnectable: null,
         }
-        this.manager = new BleManager();
+      this.manager = new BleManager();
     }
 
     componentDidMount () {
         const {device} = this.props
         this.setState({
             id: device.id,
-            name: device.name || 'anonimo',  
+            name: device.name || 'Anonimo',  
             rssi: device.rssi,
             isConnectable: device.isConnectable,
         })
@@ -34,7 +33,6 @@ export class DeviceItem extends React.Component {
     };
 
     render() {
-        
         return (
             <TouchableOpacity onPress={this.onPress}>
                 <View>
