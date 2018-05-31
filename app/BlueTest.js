@@ -1,8 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, FlatList } from "react-native";
 import { BleManager } from "react-native-ble-plx";
-import { createStackNavigator } from 'react-navigation';
 import { DeviceItem } from "./components/DeviceItem";
+import { createStackNavigator } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
+
 
 export class BlueTest extends React.Component {
   constructor() {
@@ -14,7 +16,6 @@ export class BlueTest extends React.Component {
       devicesData: []
     };
     this.manager = new BleManager();
-    this.lastDevice = "No hay nada";
     this.isDiscovering = false;
   }
 
@@ -74,6 +75,18 @@ export class BlueTest extends React.Component {
       <View>
         <View>
           <Button
+            // Botón de prueba del navigator
+            title="Go to Home"
+            onPress={() => this.props.navigation.navigate('Home')}
+          />
+          <Text>-------------------------------->>>></Text>
+          <Button
+            // Botón de prueba del navigator
+            title="Go to Settings"
+            onPress={() => this.props.navigation.navigate('Settings')}
+          />
+          <Text>-------------------------------->>>></Text>
+          <Button
             // Propiedades del botón ("props")
             title={this.state.isDiscovering ? "Stop scanner" : "Start new scan"}
             onPress={() => {
@@ -100,10 +113,5 @@ const styles = StyleSheet.create({
     padding: 9,
     borderRadius: 9,
     borderColor: "#d6d7da"
-  }
-});
-export default createStackNavigator({
-  Home: {
-    screen: BlueTest
   }
 });
