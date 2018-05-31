@@ -4,6 +4,8 @@ import { BleManager } from "react-native-ble-plx";
 import { DeviceItem } from "./components/DeviceItem";
 import { createStackNavigator } from 'react-navigation';
 import { withNavigation } from 'react-navigation';
+import { DeviceTabScreen } from './DeviceTabScreen';
+
 
 
 export class BlueTest extends React.Component {
@@ -76,14 +78,14 @@ export class BlueTest extends React.Component {
         <View>
           <Button
             // Botón de prueba del navigator
-            title="Go to Home"
-            onPress={() => this.props.navigation.navigate('Home')}
+            title="Go to Inicio"
+            onPress={() => this.props.navigation.navigate('Device')}
           />
           <Text>-------------------------------->>>></Text>
           <Button
             // Botón de prueba del navigator
             title="Go to Settings"
-            onPress={() => this.props.navigation.navigate('Settings')}
+            onPress={() => this.props.navigation.navigate('Details')}
           />
           <Text>-------------------------------->>>></Text>
           <Button

@@ -2,61 +2,46 @@ import React from 'react';
 import { StyleSheet, Button, Text, View, NativeModules } from 'react-native';
 import { BleManager } from 'react-native-ble-plx';
 import { BlueTest } from './BlueTest';
+import { DeviceTabScreen } from './DeviceTabScreen'
 import { createStackNavigator } from 'react-navigation';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
-import { withNavigation } from 'react-navigation';
-
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Home!</Text>
-        <Button
-          title="Go to Settings"
-          onPress={() => this.props.navigation.navigate('Settings')}
-        />
-        <Text>!</Text>
-        <Button
-          title="Go to BlueTest"
-          onPress={() => this.props.navigation.navigate('BlueTest')}
-        />
-      </View>
-    );
-  }
-}
 
 class SettingsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Settings Screen</Text>
+      </View>
+    );
+  }
+}
+
+class DeviceScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Device Tab Screen</Text>
         <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
+          title="Go to Details"
+          onPress={() => this.props.navigation.navigate('Details')}
         />
       </View>
     );
   }
 }
 
-export default TabNavigator(
+export const Navi = createStackNavigator(
   {
-    Home: { screen: HomeScreen },
-    Settings: { screen: SettingsScreen },
-    BlueTest: { screen: BlueTest },
+    Scanner: BlueTest,
+    Settings: SettingsScreen,
+    Device: DeviceTabScreen,
   },
   {
-    navigationOptions: ({ navigation }) => ({
-      // AQuí iban los iconos que no me funkaban :(
-    }),
-    tabBarComponent: TabBarBottom,
-     // Las pestañas en top para que no las tapen los Warnings*
-    tabBarPosition: 'top',
-    tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
-    },
-    animationEnabled: false,
-    swipeEnabled: false,
+    initialRouteName: 'Scanner',
   }
 );
+
+export default class App extends React.Component {
+  render() {
+    return <Navi />;
+  }
+}

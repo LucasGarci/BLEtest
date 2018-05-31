@@ -35,7 +35,7 @@ const Navi = createStackNavigator(
     Inicio: InicioScreen,
   },
   {
-    initialRouteName: 'BlueTest',
+    initialRouteName: 'Home',
   }
 );
 
