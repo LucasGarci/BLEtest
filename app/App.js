@@ -1,25 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View, NativeModules } from 'react-native';
-import { BleManager } from 'react-native-ble-plx';
-import { createStackNavigator } from 'react-navigation';
-import { BlueTest } from './BlueTest';
+import React from "react"
+import { StyleSheet, Text, View, NativeModules } from "react-native"
+import { BleManager } from "react-native-ble-plx"
+import { createStackNavigator } from "react-navigation"
+import { Root } from "./navigation/router"
 
-
-export class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
-      <View>
-        <BlueTest />
-      </View>
-    );
+        <Root />
+    )
   }
 }
-
-export default createStackNavigator({
-  Home: {
-    screen: App,
-    navigationOptions: {
-      title: 'Devices Scanner',
-    },
-  },
-});
+export default App

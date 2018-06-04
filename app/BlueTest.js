@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, FlatList } from "react-native";
 import { BleManager } from "react-native-ble-plx";
-import { createStackNavigator } from 'react-navigation';
 import { DeviceItem } from "./components/DeviceItem";
 
 export class BlueTest extends React.Component {
@@ -69,10 +68,23 @@ export class BlueTest extends React.Component {
     }
   }
 
+  onSettingsButton = () => {
+    this.props.navigation.navigate('Options');
+  };
+
   render() {
     return (
       <View>
         <View>
+
+          <Button
+            // Propiedades del botón ("props")
+            title={"Go options"}
+            onPress={() => {
+              this.onSettingsButton();
+            }}
+          />
+          <Text> - </Text>
           <Button
             // Propiedades del botón ("props")
             title={this.state.isDiscovering ? "Stop scanner" : "Start new scan"}
@@ -86,7 +98,7 @@ export class BlueTest extends React.Component {
             <FlatList
               // Le pasamos el array de dispositivos de nuetro estado
               data={this.state.devicesData}
-              renderItem={({ item }) => <DeviceItem device={item} />}
+              renderItem={({ item }) => <DeviceItem device={item} navigation={this.props.navigation} />}
             />
           </View>
         </View>
@@ -102,8 +114,4 @@ const styles = StyleSheet.create({
     borderColor: "#d6d7da"
   }
 });
-export default createStackNavigator({
-  Home: {
-    screen: BlueTest
-  }
-});
+

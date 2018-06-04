@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { BleManager } from 'react-native-ble-plx';
+import { Root } from "../navigation/router"
+
 
 export class DeviceItem extends React.Component {
     constructor() {
@@ -27,7 +29,8 @@ export class DeviceItem extends React.Component {
     }
 
     onPress = () => {
-        this.manager.connectToDevice(this.state.id)
+        this.props.navigation.navigate("Device")
+        /*this.manager.connectToDevice(this.state.id)
             .then((device) => {
                 device.discoverAllServicesAndCharacteristics().then((result) => {
                     console.log({ fullData: result })
@@ -36,6 +39,8 @@ export class DeviceItem extends React.Component {
             .catch((reason) => {
                 console.log({ result: reason }); // Error!
             })
+
+        */
     };
 
     render() {
