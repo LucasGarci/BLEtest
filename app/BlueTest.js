@@ -1,70 +1,71 @@
-import React from "react";
-import { StyleSheet, Text, View, Button, FlatList } from "react-native";
-import { BleManager } from "react-native-ble-plx";
-import { DeviceItem } from "./components/DeviceItem";
+import React from "react"
+import { StyleSheet, Text, View, Button, FlatList } from "react-native"
+import { BleManager } from "react-native-ble-plx"
+import { DeviceItem } from "./components/DeviceItem"
+
 
 export class BlueTest extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       bleState: "NOT READY",
       devicesIds: [],
       names: [],
       devicesData: []
-    };
-    this.manager = new BleManager();
-    this.lastDevice = "No hay nada";
-    this.isDiscovering = false;
+    }
+    this.manager = new BleManager()
+    this.lastDevice = "No hay nada"
+    this.isDiscovering = false
   }
 
   async componentDidMount() {
-    const bluetoothState = await this.manager.state();
-    console.log({ bluetoothState });
-    this.setState({ bleState: bluetoothState });
+    const bluetoothState = await this.manager.state()
+    console.log({ bluetoothState })
+    this.setState({ bleState: bluetoothState })
   }
 
   scanAndConnect() {
     if (this.state.bleState !== "PoweredOn") {
-      return;
+      return
     }
 
     this.manager.startDeviceScan(null, null, (error, device) => {
       if (error) {
         // Handle error (scanning will be stopped automatically)
-        return console.error(error);
+        return console.error(error)
       }
       //Comprobamos que el dispositivo no ha sido encontrado anteriormente
       if (!this.state.devicesIds.includes(device.id)) {
-        this.setState({ devicesIds: [device.id, ...this.state.devicesIds] });
+        this.setState({ devicesIds: [device.id, ...this.state.devicesIds] })
         // Añadimos el dispositivo completo a la lista
         this.setState({
           devicesData: [...this.state.devicesData, device]
-        });
-        console.log({ estadoActual: this.state });
+        })
+        console.log({ estadoActual: this.state })
       }
-    });
+    })
   }
 
   resetDevices() {
     // Reseteamos los devices y los ids
-    this.setState({ devicesIds: [] });
-    this.setState({ devicesData: [] });
+    this.setState({ devicesIds: [] })
+    this.setState({ devicesData: [] })
   }
 
   startStop() {
     // Limpiamos y empezamos nuevo escaner o detenemos el actual
     if (this.state.isDiscovering) {
-      console.log("Stoped scanner");
-      this.manager.stopDeviceScan();
-      this.setState({ isDiscovering: false });
+      console.log("Stoped scanner")
+      this.manager.stopDeviceScan()
+      this.setState({ isDiscovering: false })
     } else {
-      console.log("Starting scanner");
+      console.log("Starting scanner")
       const subscription = this.manager.onStateChange(state => {
-        this.scanAndConnect();
-        subscription.remove();
-      }, true);
-      this.setState({ isDiscovering: true });
-      this.resetDevices();
+        this.scanAndConnect()
+        subscription.remove()
+      }, true)
+      this.setState({ isDiscovering: true })
+      this.resetDevices()
     }
   }
 
@@ -89,7 +90,7 @@ export class BlueTest extends React.Component {
             // Propiedades del botón ("props")
             title={this.state.isDiscovering ? "Stop scanner" : "Start new scan"}
             onPress={() => {
-              this.startStop();
+              this.startStop()
             }}
           />
           <View style={styles.container}>
@@ -98,12 +99,15 @@ export class BlueTest extends React.Component {
             <FlatList
               // Le pasamos el array de dispositivos de nuetro estado
               data={this.state.devicesData}
-              renderItem={({ item }) => <DeviceItem device={item} navigation={this.props.navigation} />}
+              renderItem={({ item }) => (
+                <DeviceItem device={item} navigation={this.props.navigation} />
+              )}
+
             />
           </View>
         </View>
       </View>
-    );
+    )
   }
 }
 
@@ -113,5 +117,5 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     borderColor: "#d6d7da"
   }
-});
+})
 
