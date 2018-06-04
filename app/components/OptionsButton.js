@@ -1,5 +1,6 @@
 import React from "react"
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
+import { Icon } from "react-native-elements"
 
 export class OptionsButton extends React.Component {
   _onPress = () => {
@@ -11,7 +12,11 @@ export class OptionsButton extends React.Component {
     return (
       <TouchableOpacity style={styles.button} onPress={this._onPress}>
         <View>
-          <Text>Go options...</Text>
+          <Icon 
+            name= 'settings'
+            color= 'grey'
+            size= {32}
+          />
         </View>
       </TouchableOpacity>
     )
@@ -22,8 +27,5 @@ const styles = StyleSheet.create({
   button: {
     margin: 10,
     padding: 5,
-    borderWidth: 1,
-    borderRadius: 4,
-    borderColor: "#505050"
   }
 })

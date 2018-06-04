@@ -12,7 +12,7 @@ import { OptionsButton } from "../components/OptionsButton"
 
 
 export const Root = StackNavigator({
-  Feed: {
+  Home: {
     screen: BlueTest,
     navigationOptions: ({ navigation }) => ({
       title: "Bluetooth Scanner",
@@ -53,25 +53,3 @@ export const DeviceNavigation = TabNavigator({
     }
   }
 })
-/*
-export const Tabs = TabNavigator({
-  Feed: {
-    screen: FeedStack,
-    navigationOptions: {
-      tabBarLabel: "Feed",
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="list" size={35} color={tintColor} />
-      )
-    }
-  },
-  Me: {
-    screen: Me,
-    navigationOptions: {
-      tabBarLabel: "Me",
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="account-circle" size={35} color={tintColor} />
-      )
-    }
-  }
-})
-*/

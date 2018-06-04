@@ -14,7 +14,6 @@ export class BlueTest extends React.Component {
       devicesData: []
     }
     this.manager = new BleManager()
-    this.lastDevice = "No hay nada"
     this.isDiscovering = false
   }
 
@@ -69,23 +68,10 @@ export class BlueTest extends React.Component {
     }
   }
 
-  onSettingsButton = () => {
-    this.props.navigation.navigate('Options');
-  };
-
   render() {
     return (
       <View>
         <View>
-
-          <Button
-            // Propiedades del botón ("props")
-            title={"Go options"}
-            onPress={() => {
-              this.onSettingsButton();
-            }}
-          />
-          <Text> - </Text>
           <Button
             // Propiedades del botón ("props")
             title={this.state.isDiscovering ? "Stop scanner" : "Start new scan"}

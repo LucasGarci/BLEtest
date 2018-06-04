@@ -39,7 +39,6 @@ export class DeviceItem extends React.Component {
             .catch((reason) => {
                 console.log({ result: reason }); // Error!
             })
-
         */
     };
 
