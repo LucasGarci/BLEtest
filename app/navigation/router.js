@@ -1,14 +1,17 @@
 import React from "react"
 import { TabNavigator, StackNavigator } from "react-navigation"
 import { Text } from "react-native"
+import { Icon } from "react-native-elements"
 
 import { BlueTest } from "../BlueTest"
+import { BriTab } from "../containers/BriTab"
 import { ColorTab } from "../containers/ColorTab"
 import { TempTab } from "../containers/TempTab"
 import { EffectTab } from "../containers/EffectTab"
 import { OptionsScreen } from "../containers/OptionsScreen"
 import { DeviceTabs } from "../containers/DeviceTabs"
 import { OptionsButton } from "../components/OptionsButton"
+
 
 
 export const Root = StackNavigator({
@@ -34,22 +37,44 @@ export const Root = StackNavigator({
 })
 
 export const DeviceNavigation = TabNavigator({
+  Brigthness: {
+    screen: BriTab,
+    navigationOptions: {
+      tabBarLabel: <Icon
+        name='brightness-6'
+        color='white'
+        size={32}
+      />
+    }
+  },
   RGB: {
     screen: ColorTab,
     navigationOptions: {
-      tabBarLabel: "RGB"
+      tabBarLabel: <Icon
+      name='color-lens'
+      color='white'
+      size={32}
+    />
     }
   },
   Temperature: {
     screen: TempTab,
     navigationOptions: {
-      tabBarLabel: "Temp"
+      tabBarLabel: <Icon
+      name='beach-access'
+      color='white'
+      size={32}
+    />
     }
   },
   Effect: {
     screen: EffectTab,
     navigationOptions: {
-      tabBarLabel: "Effect"
+      tabBarLabel: <Icon
+      name='smoking-rooms'
+      color='white'
+      size={32}
+    />
     }
   }
 })
