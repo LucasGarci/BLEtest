@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Button, FlatList } from "react-native"
 import { BleManager } from "react-native-ble-plx"
 import { DeviceItem } from "./components/DeviceItem"
 
-
 export class BlueTest extends React.Component {
   constructor() {
     super()
@@ -18,6 +17,10 @@ export class BlueTest extends React.Component {
   }
 
   async componentDidMount() {
+    this.updateBLEState()
+  }
+
+  async updateBLEState() {
     const bluetoothState = await this.manager.state()
     console.log({ bluetoothState })
     this.setState({ bleState: bluetoothState })
@@ -30,8 +33,10 @@ export class BlueTest extends React.Component {
 
     this.manager.startDeviceScan(null, null, (error, device) => {
       if (error) {
+        this.manager.stopDeviceScan()
+        this.updateBLEState()
         // Handle error (scanning will be stopped automatically)
-        return console.error(error)
+        return console.log(error)
       }
       //Comprobamos que el dispositivo no ha sido encontrado anteriormente
       if (!this.state.devicesIds.includes(device.id)) {
@@ -40,7 +45,6 @@ export class BlueTest extends React.Component {
         this.setState({
           devicesData: [...this.state.devicesData, device]
         })
-        console.log({ estadoActual: this.state })
       }
     })
   }
@@ -88,7 +92,6 @@ export class BlueTest extends React.Component {
               renderItem={({ item }) => (
                 <DeviceItem device={item} navigation={this.props.navigation} />
               )}
-
             />
           </View>
         </View>
@@ -104,4 +107,3 @@ const styles = StyleSheet.create({
     borderColor: "#d6d7da"
   }
 })
-
