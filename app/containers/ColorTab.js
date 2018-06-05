@@ -9,15 +9,15 @@ export class ColorTab extends React.Component {
   }
   render() {
     return (
-      <View style={styles.wheelContainer}>
-        <View style={styles.wheelContainer}>
+      <View style={styles.centerContainer}>
+        <View style={styles.centerContainer}>
           <ColorWheel
             initialColor="#ee0000"
             onColorChange={color => console.log({ color })}
             style={styles.wheelStyle}
             thumbStyle={styles.thumb} />
         </View>
-        <View style={styles.wheelContainer}>
+        <View style={styles.centerContainer}>
           <PrefabPicker />
         </View>
       </View>
@@ -26,7 +26,7 @@ export class ColorTab extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  wheelContainer: {
+  centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

@@ -21,10 +21,9 @@ export class PrefabPicker extends Component {
     render() {
         return (
             <View style={{
-                //flex: 1,
+              //  flex: 1,
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                alignItems: 'center',
             }}>
                 <View style={styles.pickerItem} >
                     <TouchableOpacity style= {{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:this.state.color1}} onPress={this.onPress}>
@@ -55,10 +54,10 @@ export class PrefabPicker extends Component {
 const styles = StyleSheet.create({
     pickerItem: {
         width: 55,
+        height: 55,
+        margin: 5,
         borderWidth: 1,
         borderRadius: 2,
-        margin: 5,
-        height: 55,
     },
     touchItem: {
         
