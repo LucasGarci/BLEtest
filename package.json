@@ -25,6 +25,7 @@
     "react-native-big-slider": "^0.1.1",
     "react-native-ble-plx": "^0.9.0",
     "react-native-color-wheel": "^0.1.5",
+    "react-native-dial": "^1.0.12",
     "react-native-elements": "^0.19.1",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.0.4",

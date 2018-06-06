@@ -8,7 +8,7 @@ export class EffectTab extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.centerContainer}>
         <TouchableOpacity onPress={this.onPress}>
           <Text>This is EffectTab</Text>
         </TouchableOpacity>
@@ -16,3 +16,12 @@ export class EffectTab extends React.Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 25,
+  },
+})
