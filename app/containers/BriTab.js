@@ -45,11 +45,6 @@ export class BriTab extends React.Component {
 }
 
 const BrightnessLabel = props => {
-    function formatNumber(x) {
-        return parseInt(x, 10)
-            .toFixed(1)
-            .replace(/.?0*$/, '')
-    }
     return (
         <View flex={1} justifyContent="center">
             <Text style={[styles.brightnessLabel, props.style]}>
@@ -57,7 +52,6 @@ const BrightnessLabel = props => {
                     if (props.sliding) {
                         return '...'
                     }
-
                     return props.power
                         ? `${formatNumber(props.brightness || 0)}%\n Brightness`
                         : 'Off'
@@ -87,3 +81,9 @@ const styles = StyleSheet.create({
         margin: 25,
       },
 })
+
+function formatNumber(x) {
+    return parseInt(x, 10)
+        .toFixed(1)
+        .replace(/.?0*$/, '')
+}
