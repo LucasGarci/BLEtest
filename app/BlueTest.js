@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, Text, View, Button, FlatList } from "react-native"
+import { StyleSheet, Text, View, ScrollView, Button, FlatList } from "react-native"
 import { BleManager } from "react-native-ble-plx"
 import { DeviceItem } from "./components/DeviceItem"
 
@@ -83,7 +83,7 @@ export class BlueTest extends React.Component {
               this.startStop()
             }}
           />
-          <View style={styles.container}>
+          <ScrollView style={styles.container}>
             <Text>BLE state: {JSON.stringify(this.state.bleState)}</Text>
             <Text>Devices found: {this.state.devicesIds.length}</Text>
             <FlatList
@@ -93,7 +93,7 @@ export class BlueTest extends React.Component {
                 <DeviceItem device={item} navigation={this.props.navigation} />
               )}
             />
-          </View>
+          </ScrollView>
         </View>
       </View>
     )
