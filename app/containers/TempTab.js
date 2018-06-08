@@ -10,6 +10,23 @@ export class TempTab extends React.Component {
       temperature: 0,
       xPosition: 0,
     }
+
+  }
+
+  changeTemp (angle) {
+    const temperature = this.calcTempFromAngle(angle)
+    this.setState({temperature})
+    console.log({temperature})
+    console.log({angle})
+  }
+
+  calcTempFromAngle = (angle) => {
+    let aux
+    if (angle < 0) aux = angle + 360
+    aux = 360 - (angle | 0) % 360
+    const result =
+      aux / 360 * (this.props.maxTemp - this.props.minTemp) + this.props.minTemp
+    return result | 0
   }
 
   render() {
@@ -28,6 +45,7 @@ export class TempTab extends React.Component {
           </View>
           <View style={styles.terceraCajaExt}><Text>Btn Dch</Text></View>
         </View>
+
       </View>
     )
   }
