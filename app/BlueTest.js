@@ -102,8 +102,7 @@ export class BlueTest extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 9,
-    borderRadius: 9,
+    padding: 5,
     borderColor: "#d6d7da"
   }
 })
