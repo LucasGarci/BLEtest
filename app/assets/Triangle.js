@@ -11,8 +11,7 @@ export class Triangle extends React.Component {
 
     render() {
       return (
-        <TouchableOpacity style={styles.triangle}  onPress={this.props.cigarrito}>
-         
+        <TouchableOpacity style={styles.triangle}  onPress={this.props.triangle}>   
         </TouchableOpacity>
       )
     }
@@ -29,7 +28,11 @@ export class Triangle extends React.Component {
         borderBottomWidth: 100,
         borderLeftColor: 'transparent',
         borderRightColor: 'transparent',
-        borderBottomColor: 'red'
+        borderBottomColor: 'red',
+        transform: [
+          {scaleX: .2},
+          {scaleY: .2}
+        ]
       }
   })
   
