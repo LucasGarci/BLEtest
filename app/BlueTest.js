@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, Text, View, ScrollView, Button, FlatList } from "react-native"
+import { ImageBackground, StyleSheet, Text, View, ScrollView, Button, FlatList } from "react-native"
 import { BleManager } from "react-native-ble-plx"
 import { DeviceItem } from "./components/DeviceItem"
 
@@ -74,28 +74,32 @@ export class BlueTest extends React.Component {
 
   render() {
     return (
-      <View>
+      <ImageBackground
+        source={require('./img/fondoapp.png')}
+        style={{ width: '100%', height: '100%' }} >
         <View>
-          <Button
-            // Propiedades del botón ("props")
-            title={this.state.isDiscovering ? "Stop scanner" : "Start new scan"}
-            onPress={() => {
-              this.startStop()
-            }}
-          />
-          <ScrollView style={styles.container}>
-            <Text>BLE state: {JSON.stringify(this.state.bleState)}</Text>
-            <Text>Devices found: {this.state.devicesIds.length}</Text>
-            <FlatList
-              // Le pasamos el array de dispositivos de nuetro estado
-              data={this.state.devicesData}
-              renderItem={({ item }) => (
-                <DeviceItem device={item} navigation={this.props.navigation} />
-              )}
+          <View>
+            <Button
+              // Propiedades del botón ("props")
+              title={this.state.isDiscovering ? "Stop scanner" : "Start new scan"}
+              onPress={() => {
+                this.startStop()
+              }}
             />
-          </ScrollView>
+            <ScrollView style={styles.container}>
+              <Text>BLE state: {JSON.stringify(this.state.bleState)}</Text>
+              <Text>Devices found: {this.state.devicesIds.length}</Text>
+              <FlatList
+                // Le pasamos el array de dispositivos de nuetro estado
+                data={this.state.devicesData}
+                renderItem={({ item }) => (
+                  <DeviceItem device={item} navigation={this.props.navigation} />
+                )}
+              />
+            </ScrollView>
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     )
   }
 }
