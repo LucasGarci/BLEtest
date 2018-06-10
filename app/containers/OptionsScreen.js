@@ -1,5 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View, ImageBackground, Picker, Switch } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Picker,
+  Button,
+  Switch
+} from "react-native";
 import { Card } from "react-native-elements";
 
 export class OptionsScreen extends React.Component {
@@ -24,65 +32,33 @@ export class OptionsScreen extends React.Component {
   render() {
     return (
       <ImageBackground
-        source={require('../img/fondoapp.png')}
-        style={{ width: '100%', height: '100%' }} >
-      <View style={styles.centerContainer}>
-        <Card containerStyle={styles.list}>
-          <View style={styles.optionContainer}>
-            <View style={styles.descriptionContainer}>
-              <Text style={styles.textOption}>Seleccionar idioma: </Text>
-            </View>
-            <View style={styles.switchContainer}>
-              <Picker
-                selectedValue={this.state.language}
-                style={{ height: 50, width: 100 }}
-                onValueChange={(itemValue, itemIndex) => {
-                  this.setState({ language: itemValue });
-                  console.log(this.state.language);
-                }}
-              >
-                <Picker.Item label="Español" value="es" />
-                <Picker.Item label="English" value="en" />
-              </Picker>
-            </View>
-          </View>
-        </Card>
-
-        <Card containerStyle={styles.list}>
-          <View style={styles.optionContainer}>
-            <View style={styles.descriptionContainer}>
-              <Text style={styles.textOption}>Borrar datos locales:</Text>
-            </View>
-            <View style={styles.switchContainer}>
-              <Text style={styles.textOption}>Button</Text>
-            </View>
-          </View>
-        </Card>
-
-        <Card containerStyle={styles.list}>
-          <View style={styles.optionContainer}>
-            <View style={styles.descriptionContainer}>
-              <Text style={styles.textOption}>
-                Esquema de colores: {this.state.colorScheme}
-              </Text>
-            </View>
-            <View style={styles.switchContainer}>
-              <Switch
-                onValueChange={value => this.onSwitch(value)}
-                value={this.state.switchValue}
-              />
-            </View>
-          </View>
-        </Card>
-
-        <View style={styles.footer}>
+        source={require("../img/fondoapp.png")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <View style={styles.centerContainer}>
           <Card containerStyle={styles.list}>
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
-                <Text style={styles.textOption}>Salir de la aplicación</Text>
+                <Text style={styles.textOption}>Seleccionar idioma: </Text>
               </View>
               <View style={styles.switchContainer}>
-                <Text style={styles.textOption}>Bye!!</Text>
+                <Picker
+                  selectedValue={this.state.language}
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    height: 50,
+                    width: 150,
+                    borderWidth: 1
+                  }}
+                  onValueChange={(itemValue, itemIndex) => {
+                    this.setState({ language: itemValue });
+                    console.log(this.state.language);
+                  }}
+                >
+                  <Picker.Item label="Español" value="es" />
+                  <Picker.Item label="English" value="en" />
+                </Picker>
               </View>
             </View>
           </Card>
@@ -90,12 +66,51 @@ export class OptionsScreen extends React.Component {
           <Card containerStyle={styles.list}>
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
-                <Text style={styles.link}>Averigua como me han hecho ;)</Text>
+                <Text style={styles.textOption}>Borrar datos locales:</Text>
+              </View>
+              <View style={styles.switchContainer}>
+                <Button title="Delete" style={styles.textOption} />
               </View>
             </View>
           </Card>
+
+          <Card containerStyle={styles.list}>
+            <View style={styles.optionContainer}>
+              <View style={styles.descriptionContainer}>
+                <Text style={styles.textOption}>
+                  Esquema de colores: {this.state.colorScheme}
+                </Text>
+              </View>
+              <View style={styles.switchContainer}>
+                <Switch
+                  onValueChange={value => this.onSwitch(value)}
+                  value={this.state.switchValue}
+                />
+              </View>
+            </View>
+          </Card>
+
+          <View style={styles.footer}>
+            <Card containerStyle={styles.list}>
+              <View style={styles.optionContainer}>
+                <View style={styles.descriptionContainer}>
+                  <Text style={styles.textOption}>Salir de la aplicación</Text>
+                </View>
+                <View style={styles.switchContainer}>
+                <Button title="Bye :(" style={styles.textOption} />
+                </View>
+              </View>
+            </Card>
+
+            <Card containerStyle={styles.list}>
+              <View style={styles.optionContainer}>
+                <View style={styles.descriptionContainer}>
+                  <Text style={styles.link}>Averigua como me han hecho ;)</Text>
+                </View>
+              </View>
+            </Card>
+          </View>
         </View>
-      </View>
       </ImageBackground>
     );
   }
