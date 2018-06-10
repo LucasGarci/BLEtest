@@ -2,6 +2,8 @@
   "name": "BLEtest",
   "displayName": "BLEtest",
   "expo": {
-    "sdkVersion": "27.0.0"
+    "sdkVersion": "27.0.0",
+    "orientation": "portrait",
+    "privacy": "public"
   }
 }

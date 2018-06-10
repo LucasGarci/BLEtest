@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Picker, Switch } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Picker, Switch } from "react-native";
 import { Card } from "react-native-elements";
 
 export class OptionsScreen extends React.Component {
@@ -23,6 +23,9 @@ export class OptionsScreen extends React.Component {
 
   render() {
     return (
+      <ImageBackground
+        source={require('../img/fondoapp.png')}
+        style={{ width: '100%', height: '100%' }} >
       <View style={styles.centerContainer}>
         <Card containerStyle={styles.list}>
           <View style={styles.optionContainer}>
@@ -93,6 +96,7 @@ export class OptionsScreen extends React.Component {
           </Card>
         </View>
       </View>
+      </ImageBackground>
     );
   }
 }
