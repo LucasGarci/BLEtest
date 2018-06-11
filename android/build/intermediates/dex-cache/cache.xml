@@ -228,6 +228,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-ble-manager\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="898908c54d1e757be1581cf79685ce8c60d32bc7">
+        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\BLEtest-react-native-ble-manager-unspecified_fdcf4492be0bfdd40d6e0992de44a8ec7ba16919.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Administrador\.gradle\caches\modules-2\files-2.1\com.facebook.fbui.textlayoutbuilder\staticlayout-proxy\1.0\f162442a19fff13995fbd51ba414d9ee05579080\staticlayout-proxy-1.0.jar"
         jumboMode="false"
         optimize="true"

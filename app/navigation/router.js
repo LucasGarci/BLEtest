@@ -3,7 +3,7 @@ import { TabNavigator, StackNavigator } from "react-navigation"
 import { Text } from "react-native"
 import { Icon } from "react-native-elements"
 
-import { BlueTest } from "../BlueTest"
+import { Scanner } from "../Scanner"
 import { BriTab } from "../containers/BriTab"
 import { ColorTab } from "../containers/ColorTab"
 import { TempTab } from "../containers/TempTab"
@@ -16,7 +16,7 @@ import { OptionsButton } from "../components/OptionsButton"
 
 export const Root = StackNavigator({
   Home: {
-    screen: BlueTest,
+    screen: Scanner,
     navigationOptions: ({ navigation }) => ({
       title: "Bluetooth Scanner",
       headerRight: <OptionsButton navigation={navigation} />
