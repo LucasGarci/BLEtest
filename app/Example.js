@@ -26,7 +26,6 @@ const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 export class Example extends Component {
   constructor(){
     super()
-
     this.state = {
       scanning:false,
       peripherals: new Map(),
@@ -112,6 +111,7 @@ export class Example extends Component {
       this.setState({peripherals: new Map()});
       BleManager.scan([], 3, true).then((results) => {
         console.log('Scanning...');
+        console.log({results});
         this.setState({scanning:true});
       });
     }
@@ -129,7 +129,7 @@ export class Example extends Component {
       }
     });
   }
-
+ 
   handleDiscoverPeripheral(peripheral){
     var peripherals = this.state.peripherals;
     if (!peripherals.has(peripheral.id)){

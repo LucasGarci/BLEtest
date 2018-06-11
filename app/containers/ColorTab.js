@@ -27,13 +27,13 @@ export class ColorTab extends React.Component {
         <View style={styles.centerContainer}>
           <ColorWheel
             initialColor="#ff0000"
-            onColorChange={color => console.log({ color })}
+            onColorChange={color => this.setState({currentColor: color })}
             style={styles.wheelStyle}
             thumbStyle={styles.thumb}
           />
         </View>
         <View style={styles.centerContainer}>
-          <PrefabPicker />
+          <PrefabPicker color = {this.state.currentColor} />
         </View>
       </View>
     );
