@@ -20,7 +20,10 @@ import BleManager from 'react-native-ble-manager';
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
+
+//We get the class to subscribe
 const BleManagerModule = NativeModules.BleManager;
+//We create our events emitter
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 export class Example extends Component {
