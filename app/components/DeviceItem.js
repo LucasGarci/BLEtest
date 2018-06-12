@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Card } from "react-native-elements";
 import BleManager from "react-native-ble-manager";
+import Buffer from 'buffer';
 
 export class DeviceItem extends React.Component {
   constructor() {
@@ -22,13 +23,13 @@ export class DeviceItem extends React.Component {
       id: device.id,
       name: device.name || "Anonimo",
       rssi: device.rssi,
-      connected: device.connected,
+      connected: device.connected
     });
     this.device = this.props.device;
   }
 
   _onPress = () => {
-    const peripheral = this.props.device
+    const peripheral = this.props.device;
     if (peripheral) {
       console.log("Connected to " + peripheral.id);
       if (peripheral.connected) {
@@ -46,68 +47,36 @@ export class DeviceItem extends React.Component {
             console.log("Connected to " + peripheral.id);
 
             setTimeout(() => {
-              /* Test read current RSSI value
-            BleManager.retrieveServices(peripheral.id).then((peripheralData) => {
-              console.log('Retrieved peripheral services', peripheralData);
-              BleManager.readRSSI(peripheral.id).then((rssi) => {
-                console.log('Retrieved actual RSSI value', rssi);
-              });
-            });*/
-
-              // Test using bleno's pizza example
-              // https://github.com/sandeepmistry/bleno/tree/master/examples/pizza
-              BleManager.retrieveServices(peripheral.id).then(
-                peripheralInfo => {
-                  console.log({peripheralInfo});
-                  var service = "13333333-3333-3333-3333-333333333337";
-                  var bakeCharacteristic =
-                    "13333333-3333-3333-3333-333333330003";
-                  var crustCharacteristic =
-                    "13333333-3333-3333-3333-333333330001";
-
-                  setTimeout(() => {
-                    BleManager.startNotification(
-                      peripheral.id,
-                      service,
-                      bakeCharacteristic
-                    )
-                      .then(() => {
-                        console.log("Started notification on " + peripheral.id);
-                        setTimeout(() => {
-                          BleManager.write(
-                            peripheral.id,
-                            service,
-                            crustCharacteristic,
-                            [0]
-                          ).then(() => {
-                            console.log("Writed NORMAL crust");
-                            BleManager.write(
-                              peripheral.id,
-                              service,
-                              bakeCharacteristic,
-                              [1, 95]
-                            ).then(() => {
-                              console.log(
-                                "Writed 351 temperature, the pizza should be BAKED"
-                              );
-                              /*
-                        var PizzaBakeResult = {
-                          HALF_BAKED: 0,
-                          BAKED:      1,
-                          CRISPY:     2,
-                          BURNT:      3,
-                          ON_FIRE:    4
-                        };*/
-                            });
-                          });
-                        }, 500);
-                      })
-                      .catch(error => {
-                        console.log("Notification error", error);
-                      });
-                  }, 200);
-                }
-              );
+              BleManager.retrieveServices(peripheral.id)
+                .then(peripheralInfo => {
+                  console.log({ peripheralInfo });
+                  BleManager.startNotification(
+                    peripheralInfo.id,
+                    peripheralInfo.characteristics[0].service,
+                    peripheralInfo.characteristics[0].characteristic
+                  );
+                  console.log("lanzado peripheral infos!");
+                  return peripheralInfo;
+                })
+                .then(peripheralInfo => {
+                  BleManager.read(
+                    peripheralInfo.id,
+                    peripheralInfo.characteristics[0].service,
+                    peripheralInfo.characteristics[0].characteristic
+                  )
+                    .then(readData => {
+                      // Success code
+                      console.log({readData});
+                      const buffer = Buffer.Buffer.from(readData);
+                      console.log({ buffer });
+                      const sensorData = buffer.readUInt8(1, true);
+                      console.log({ sensorData });
+                    })
+                    .catch(error => {
+                      // Failure code
+                      console.log(error);
+                    });
+                });
             }, 900);
           })
           .catch(error => {

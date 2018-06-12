@@ -39,6 +39,7 @@ export class BlueTest extends React.Component {
         return console.log(error)
       }
       //Comprobamos que el dispositivo no ha sido encontrado anteriormente
+      console.log({device})
       if (!this.state.devicesIds.includes(device.id)) {
         this.setState({ devicesIds: [device.id, ...this.state.devicesIds] })
         // Añadimos el dispositivo completo a la lista
