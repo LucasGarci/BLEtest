@@ -24,6 +24,7 @@ export class DeviceItem extends React.Component {
       name: device.name || "Anonimo",
       rssi: device.rssi,
       connected: device.connected
+
     });
     this.device = this.props.device;
   }
