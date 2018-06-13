@@ -1,14 +1,18 @@
 [
     {
-        "merged": "/Users/lucas/Development/BLEtest/android/C:\\Users\\Administrador\\Desktop\\Desarrollo\\BLEtest\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher.png",
-        "source": "/Users/lucas/Development/BLEtest/android/C:\\Users\\Administrador\\Desktop\\Desarrollo\\BLEtest\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\Administrador\\Desktop\\Desarrollo\\BLEtest\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher.png",
+        "source": "C:\\Users\\Administrador\\Desktop\\Desarrollo\\BLEtest\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "/Users/lucas/Development/BLEtest/android/app/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher.png",
-        "source": "/Users/lucas/Development/BLEtest/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+        "merged": "C:\\Users\\lucas\\Development\\BLEtest\\android\\C:\\Users\\Administrador\\Desktop\\Desarrollo\\BLEtest\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher.png",
+        "source": "C:\\Users\\lucas\\Development\\BLEtest\\android\\C:\\Users\\Administrador\\Desktop\\Desarrollo\\BLEtest\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "/Users/lucas/Development/BLEtest/android/C:\\Users\\LGF\\Desktop\\desarrollo\\BLEtest\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher.png",
-        "source": "/Users/lucas/Development/BLEtest/android/C:\\Users\\LGF\\Desktop\\desarrollo\\BLEtest\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\lucas\\Development\\BLEtest\\android\\C:\\Users\\LGF\\Desktop\\desarrollo\\BLEtest\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher.png",
+        "source": "C:\\Users\\lucas\\Development\\BLEtest\\android\\C:\\Users\\LGF\\Desktop\\desarrollo\\BLEtest\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\lucas\\Development\\BLEtest\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher.png",
+        "source": "C:\\Users\\lucas\\Development\\BLEtest\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     }
 ]

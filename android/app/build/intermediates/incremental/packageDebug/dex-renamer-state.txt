@@ -1,4 +1,4 @@
-#Wed Jun 13 10:11:40 CEST 2018
-base.0=/Users/lucas/Development/BLEtest/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+#Wed Jun 13 20:51:16 CEST 2018
+base.0=C\:\\Users\\Administrador\\Desktop\\Desarrollo\\BLEtest\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
-file.0=/Users/lucas/Development/BLEtest/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
+file.0=C\:\\Users\\Administrador\\Desktop\\Desarrollo\\BLEtest\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
