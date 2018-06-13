@@ -18,6 +18,7 @@ import {
   AppState,
   Dimensions
 } from "react-native"
+import I18n from 'react-native-i18n';
 import BleManager from "react-native-ble-manager"
 import { DeviceItem } from "./components/DeviceItem"
 
@@ -178,7 +179,7 @@ export class Scanner extends React.Component {
                 )}
               />
               <Text>
-                Nº Dispositivos Encontrados: {this.state.devicesIds.length}
+              Nº Dispositivos Encontrados: {this.state.devicesIds.length}
               </Text>
               <FlatList
                 // Le pasamos el array de dispositivos de nuetro estado
