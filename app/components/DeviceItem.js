@@ -30,6 +30,11 @@ export class DeviceItem extends React.Component {
   }
 
   _onPress = () => {
+
+    //ESTO ES PARA PRUEBAS
+    this.props.navigation.navigate("Device");
+
+
     const peripheral = this.props.device;
     if (peripheral) {
       console.log("Connected to " + peripheral.id);

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { ColorWheel } from "react-native-color-wheel";
 import { PrefabPicker } from "../components/PrefabPicker";
+import { hsv2Hex, hex2Hsv, hex2Hsl, hsv2Hsl, rgb2Hsv } from "colorsys";
 
 export class ColorTab extends React.Component {
   constructor(props) {
@@ -21,19 +22,27 @@ export class ColorTab extends React.Component {
   onPress = () => {
     console.log("ColorTab");
   };
+
+  handleColorChange(color){
+    this.setState({ currentColor: color })
+  }
+
   render() {
     return (
       <View style={styles.centerContainer}>
         <View style={styles.centerContainer}>
           <ColorWheel
-            initialColor="#ff0000"
-            onColorChange={color => this.setState({currentColor: color })}
+            ref={node => {
+              this.colorPicker = node;
+            }}
+            initialColor="#ffffff"
+            onColorChange={color =>this.handleColorChange(color)}
             style={styles.wheelStyle}
             thumbStyle={styles.thumb}
           />
         </View>
         <View style={styles.centerContainer}>
-          <PrefabPicker color = {this.state.currentColor} />
+          <PrefabPicker ref='picker' color={this.state.currentColor} onLongPress={()=>this.handleColorChange(this.state.currentColor)} />
         </View>
       </View>
     );

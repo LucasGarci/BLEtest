@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "buffer": "^5.1.0",
+    "colorsys": "^1.0.21",
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "react-native-big-slider": "^0.1.1",
