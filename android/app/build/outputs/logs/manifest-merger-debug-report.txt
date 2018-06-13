@@ -84,6 +84,7 @@ uses-sdk
 INJECTED from C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [BLEtest:react-native-ble-manager:unspecified] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-ble-manager\unspecified\AndroidManifest.xml:5:5-44
 MERGED from [BLEtest:react-native-vector-icons:unspecified] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-vector-icons\unspecified\AndroidManifest.xml:7:5-9:41
+MERGED from [BLEtest:react-native-i18n:unspecified] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-i18n\unspecified\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.55.4] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.55.4\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:23.0.1] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.0.1] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:20:5-43

@@ -110,7 +110,7 @@ export class DeviceItem extends React.Component {
             b: '0x560000ff00f0aa',
           }
 
-          const data = conversor.hexToBytes(rgb.b)
+          const data = conversor.hexToBytes(rgb.g)
           console.log({ dataToWrite: data })
           for (let index = 0; index < 60; index++) {
             await BleManager.write(
