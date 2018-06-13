@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
   ImageBackground,
   StyleSheet,
@@ -17,18 +17,18 @@ import {
   ListView,
   AppState,
   Dimensions
-} from "react-native";
-import BleManager from "react-native-ble-manager";
-import { DeviceItem } from "./components/DeviceItem";
+} from "react-native"
+import BleManager from "react-native-ble-manager"
+import { DeviceItem } from "./components/DeviceItem"
 
 //We get the class to subscribe
-const BleManagerModule = NativeModules.BleManager;
+const BleManagerModule = NativeModules.BleManager
 //We create our events emitter
-const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+const bleManagerEmitter = new NativeEventEmitter(BleManagerModule)
 
 export class Scanner extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       scanning: false,
       bleState: "",
@@ -37,120 +37,120 @@ export class Scanner extends React.Component {
       devices: [],
       devicesConnectedIds: [],
       devicesConnected: []
-    };
+    }
 
-    this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
-    this.handleStopScan = this.handleStopScan.bind(this);
+    this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this)
+    this.handleStopScan = this.handleStopScan.bind(this)
     this.handleUpdateValueForCharacteristic = this.handleUpdateValueForCharacteristic.bind(
       this
-    );
+    )
     this.handleDisconnectedPeripheral = this.handleDisconnectedPeripheral.bind(
       this
-    );
-    this.handleAppStateChange = this.handleAppStateChange.bind(this);
+    )
+    this.handleAppStateChange = this.handleAppStateChange.bind(this)
   }
 
   handleDiscoverPeripheral(device) {
     if (!this.state.devicesIds.includes(device.id)) {
-      console.log(device);
-      this.setState({ devicesIds: [...this.state.devicesIds, device.id] });
+      console.log(device)
+      this.setState({ devicesIds: [...this.state.devicesIds, device.id] })
       // Añadimos el dispositivo completo a la lista
       this.setState({
         devices: [...this.state.devices, device]
-      });
+      })
     }
   }
 
-  handleAppStateChange() {}
+  handleAppStateChange() { }
 
   componentWillUnmount() {
     BleManager.stopScan().then(() => {
       // Success code
-      console.log("Scan stopped on Unmount");
-    });
-    this.handlerDiscover.remove();
-    this.handlerStop.remove();
-    this.handlerDisconnect.remove();
-    this.handlerUpdate.remove();
+      console.log("Scan stopped on Unmount")
+    })
+    this.handlerDiscover.remove()
+    this.handlerStop.remove()
+    this.handlerDisconnect.remove()
+    this.handlerUpdate.remove()
   }
 
-  handleDisconnectedPeripheral() {}
+  handleDisconnectedPeripheral() { }
 
-  handleUpdateValueForCharacteristic() {}
+  handleUpdateValueForCharacteristic() { }
 
-  handleStopScan() {}
+  handleStopScan() { }
 
   componentDidMount() {
     // We set listeners to our events to our api events
     this.handlerDiscover = bleManagerEmitter.addListener(
       "BleManagerDiscoverPeripheral",
       this.handleDiscoverPeripheral
-    );
+    )
     this.handlerStop = bleManagerEmitter.addListener(
       "BleManagerStopScan",
       this.handleStopScan
-    );
+    )
     this.handlerDisconnect = bleManagerEmitter.addListener(
       "BleManagerDisconnectPeripheral",
       this.handleDisconnectedPeripheral
-    );
+    )
     this.handlerUpdate = bleManagerEmitter.addListener(
       "BleManagerDidUpdateValueForCharacteristic",
       this.handleUpdateValueForCharacteristic
-    );
+    )
     //Start manager
-    BleManager.start();
+    BleManager.start()
     //Comprobamos el BLE (nos pide permisos)
     BleManager.enableBluetooth()
       .then(() => {
         // Success code
-        console.log("The bluetooth is already enabled or the user confirm");
+        console.log("The bluetooth is already enabled or the user confirm")
       })
       .catch(error => {
         // Failure code
-        console.warn({ error });
-        console.log("The user refuse to enable bluetooth");
-      });
-    this.retrieveConnected();
+        console.warn({ error })
+        console.log("The user refuse to enable bluetooth")
+      })
+    this.retrieveConnected()
   }
 
   retrieveConnected() {
     BleManager.getConnectedPeripherals([]).then(results => {
-      console.log({ ConnectedDevices: results });
+      console.log({ ConnectedDevices: results })
       for (var i = 0; i < results.length; i++) {
-        var device = results[i];
-        device.connected = true;
-        this.setState({ devicesConnected: results });
+        var device = results[i]
+        device.connected = true
+        this.setState({ devicesConnected: results })
       }
-    });
+    })
   }
 
   resetDevices() {
     // Reseteamos los devices y los ids
-    this.setState({ devicesIds: [] });
-    this.setState({ devices: [] });
-    this.setState({ devicesConnectedIds: [] });
-    this.setState({ devicesConnected: [] });
+    this.setState({ devicesIds: [] })
+    this.setState({ devices: [] })
+    this.setState({ devicesConnectedIds: [] })
+    this.setState({ devicesConnected: [] })
   }
 
   startStop() {
     // Limpiamos y empezamos nuevo escaner o detenemos el actual
     if (this.state.scanning) {
-      console.log("Stoped scanner");
+      console.log("Stoped scanner")
       BleManager.stopScan().then(() => {
         // Success code
-        console.log("Scan stopped");
-      });
-      this.setState({ scanning: false });
+        console.log("Scan stopped")
+      })
+      this.setState({ scanning: false })
     } else {
       BleManager.scan([], 5, true).then(result => {
-        console.log({ result });
-        console.log("Scan started");
-      });
-      this.setState({ scanning: true });
-      this.resetDevices();
+        console.log({ result })
+        console.log("Scan started")
+      })
+      this.setState({ scanning: true })
+      this.resetDevices()
     }
-    this.retrieveConnected();
+    this.retrieveConnected()
   }
 
   render() {
@@ -165,7 +165,7 @@ export class Scanner extends React.Component {
               // Propiedades del botón ("props")
               title={this.state.scanning ? "Stop scanner" : "Start new scan"}
               onPress={() => {
-                this.startStop();
+                this.startStop()
               }}
             />
             <ScrollView style={styles.container}>
@@ -201,7 +201,7 @@ export class Scanner extends React.Component {
           </View>
         </View>
       </ImageBackground>
-    );
+    )
   }
 }
 
@@ -210,4 +210,4 @@ const styles = StyleSheet.create({
     padding: 5,
     borderColor: "#d6d7da"
   }
-});
+})
