@@ -82,35 +82,10 @@ export class Scanner extends React.Component {
 
   componentDidMount() {
     // We set listeners to our events to our api events
-    this.handlerDiscover = bleManagerEmitter.addListener(
-      "BleManagerDiscoverPeripheral",
-      this.handleDiscoverPeripheral
-    )
-    this.handlerStop = bleManagerEmitter.addListener(
-      "BleManagerStopScan",
-      this.handleStopScan
-    )
-    this.handlerDisconnect = bleManagerEmitter.addListener(
-      "BleManagerDisconnectPeripheral",
-      this.handleDisconnectedPeripheral
-    )
-    this.handlerUpdate = bleManagerEmitter.addListener(
-      "BleManagerDidUpdateValueForCharacteristic",
-      this.handleUpdateValueForCharacteristic
-    )
-    //Start manager
-    BleManager.start()
-    //Comprobamos el BLE (nos pide permisos)
-    BleManager.enableBluetooth()
-      .then(() => {
-        // Success code
-        console.log("The bluetooth is already enabled or the user confirm")
-      })
-      .catch(error => {
-        // Failure code
-        console.warn({ error })
-        console.log("The user refuse to enable bluetooth")
-      })
+    this.setListeners();
+    //Comprobamos el BLE (nos pide permisos) y lo arrancamos
+    startManager()
+    //Actualizamos los dispositivos conectados
     this.retrieveConnected()
   }
 
@@ -151,6 +126,25 @@ export class Scanner extends React.Component {
       this.resetDevices()
     }
     this.retrieveConnected()
+  }
+
+  setListeners = () => {
+    this.handlerDiscover = bleManagerEmitter.addListener(
+      "BleManagerDiscoverPeripheral",
+      this.handleDiscoverPeripheral
+    )
+    this.handlerStop = bleManagerEmitter.addListener(
+      "BleManagerStopScan",
+      this.handleStopScan
+    )
+    this.handlerDisconnect = bleManagerEmitter.addListener(
+      "BleManagerDisconnectPeripheral",
+      this.handleDisconnectedPeripheral
+    )
+    this.handlerUpdate = bleManagerEmitter.addListener(
+      "BleManagerDidUpdateValueForCharacteristic",
+      this.handleUpdateValueForCharacteristic
+    )
   }
 
   render() {
@@ -211,3 +205,17 @@ const styles = StyleSheet.create({
     borderColor: "#d6d7da"
   }
 })
+
+startManager = () => {
+  BleManager.enableBluetooth()
+    .then(() => {
+      // Success code
+      console.log("The bluetooth is already enabled or the user confirm")
+    })
+    .catch(error => {
+      // Failure code
+      console.warn({ error })
+      console.log("The user refuse to enable bluetooth")
+    })
+  BleManager.start()
+}

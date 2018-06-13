@@ -27,24 +27,6 @@ export class DeviceItem extends React.Component {
       devices: new Map()
     }
     this.device = {}
-    this.oldData = [
-      76,
-      69,
-      68,
-      66,
-      76,
-      69,
-      45,
-      55,
-      56,
-      54,
-      50,
-      57,
-      66,
-      52,
-      51,
-      0
-    ]
     this.handleUpdateValueForCharacteristic = this.handleUpdateValueForCharacteristic.bind(
       this
     )
@@ -69,12 +51,11 @@ export class DeviceItem extends React.Component {
     console.log('Received data from ' + data.peripheral + ' characteristic ' + data.characteristic, data.value);
   }
 
-  _onPress = () => {
+  _onPress = async () => {
     console.log({ props: this.props })
     const { device } = this.props
     if (device) {
-      console.log("Connected to " + device.id)
-      BleManager.connect(device.id)
+      await BleManager.connect(device.id)
         .then(() => {
           let devices = this.state.devices
           let p = devices.get(device.id)
@@ -84,120 +65,73 @@ export class DeviceItem extends React.Component {
             this.setState({ devices })
           }
           console.log("Connected to " + device.id)
-
-          setTimeout(() => {
-            BleManager.retrieveServices(device.id)
-              .then(deviceInfo => {
-                console.log({ deviceInfo })
-                // Esta es la unica caracteristica que responde a startNotific...
-                BleManager.startNotification(
-                  deviceInfo.id,
-                  deviceInfo.characteristics[4].service,
-                  deviceInfo.characteristics[4].characteristic
-                ).catch(errNotif => console.log({ errNotif }))
-                console.log("lanzado device infos!")
-                return deviceInfo
-              })
-              .then(async deviceInfo => {
-                // BleManager.read(
-                //   deviceInfo.id,
-                //   deviceInfo.characteristics[0].service,
-                //   deviceInfo.characteristics[0].characteristic
-                // )
-                //   .then(readData => {
-                // Success code
-                // console.log({ readData })
-                // const buffer = Buffer.Buffer.from(readData)
-                // console.log({ buffer })
-                // const sensorData = buffer.readUInt8(1, true)
-                // console.log({ sensorData })
-                // Turn Off the Light
-                await BleManager.createBond(deviceInfo.id)
-                  .then(() => {
-                    console.log(
-                      "createBond success or there is already an existing one"
-                    )
-                  })
-                  .catch(() => {
-                    console.log("fail to bond")
-                  })
-                /*
-                Red : 0x56ff000000f0aa
-                Yellow : 0x56ffff0000f0aa,
-                Blue: 0x560000ff00f0aa
-                */
-                const data = conversor.hexToBytes('0x56ffff0000f0aa')
-                console.log({ dataToWrite: data })
-                for (let index = 0; index < 4; index++) {
-                  await BleManager.write(
-                    deviceInfo.id,
-                    deviceInfo.characteristics[3].service,
-                    deviceInfo.characteristics[3].characteristic,
-                    data
-                  )
-                    .then(() => {
-                      // Success code
-                      console.log("Writed: " + data)
-                    })
-                    .catch(error => {
-                      // Failure code
-                      console.log(error)
-                    })
-                }
-
-                // })
-                // .catch(error => {
-                //   // Failure code
-                //   console.log(error)
-                // })
-              })
-          }, 900)
         })
         .catch(error => {
           console.log("Connection error", error)
         })
-    }
-    /*  BleManager.stopScan().then(() => {
-      // Success code
-      console.log("Scan stopped");
-    });
-   
-    if (this.props.device.connected) {
-      console.log("Device is connected");
-      BleManager.retrieveServices(this.device.id)
+      await BleManager.retrieveServices(device.id)
         .then(deviceInfo => {
-          // Success code
-          console.log({
-            DeviceInfo: deviceInfo
-          });
-          this.props.navigation.navigate("Device");
+          console.log({ deviceInfo })
+          // Esta es la unica caracteristica que responde a startNotific...
+          BleManager.startNotification(
+            deviceInfo.id,
+            deviceInfo.characteristics[4].service,
+            deviceInfo.characteristics[4].characteristic
+          ).catch(errNotif => console.log({ errNotif }))
+          return deviceInfo
         })
-        .catch(reason => console.log({ reason }));
-      return;
+        .then(async deviceInfo => {
+          await BleManager.read(
+            deviceInfo.id,
+            deviceInfo.characteristics[0].service,
+            deviceInfo.characteristics[0].characteristic
+          )
+            .then(readData => {
+              console.log({ readData })
+              const buffer = Buffer.Buffer.from(readData)
+              console.log({ buffer })
+              const sensorData = buffer.readUInt8(1, true)
+              console.log({ sensorData })
+            }).catch(err => console.log({ devInfErr: err }))
+
+          await BleManager.createBond(deviceInfo.id)
+            .then(() => {
+              console.log(
+                "createBond success or there is already an existing one"
+              )
+            })
+            .catch(() => {
+              console.log("fail to bond")
+            })
+
+          const rgb = {
+            r: '0x56ff000000f0aa',
+            g: '0x5600ff0000f0aa',
+            b: '0x560000ff00f0aa',
+          }
+
+          const data = conversor.hexToBytes(rgb.g)
+          console.log({ dataToWrite: data })
+          for (let index = 0; index < 60; index++) {
+            await BleManager.write(
+              deviceInfo.id,
+              deviceInfo.characteristics[3].service,
+              deviceInfo.characteristics[3].characteristic,
+              data
+            )
+              .then(() => {
+                index = 60
+                // Success code
+                console.log("Writed: " + data)
+              })
+              .catch(error => {
+                // Failure code
+                console.log(error)
+              })
+          }
+        })
     }
-   
-    BleManager.connect(this.device.id)
-      .then(() => {
-        // Success code
-        console.log("Connected");
-        this.props.navigation.navigate("Device");
-      })
-      .then(
-        BleManager.retrieveServices(this.device.id)
-          .then(deviceInfo => {
-            // Success code
-            console.log({
-              DeviceInfo: deviceInfo
-            });
-          })
-          .catch(reason => console.log({ reason }))
-      )
-      .catch(error => {
-        // Failure code
-        console.log(error);
-      });
-      */
-  }
+  } 
 
   render() {
     return (
