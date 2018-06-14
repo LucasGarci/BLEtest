@@ -1,58 +1,87 @@
-import React from "react"
+import React from "react";
 import {
-  StyleSheet, Text, TouchableOpacity, NativeEventEmitter,
-  NativeModules,
-} from "react-native"
-import { Card } from "react-native-elements"
-import BleManager from "react-native-ble-manager"
-import Buffer from "buffer"
-import { bytesToString } from 'convert-string';
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  NativeEventEmitter,
+  NativeModules
+} from "react-native";
+import { Card } from "react-native-elements";
+import BleManager from "react-native-ble-manager";
+import Buffer from "buffer";
+import { bytesToString } from "convert-string";
 
-const BleManagerModule = NativeModules.BleManager
+const BleManagerModule = NativeModules.BleManager;
 //We create our events emitter
-const bleManagerEmitter = new NativeEventEmitter(BleManagerModule)
+const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
-var conversor = require("convert-hex")
+var conversor = require("convert-hex");
 
 // DONT DELETE THIS COMMENT https://www.npmjs.com/package/convert-hex
 
 export class DeviceItem extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       id: null,
       name: null,
       rssi: null,
       connected: false,
       devices: new Map()
-    }
-    this.device = {}
+    };
+    this.device = {};
     this.handleUpdateValueForCharacteristic = this.handleUpdateValueForCharacteristic.bind(
       this
-    )
+    );
   }
 
   componentDidMount() {
-    const { device } = this.props
+    const { device } = this.props;
     this.setState({
       id: device.id,
       name: device.name || "Anonimo",
       rssi: device.rssi,
       connected: device.connected
-    })
-    this.device = this.props.device
+    });
+    this.device = this.props.device;
     this.handlerUpdate = bleManagerEmitter.addListener(
       "BleManagerDidUpdateValueForCharacteristic",
       this.handleUpdateValueForCharacteristic
-    )
+    );
   }
 
   handleUpdateValueForCharacteristic(data) {
-    console.log('Received data from ' + data.peripheral + ' characteristic ' + data.characteristic, data.value);
+    console.log(
+      "Received data from " +
+        data.peripheral +
+        " characteristic " +
+        data.characteristic,
+      data.value
+    );
   }
 
   _onPress = async () => {
-    console.log({ props: this.props })
+    const { device } = this.props
+    await BleManager.connect(device.id)
+      .then(() => {
+        let devices = this.state.devices;
+        let p = devices.get(device.id);
+        if (p) {
+          p.connected = true;
+          devices.set(device.id, p);
+          this.setState({ devices });
+        }
+        console.log("Connected to " + device.id);
+        this.props.navigation.navigate("Device", {
+          device: this.props.device
+        });
+      })
+      .catch(error => {
+        console.log("Connection error", error);
+      });
+
+    console.log({ props: this.props });
+    /*
     const { device } = this.props
     if (device) {
       await BleManager.connect(device.id)
@@ -110,7 +139,7 @@ export class DeviceItem extends React.Component {
             b: '0x560000ff00f0aa',
           }
 
-          const data = conversor.hexToBytes(rgb.g)
+          const data = conversor.hexToBytes('0x5620202000f0aa')
           console.log({ dataToWrite: data })
           for (let index = 0; index < 60; index++) {
             await BleManager.write(
@@ -130,8 +159,8 @@ export class DeviceItem extends React.Component {
               })
           }
         })
-    }
-  } 
+    }*/
+  };
 
   render() {
     return (
@@ -144,10 +173,10 @@ export class DeviceItem extends React.Component {
         <Card containerStyle={styles.list}>
           <Text> Id: {this.state.id} </Text>
           <Text> Name: {this.state.name} </Text>
-          <Text> Rssi: {this.state.rssi || 'Connected'} </Text>
+          <Text> Rssi: {this.state.rssi || "Connected"} </Text>
         </Card>
       </TouchableOpacity>
-    )
+    );
   }
 }
 
@@ -157,4 +186,4 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 10
   }
-})
+});
