@@ -5,13 +5,19 @@ import {
   View,
   Button,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  NativeEventEmitter,
+  NativeModules,
 } from "react-native";
 import { ColorWheel } from "react-native-color-wheel";
 import { PrefabPicker } from "../components/PrefabPicker";
 import BleManager from "react-native-ble-manager";
 
 var conversor = require("convert-hex");
+//We get the class to subscribe
+const BleManagerModule = NativeModules.BleManager;
+//We create our events emitter
+const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 export class ColorTab extends React.Component {
   constructor(props) {
@@ -19,12 +25,20 @@ export class ColorTab extends React.Component {
     this.state = {
       currentColor: "",
       devicesConnected: {},
-      deviceInfo: {}
+      deviceInfo: {},
+      lastUpdateValue: {}
     };
+    this.handleBleManagerDidUpdateState = this.handleBleManagerDidUpdateState.bind(
+      this
+    );
   }
 
   componentDidMount() {
     this.retrieveConnected();
+    this.handlerUpdate = bleManagerEmitter.addListener(
+      "BleManagerDidUpdateState",
+      this.handleBleManagerDidUpdateState
+    );
   }
 
   retrieveConnected() {
@@ -34,7 +48,19 @@ export class ColorTab extends React.Component {
     });
   }
 
+  handleBleManagerDidUpdateState(data) {
+    console.log(
+      "Received data from " +
+        data.peripheral +
+        " characteristic " +
+        data.characteristic,
+      data.value
+    );
+    this.setState({ lastUpdateValue: data });
+  }
+
   async handleColorChange(color) {
+    BleManager.checkState();
     const rgbColor = hsv2Rgb(color.h, color.s, color.v);
     this.setState({ currentColor: rgbColor });
     console.log({ colorIs: this.state.currentColor });
@@ -62,10 +88,10 @@ export class ColorTab extends React.Component {
     //Creamos enlace o certificamos que esta creado
     await BleManager.createBond(deviceInfo.id)
       .then(() => {
-        console.log("createBond success or there is already an existing one");
+        console.log("Bonding its OK");
       })
       .catch(() => {
-        console.log("fail to bond");
+        console.log("Fail to bond");
       });
 
     const mode = "0x56";
@@ -80,7 +106,7 @@ export class ColorTab extends React.Component {
     const data = conversor.hexToBytes(colorToWrite);
     console.log({ dataToWrite: data });
 
-  //  BleManager.checkState
+    //  BleManager.checkState
     await BleManager.write(
       deviceInfo.id,
       deviceInfo.characteristics[3].service,
