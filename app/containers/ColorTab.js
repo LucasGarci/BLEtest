@@ -18,7 +18,8 @@ export class ColorTab extends React.Component {
     super(props);
     this.state = {
       currentColor: "",
-      devicesConnected: {}
+      devicesConnected: {},
+      deviceInfo: {}
     };
   }
 
@@ -39,52 +40,57 @@ export class ColorTab extends React.Component {
     console.log({ colorIs: this.state.currentColor });
     const device = this.state.devicesConnected[0];
     console.log({ CT_devConected: device });
+
+    //Sacamos los servicios
     await BleManager.retrieveServices(device.id)
       .then(deviceInfo => {
         console.log({ CT_devInf: deviceInfo });
-        // Esta es la unica caracteristica que responde a startNotific...
-        BleManager.startNotification(
-          deviceInfo.id,
-          deviceInfo.characteristics[4].service,
-          deviceInfo.characteristics[4].characteristic
-        ).catch(errNotif => console.log({ errNotif }));
-        return deviceInfo;
+        this.setState({ deviceInfo });
       })
-      .then(async deviceInfo => {
-        await BleManager.createBond(deviceInfo.id)
-          .then(() => {
-            console.log(
-              "createBond success or there is already an existing one"
-            );
-          })
-          .catch(() => {
-            console.log("fail to bond");
-          });
+      .catch(error => {
+        console.log(error);
+      });
 
-        const colorToSend = "0x56";
-        const cs = colorToSend.concat(rgbColor.r.toString(16), rgbColor.g.toString(16), rgbColor.b.toString(16), "00f0aa");
+    const deviceInfo = this.state.deviceInfo;
+    // Esta es la unica caracteristica que responde a startNotific...
+    await BleManager.startNotification(
+      deviceInfo.id,
+      deviceInfo.characteristics[4].service,
+      deviceInfo.characteristics[4].characteristic
+    ).catch(errNotif => console.log({ errNotif }));
 
-        console.log({ cs });
+    //Creamos enlace o certificamos que esta creado
+    await BleManager.createBond(deviceInfo.id)
+      .then(() => {
+        console.log("createBond success or there is already an existing one");
+      })
+      .catch(() => {
+        console.log("fail to bond");
+      });
 
-        const data = conversor.hexToBytes(cs);
-        console.log({ dataToWrite: data });
-        for (let index = 0; index < 10; index++) {
-          await BleManager.write(
-            deviceInfo.id,
-            deviceInfo.characteristics[3].service,
-            deviceInfo.characteristics[3].characteristic,
-            data
-          )
-            .then(() => {
-              index = 10;
-              // Success code
-              console.log("Writed: " + data);
-            })
-            .catch(error => {
-              // Failure code
-              console.log(error);
-            });
-        }
+    const mode = "0x56";
+    //concat mode+r+g+b+constant
+    const colorToWrite = mode.concat(
+      rgbColor.r.toString(16),
+      rgbColor.g.toString(16),
+      rgbColor.b.toString(16),
+      "00f0aa"
+    );
+    console.log({ colorToWrite: colorToWrite });
+
+    const data = conversor.hexToBytes(colorToWrite);
+    console.log({ dataToWrite: data });
+
+    await BleManager.write(
+      deviceInfo.id,
+      deviceInfo.characteristics[3].service,
+      deviceInfo.characteristics[3].characteristic,
+      data
+    )
+      .then(() => {
+        index = 10;
+        // Success code
+        console.log("Writed: " + data);
       })
       .catch(error => {
         // Failure code
