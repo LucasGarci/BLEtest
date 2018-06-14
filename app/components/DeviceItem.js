@@ -30,9 +30,6 @@ export class DeviceItem extends React.Component {
       devices: new Map()
     };
     this.device = {};
-    this.handleUpdateValueForCharacteristic = this.handleUpdateValueForCharacteristic.bind(
-      this
-    );
   }
 
   componentDidMount() {
@@ -50,18 +47,8 @@ export class DeviceItem extends React.Component {
     );
   }
 
-  handleUpdateValueForCharacteristic(data) {
-    console.log(
-      "Received data from " +
-        data.peripheral +
-        " characteristic " +
-        data.characteristic,
-      data.value
-    );
-  }
-
   _onPress = async () => {
-    const { device } = this.props
+    const { device } = this.props;
     await BleManager.connect(device.id)
       .then(() => {
         let devices = this.state.devices;
@@ -80,7 +67,53 @@ export class DeviceItem extends React.Component {
         console.log("Connection error", error);
       });
 
-    console.log({ props: this.props });
+    await BleManager.connect(device.id)
+      .then(() => {
+        let devices = this.state.devices;
+        let p = devices.get(device.id);
+        if (p) {
+          p.connected = true;
+          devices.set(device.id, p);
+          this.setState({ devices });
+        }
+        console.log("Connected to " + device.id);
+      })
+      .catch(error => {
+        console.log("Connection error", error);
+      });
+    await BleManager.retrieveServices(device.id)
+      .then(deviceInfo => {
+        console.log({ deviceInfo });
+        // Esta es la unica caracteristica que responde a startNotific...
+        /* BleManager.startNotification(
+          deviceInfo.id,
+          deviceInfo.characteristics[4].service,
+          deviceInfo.characteristics[4].characteristic
+        ).catch(errNotif => console.log({ errNotif }));*/
+        return deviceInfo;
+      })
+      .then(async deviceInfo => {
+        for (
+          let index = 0;
+          index < deviceInfo.characteristics.length;
+          index++
+        ) {
+          console.log("ciclo", index);
+          await BleManager.read(
+            deviceInfo.id,
+            deviceInfo.characteristics[index].service,
+            deviceInfo.characteristics[index].characteristic
+          )
+            .then(readData => {
+              console.log({ readData });
+              const buffer = Buffer.Buffer.from(readData);
+              console.log({ bufferData });
+              const sensorData = buffer.readUInt8(1, true);
+              console.log({ sensorData });
+            })
+            .catch(err => console.log({ devInfErr: err }));
+        }
+      });
     /*
     const { device } = this.props
     if (device) {

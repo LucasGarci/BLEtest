@@ -121,7 +121,7 @@ export class Scanner extends React.Component {
     } else {
       BleManager.scan([], 5, true).then(
         console.log("Scan started")
-      })
+      )
       this.setState({ scanning: true })
       this.resetDevices()
     }
