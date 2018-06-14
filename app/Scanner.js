@@ -53,7 +53,7 @@ export class Scanner extends React.Component {
 
   handleDiscoverPeripheral(device) {
     if (!this.state.devicesIds.includes(device.id)) {
-      console.log(device)
+      console.log({DeviceFound: device})
       this.setState({ devicesIds: [...this.state.devicesIds, device.id] })
       // Añadimos el dispositivo completo a la lista
       this.setState({
@@ -119,8 +119,7 @@ export class Scanner extends React.Component {
       })
       this.setState({ scanning: false })
     } else {
-      BleManager.scan([], 5, true).then(result => {
-        console.log({ result })
+      BleManager.scan([], 5, true).then(
         console.log("Scan started")
       })
       this.setState({ scanning: true })
