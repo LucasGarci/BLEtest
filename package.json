@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "buffer": "^5.1.0",
+    "colorsys": "^1.0.21",
     "convert-hex": "^0.1.0",
     "convert-string": "^0.1.0",
     "react": "16.3.1",

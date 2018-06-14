@@ -69,18 +69,18 @@ export class ColorTab extends React.Component {
       });
 
     const mode = "0x56";
-    //concat mode+r+g+b+constant
-    const colorToWrite = mode.concat(
-      rgbColor.r.toString(16),
-      rgbColor.g.toString(16),
-      rgbColor.b.toString(16),
-      "00f0aa"
-    );
+    // Debemos pasar la cadena a hexadecimal y que sea un valor de dos dígitos
+    const r = secureByte(rgbColor.r.toString(16));
+    const g = secureByte(rgbColor.g.toString(16));
+    const b = secureByte(rgbColor.b.toString(16));
+    //concatenamos mode+r+g+b+constant
+    const colorToWrite = mode.concat(r, g, b, "00f0aa");
     console.log({ colorToWrite: colorToWrite });
 
     const data = conversor.hexToBytes(colorToWrite);
     console.log({ dataToWrite: data });
 
+  //  BleManager.checkState
     await BleManager.write(
       deviceInfo.id,
       deviceInfo.characteristics[3].service,
@@ -133,6 +133,13 @@ const styles = StyleSheet.create({
     borderRadius: 10
   }
 });
+
+secureByte = function(byteString) {
+  if (byteString.length === 1) {
+    byteString = "0".concat(byteString);
+  }
+  return byteString;
+};
 
 hsv2Rgb = function(h, s, v) {
   if (typeof h === "object") {
