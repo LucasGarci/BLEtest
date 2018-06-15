@@ -21,15 +21,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.55.4\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="e31331bdf6b5952badadbfc171f04b95c55d3b16">
-        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\com.facebook.react-react-native-0.55.4_c3a90de542bcccda544fa015daa3bb000e7ce364.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Administrador\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.6.0\69edde9fc4b01c9fd51d25b83428837478c27254\okhttp-3.6.0.jar"
         jumboMode="false"
         optimize="true"
@@ -39,12 +30,84 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.0.1_2d1877018dbca839575bffd5b77ec9ef566de382.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.soloader\soloader\0.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\com.facebook.soloader-soloader-0.1.0_dec935dc03bc7f5c991389458abdab329b07d7ce.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrador\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.0\5871fb60dc68d67da54a663c3fd636a10a532948\jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\jsr305-3.0.0_93a47ddabb2eb142213231b6aa264f02f0c7793c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrador\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.13.0\a9283170b7305c8d92d25aff02a6ab7e45d06cbe\okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\okio-1.13.0_c6ec2bb114174b84f58cfb3d4b4e0353fbd8ff57.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\1.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-base-1.3.0_c69b19624144b12c4a21cad0ecfeeb9a047de3f6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1_244a5744ff5bd7e6f3dd097e6a6412bd91c4b48a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.55.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e31331bdf6b5952badadbfc171f04b95c55d3b16">
+        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\com.facebook.react-react-native-0.55.4_c3a90de542bcccda544fa015daa3bb000e7ce364.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.55.4\jars\libs\infer-annotations-4.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="9809e90be788acdb479b2b44e2112f3295a03068">
         <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\infer-annotations-4.0_a7996a4de93aed819e729e695a67db940b484a5c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-exit-app\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="3f9b463dd61b0ad448b36859570c0354189a0cd7">
+        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\BLEtest-react-native-exit-app-unspecified_44e174278b70cc7c995933e621b8d275bd213296.jar" />
     </item>
     <item
         is-multidex="false"
@@ -84,15 +147,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.0.1_2d1877018dbca839575bffd5b77ec9ef566de382.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-vector-icons\unspecified\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -129,24 +183,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.soloader\soloader\0.1.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
-        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\com.facebook.soloader-soloader-0.1.0_dec935dc03bc7f5c991389458abdab329b07d7ce.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrador\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.0\5871fb60dc68d67da54a663c3fd636a10a532948\jsr305-3.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\jsr305-3.0.0_93a47ddabb2eb142213231b6aa264f02f0c7793c.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Administrador\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-urlconnection\3.6.0\3f9b16b774f2c36cfd86dd2053d0b3059531dacc\okhttp-urlconnection-3.6.0.jar"
         jumboMode="false"
         optimize="true"
@@ -174,39 +210,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Administrador\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.13.0\a9283170b7305c8d92d25aff02a6ab7e45d06cbe\okio-1.13.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\okio-1.13.0_c6ec2bb114174b84f58cfb3d4b4e0353fbd8ff57.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\1.3.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
-        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-base-1.3.0_c69b19624144b12c4a21cad0ecfeeb9a047de3f6.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\1.3.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
         <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fbcore-1.3.0_d4bf990741cba89a72c0d9afd91327bb89caa4c7.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1_244a5744ff5bd7e6f3dd097e6a6412bd91c4b48a.jar" />
     </item>
     <item
         is-multidex="false"

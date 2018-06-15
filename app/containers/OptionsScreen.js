@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Alert,
   StyleSheet,
   Text,
   View,
@@ -8,19 +9,19 @@ import {
   Button,
   Switch
 } from "react-native";
+import RNExitApp from 'react-native-exit-app';
 import { Card } from "react-native-elements";
-import { store } from '../redux/store'
-import { setLanguage, setTheme } from '../redux/actions'
-import { connect } from "react-redux"
+import { store } from "../redux/store";
+import { setLanguage, setTheme } from "../redux/actions";
+import { connect } from "react-redux";
 
 @connect(state => {
-  console.log(state)
-  console.log(store.getState())
-  return ({
+  return {
     language: state.language,
     theme: state.theme
-  })
+  };
 })
+
 export class OptionsScreen extends React.Component {
   constructor(props) {
     super();
@@ -35,22 +36,31 @@ export class OptionsScreen extends React.Component {
 
   onSwitch(value) {
     if (value) {
-      this.setState({ switchValue: value })
-      store.dispatch(setTheme('dark'))
-      return
+      this.setState({ switchValue: value });
+      store.dispatch(setTheme("dark"));
+      return;
     }
     this.setState({ switchValue: value });
-    store.dispatch(setTheme('light'))
-  }
-
-
-
-  handleDeletePress() {
-    console.log('DELETING LOCAL DATA')
+    store.dispatch(setTheme("light"));
   }
 
   handleDeletePress() {
-    console.log('BYE BYE MY FRIEND')
+    console.log("DELETING LOCAL DATA");
+  }
+
+  handleByePress() {
+    console.log("BYE BYE MY FRIEND");
+
+    Alert.alert(
+      'Exit App',
+      'Do you want to exit?',
+      [
+        {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Yes', onPress: () => RNExitApp.exitApp()},
+      ],
+      { cancelable: false })
+
+    return true;
   }
 
   render() {
@@ -64,7 +74,7 @@ export class OptionsScreen extends React.Component {
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
                 <Text style={styles.textOption}>
-                  Seleccionar idioma: {this.props.language || 'noHay'}
+                  Seleccionar idioma: {this.props.language || "noHay"}
                 </Text>
               </View>
               <View style={styles.switchContainer}>
@@ -79,7 +89,7 @@ export class OptionsScreen extends React.Component {
                   }}
                   onValueChange={(itemValue, itemIndex) => {
                     //CAMBIAMOS EL IDIOMA DE LA APP
-                    store.dispatch(setLanguage(itemValue))
+                    store.dispatch(setLanguage(itemValue));
                     console.log(this.state.language);
                   }}
                 >
@@ -96,7 +106,11 @@ export class OptionsScreen extends React.Component {
                 <Text style={styles.textOption}>Borrar datos locales:</Text>
               </View>
               <View style={styles.switchContainer}>
-                <Button title="Delete" onPress={this.handleDeletePress} style={styles.textOption} />
+                <Button
+                  title="Delete"
+                  onPress={this.handleDeletePress}
+                  style={styles.textOption}
+                />
               </View>
             </View>
           </Card>
@@ -124,7 +138,11 @@ export class OptionsScreen extends React.Component {
                   <Text style={styles.textOption}>Salir de la aplicación</Text>
                 </View>
                 <View style={styles.switchContainer}>
-                  <Button title="Bye :(" onPress={this.handleDeletePress} style={styles.textOption} />
+                  <Button
+                    title="Bye :("
+                    onPress={this.handleByePress}
+                    style={styles.textOption}
+                  />
                 </View>
               </View>
             </Card>
@@ -138,7 +156,7 @@ export class OptionsScreen extends React.Component {
             </Card>
           </View>
         </View>
-      </ImageBackground >
+      </ImageBackground>
     );
   }
 }
