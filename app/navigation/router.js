@@ -56,7 +56,7 @@ export const DeviceNavigation = TabNavigator({
   Effect: {
     screen: EffectTab,
     navigationOptions: {
-      tabBarLabel: <Icon name="smoking-rooms" color="white" size={32} />
+      tabBarLabel: <Icon name="3d-rotation" color="white" size={32} />
     }
   }
 });
