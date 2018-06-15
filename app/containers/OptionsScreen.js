@@ -9,12 +9,22 @@ import {
   Switch
 } from "react-native";
 import { Card } from "react-native-elements";
+import { store } from '../redux/store'
+import { setLanguage, setTheme } from '../redux/actions'
+import { connect } from "react-redux"
 
+@connect(state => {
+  console.log(state)
+  console.log(store.getState())
+  return ({
+    language: state.language,
+    theme: state.theme
+  })
+})
 export class OptionsScreen extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      language: "Spanish",
       switchValue: true,
       colorScheme: "izquierda"
     };
@@ -24,9 +34,23 @@ export class OptionsScreen extends React.Component {
   };
 
   onSwitch(value) {
-    value
-      ? this.setState({ switchValue: value, colorScheme: "derecha" })
-      : this.setState({ switchValue: value, colorScheme: "izquierda" });
+    if (value) {
+      this.setState({ switchValue: value })
+      store.dispatch(setTheme('dark'))
+      return
+    }
+    this.setState({ switchValue: value });
+    store.dispatch(setTheme('light'))
+  }
+
+
+
+  handleDeletePress() {
+    console.log('DELETING LOCAL DATA')
+  }
+
+  handleDeletePress() {
+    console.log('BYE BYE MY FRIEND')
   }
 
   render() {
@@ -39,11 +63,13 @@ export class OptionsScreen extends React.Component {
           <Card containerStyle={styles.list}>
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
-                <Text style={styles.textOption}>Seleccionar idioma: </Text>
+                <Text style={styles.textOption}>
+                  Seleccionar idioma: {this.props.language || 'noHay'}
+                </Text>
               </View>
               <View style={styles.switchContainer}>
                 <Picker
-                  selectedValue={this.state.language}
+                  selectedValue={this.props.language}
                   style={{
                     position: "absolute",
                     left: 0,
@@ -52,7 +78,8 @@ export class OptionsScreen extends React.Component {
                     borderWidth: 1
                   }}
                   onValueChange={(itemValue, itemIndex) => {
-                    this.setState({ language: itemValue });
+                    //CAMBIAMOS EL IDIOMA DE LA APP
+                    store.dispatch(setLanguage(itemValue))
                     console.log(this.state.language);
                   }}
                 >
@@ -69,7 +96,7 @@ export class OptionsScreen extends React.Component {
                 <Text style={styles.textOption}>Borrar datos locales:</Text>
               </View>
               <View style={styles.switchContainer}>
-                <Button title="Delete" style={styles.textOption} />
+                <Button title="Delete" onPress={this.handleDeletePress} style={styles.textOption} />
               </View>
             </View>
           </Card>
@@ -78,7 +105,7 @@ export class OptionsScreen extends React.Component {
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
                 <Text style={styles.textOption}>
-                  Esquema de colores: {this.state.colorScheme}
+                  Esquema de colores: {this.props.theme}
                 </Text>
               </View>
               <View style={styles.switchContainer}>
@@ -97,7 +124,7 @@ export class OptionsScreen extends React.Component {
                   <Text style={styles.textOption}>Salir de la aplicación</Text>
                 </View>
                 <View style={styles.switchContainer}>
-                <Button title="Bye :(" style={styles.textOption} />
+                  <Button title="Bye :(" onPress={this.handleDeletePress} style={styles.textOption} />
                 </View>
               </View>
             </Card>
@@ -111,7 +138,7 @@ export class OptionsScreen extends React.Component {
             </Card>
           </View>
         </View>
-      </ImageBackground>
+      </ImageBackground >
     );
   }
 }
