@@ -1,5 +1,5 @@
 export const initialState = {
-    theme: 'default',
+    theme: 'light',
     language: 'es',
     prefabs: {
         prefab1: {

@@ -7,9 +7,10 @@ import {
   ImageBackground,
   Picker,
   Button,
-  Switch
+  Switch,
+  Linking
 } from "react-native";
-import RNExitApp from 'react-native-exit-app';
+import RNExitApp from "react-native-exit-app";
 import { Card } from "react-native-elements";
 import { store } from "../redux/store";
 import { setLanguage, setTheme } from "../redux/actions";
@@ -21,13 +22,13 @@ import { connect } from "react-redux";
     theme: state.theme
   };
 })
-
 export class OptionsScreen extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      switchValue: true,
-      colorScheme: "izquierda"
+      switchValue: props.theme === "dark" ? true : false,
+      colorScheme: "izquierda",
+      linkColor: "#3040fB"
     };
   }
   onPress = () => {
@@ -36,6 +37,7 @@ export class OptionsScreen extends React.Component {
 
   onSwitch(value) {
     if (value) {
+      //true es a la derecha(verde)
       this.setState({ switchValue: value });
       store.dispatch(setTheme("dark"));
       return;
@@ -50,18 +52,33 @@ export class OptionsScreen extends React.Component {
 
   handleByePress() {
     console.log("BYE BYE MY FRIEND");
-
     Alert.alert(
-      'Exit App',
-      'Do you want to exit?',
+      "Exit App",
+      "Do you want to exit?",
       [
-        {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        {text: 'Yes', onPress: () => RNExitApp.exitApp()},
+        {
+          text: "No",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Yes", onPress: () => RNExitApp.exitApp() }
       ],
-      { cancelable: false })
-
+      { cancelable: false }
+    );
     return true;
   }
+
+  handleLinkPress = () => {
+    this.setState({ linkColor: "#8040fb" });
+    Linking.openURL("https://facebook.github.io/react-native/");
+  };
+
+  switchValueFromRedux = () => {
+    if (!this.props.theme === "light") {
+      return true;
+    }
+    return false;
+  };
 
   render() {
     return (
@@ -150,7 +167,15 @@ export class OptionsScreen extends React.Component {
             <Card containerStyle={styles.list}>
               <View style={styles.optionContainer}>
                 <View style={styles.descriptionContainer}>
-                  <Text style={styles.link}>Averigua como me han hecho ;)</Text>
+                  <Text
+                    style={{
+                      fontSize: 19,
+                      color: this.state.linkColor
+                    }}
+                    onPress={this.handleLinkPress}
+                  >
+                    Averigua como me han hecho ;)
+                  </Text>
                 </View>
               </View>
             </Card>
@@ -200,8 +225,7 @@ const styles = StyleSheet.create({
     color: "#606060"
   },
   link: {
-    fontSize: 19,
-    color: "#3366fB"
+    fontSize: 19
   },
   list: {
     padding: 0,
