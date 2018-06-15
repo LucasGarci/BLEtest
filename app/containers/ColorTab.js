@@ -61,23 +61,22 @@ export class ColorTab extends React.Component {
     this.setState({ lastUpdateValue: data });
   }
 
-verifications() {
-}
+  verifications() {}
 
-async handleOnPress() {
+  async handleOnPress(turn) {
     BleManager.checkState();
     const device = this.state.devicesConnected[0];
     console.log({ CT_devConected: device });
 
     //Sacamos los servicios
     await BleManager.retrieveServices(device.id)
-    .then(deviceInfo => {
-      console.log({ CT_devInf: deviceInfo });
-      this.setState({ deviceInfo });
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      .then(deviceInfo => {
+        console.log({ CT_devInf: deviceInfo });
+        this.setState({ deviceInfo });
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
     const deviceInfo = this.state.deviceInfo;
     // Esta es la unica caracteristica que responde a startNotific...
@@ -96,9 +95,12 @@ async handleOnPress() {
         console.log("Fail to bond");
       });
 
-    const off = "CC2333" 
-    const data = conversor.hexToBytes(off);
-    
+    const off = "CC2433";
+    const on = "CC2333";
+    const go = turn === "ON" ? on : off;
+
+    const data = conversor.hexToBytes(go);
+
     await BleManager.write(
       deviceInfo.id,
       deviceInfo.characteristics[3].service,
@@ -114,7 +116,7 @@ async handleOnPress() {
         // Failure code
         console.log(error);
       });
-}
+  }
 
   async handleColorChange(color) {
     if (!this.writing) {

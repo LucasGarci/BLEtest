@@ -1,6 +1,6 @@
 import React from "react"
 import { StyleSheet, Text, View, Button, ImageBackground, TouchableOpacity } from "react-native"
-import { BackgroundImage } from "../components/BgImg"
+import I18n from '../../I18n/I18n';
 
 export class EffectTab extends React.Component {
   onPress = () => {
@@ -9,16 +9,11 @@ export class EffectTab extends React.Component {
 
   render() {
     return (
-
-      <ImageBackground
-        source={require('../img/fondoapp.png')}
-        style={{ width: '100%', height: '100%' }} >
         <View style={styles.centerContainer}>
           <TouchableOpacity onPress={this.onPress}>
-            <Text>This is EffectTab</Text>
+            <Text>{I18n.t('welcome')}</Text>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
     )
   }
 }
