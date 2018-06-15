@@ -10,7 +10,11 @@ import {
   Switch,
   Linking
 } from "react-native";
+<<<<<<< HEAD
 import RNExitApp from "react-native-exit-app";
+=======
+import RNExitApp from 'react-native-exit-app';
+>>>>>>> 814c104fb6f3930e3c4f75a073f651d49bb260f7
 import { Card } from "react-native-elements";
 import { store } from "../redux/store";
 import { setLanguage, setTheme } from "../redux/actions";
@@ -22,6 +26,7 @@ import { connect } from "react-redux";
     theme: state.theme
   };
 })
+
 export class OptionsScreen extends React.Component {
   constructor(props) {
     super();
@@ -37,7 +42,10 @@ export class OptionsScreen extends React.Component {
 
   onSwitch(value) {
     if (value) {
+<<<<<<< HEAD
       //true es a la derecha(verde)
+=======
+>>>>>>> 814c104fb6f3930e3c4f75a073f651d49bb260f7
       this.setState({ switchValue: value });
       store.dispatch(setTheme("dark"));
       return;
@@ -52,6 +60,7 @@ export class OptionsScreen extends React.Component {
 
   handleByePress() {
     console.log("BYE BYE MY FRIEND");
+<<<<<<< HEAD
     Alert.alert(
       "Exit App",
       "Do you want to exit?",
@@ -65,6 +74,18 @@ export class OptionsScreen extends React.Component {
       ],
       { cancelable: false }
     );
+=======
+
+    Alert.alert(
+      'Exit App',
+      'Do you want to exit?',
+      [
+        {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Yes', onPress: () => RNExitApp.exitApp()},
+      ],
+      { cancelable: false })
+
+>>>>>>> 814c104fb6f3930e3c4f75a073f651d49bb260f7
     return true;
   }
 
