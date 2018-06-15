@@ -81,6 +81,7 @@ ADDED from C:\Users\LGF\Desktop\desarrollo\BLEtest\android\app\src\main\AndroidM
 	android:name
 		ADDED from C:\Users\LGF\Desktop\desarrollo\BLEtest\android\app\src\main\AndroidManifest.xml:26:17-81
 uses-sdk
+<<<<<<< HEAD
 INJECTED from C:\Users\LGF\Desktop\desarrollo\BLEtest\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [BLEtest:react-native-ble-manager:unspecified] C:\Users\LGF\Desktop\desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-ble-manager\unspecified\AndroidManifest.xml:5:5-44
 MERGED from [BLEtest:react-native-vector-icons:unspecified] C:\Users\LGF\Desktop\desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-vector-icons\unspecified\AndroidManifest.xml:7:5-9:41
@@ -97,6 +98,24 @@ MERGED from [com.facebook.fresco:imagepipeline:1.3.0] C:\Users\LGF\Desktop\desar
 MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] C:\Users\LGF\Desktop\desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\1.3.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:fbcore:1.3.0] C:\Users\LGF\Desktop\desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\1.3.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\LGF\Desktop\desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.soloader\soloader\0.1.0\AndroidManifest.xml:2:3-70
+=======
+INJECTED from C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [BLEtest:react-native-ble-manager:unspecified] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-ble-manager\unspecified\AndroidManifest.xml:5:5-44
+MERGED from [BLEtest:react-native-vector-icons:unspecified] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-vector-icons\unspecified\AndroidManifest.xml:7:5-9:41
+MERGED from [BLEtest:react-native-i18n:unspecified] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-i18n\unspecified\AndroidManifest.xml:7:5-9:41
+MERGED from [BLEtest:react-native-exit-app:unspecified] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\BLEtest\react-native-exit-app\unspecified\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.55.4] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.55.4\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:23.0.1] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.0.1] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:20:5-43
+MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fbui.textlayoutbuilder\textlayoutbuilder\1.0.0\AndroidManifest.xml:14:5-16:41
+MERGED from [com.facebook.fresco:fresco:1.3.0] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fresco\1.3.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.3.0] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fresco\drawee\1.3.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.3.0] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-okhttp3\1.3.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.3.0] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline\1.3.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\1.3.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.3.0] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\1.3.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\Administrador\Desktop\Desarrollo\BLEtest\android\app\build\intermediates\exploded-aar\com.facebook.soloader\soloader\0.1.0\AndroidManifest.xml:2:3-70
+>>>>>>> 814c104fb6f3930e3c4f75a073f651d49bb260f7
 	android:targetSdkVersion
 		INJECTED from C:\Users\LGF\Desktop\desarrollo\BLEtest\android\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\LGF\Desktop\desarrollo\BLEtest\android\app\src\main\AndroidManifest.xml
