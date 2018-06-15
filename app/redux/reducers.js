@@ -16,4 +16,3 @@ export default function goblalReducer(state, action) {
             return state
     }
 }
-
