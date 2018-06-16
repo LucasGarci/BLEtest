@@ -134,7 +134,8 @@ export class OptionsScreen extends React.Component {
                     left: 0,
                     height: 50,
                     width: 150,
-                    borderWidth: 1
+                    borderWidth: 1,
+                    color: getCurrentTheme().textColor
                   }}
                   onValueChange={(itemValue, itemIndex) =>
                     this.handlePicker(itemValue)
@@ -203,6 +204,7 @@ export class OptionsScreen extends React.Component {
                 <Switch
                   onValueChange={value => this.onSwitch(value)}
                   value={this.state.switchValue}
+                  thumbTintColor={ getCurrentTheme().textColor}
                 />
               </View>
             </View>

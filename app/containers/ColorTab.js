@@ -64,6 +64,8 @@ export class ColorTab extends React.Component {
   }
 
   async handleColorChange(color) {
+    this.setState({ currentColor: color });
+    console.log(this.state.currentColor);
     if (!this.writing) {
       this.writing = true;
       BleManager.checkState();
@@ -168,7 +170,7 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     borderRadius: 10
-  },
+  }
 });
 
 secureByte = function(byteString) {
