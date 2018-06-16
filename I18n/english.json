@@ -15,6 +15,9 @@
   "bye": "Bye :(",
   "colorSchema": "Color Theme: ",
   "closeApp": "Close App ",
+  "wantToExit":  "Do you really want to exit?",
+  "yes": "Yes",
+  "no": "No",
   "findOut": "Find out how to made me ;)",
 
   "name": "Name: ",

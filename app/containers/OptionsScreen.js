@@ -52,18 +52,22 @@ export class OptionsScreen extends React.Component {
   }
 
   handleByePress() {
+    const exit =  I18n.t("closeApp")
+    const wantToExit =  I18n.t("wantToExit")
+    const yes =  I18n.t("yes")
+    const no =  I18n.t("no")
     console.log("BYE BYE MY FRIEND");
     Alert.alert(
       // Language?
-      "Exit App",
-      "Do you want to exit?",
+      exit,
+      wantToExit,
       [
         {
-          text: "No",
+          text: no,
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "Yes", onPress: () => RNExitApp.exitApp() }
+        { text: yes, onPress: () => RNExitApp.exitApp() }
       ],
       { cancelable: false }
     );
