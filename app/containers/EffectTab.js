@@ -1,28 +1,43 @@
-import React from "react"
-import { StyleSheet, Text, View, Button, ImageBackground, TouchableOpacity } from "react-native"
-import I18n from '../../I18n/I18n';
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ImageBackground,
+  TouchableOpacity
+} from "react-native";
+import I18n from "../../I18n/I18n";
+import {getCurrentTheme} from "../assets/colorThemes";
 
 export class EffectTab extends React.Component {
   onPress = () => {
-    console.log("EffectTab")
-  }
+    console.log("EffectTab");
+  };
 
   render() {
+    const buttonColor = getCurrentTheme().buttonColor
+
     return (
-        <View style={styles.centerContainer}>
-          <TouchableOpacity onPress={this.onPress}>
-            <Text>{I18n.t('welcome')}</Text>
-          </TouchableOpacity>
-        </View>
-    )
+      <View style={styles.centerContainer}>
+        <Text>{I18n.t("welcome")}</Text>
+        <Button
+          color={buttonColor}
+          style={styles.centerContainer}
+          onPress={this.onPress}
+          title="Hey BROTHER!!"
+        >
+          Hey
+        </Button>
+      </View>
+    );
   }
 }
 
 const styles = StyleSheet.create({
   centerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     margin: 25,
-  },
-})
+  }
+});
