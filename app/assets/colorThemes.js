@@ -32,7 +32,6 @@ export const colorTheme = {
 
 export function getCurrentTheme() {
   const chosen = store.getState().theme;
-  console.log({ chosenColor: chosen });
   switch (chosen) {
     case DARK_THEME:
       console.log("Vamos oscurito");
