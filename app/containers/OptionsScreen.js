@@ -52,18 +52,22 @@ export class OptionsScreen extends React.Component {
   }
 
   handleByePress() {
+    const exit =  I18n.t("closeApp")
+    const wantToExit =  I18n.t("wantToExit")
+    const yes =  I18n.t("yes")
+    const no =  I18n.t("no")
     console.log("BYE BYE MY FRIEND");
     Alert.alert(
       // Language?
-      "Exit App",
-      "Do you want to exit?",
+      exit,
+      wantToExit,
       [
         {
-          text: "No",
+          text: no,
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "Yes", onPress: () => RNExitApp.exitApp() }
+        { text: yes, onPress: () => RNExitApp.exitApp() }
       ],
       { cancelable: false }
     );
@@ -90,6 +94,8 @@ export class OptionsScreen extends React.Component {
 
 
   render() {
+    const del =  I18n.t("delete")
+    const bye =  I18n.t("bye")
     return (
       <ImageBackground
         source={require("../img/fondoapp.png")}
@@ -100,7 +106,7 @@ export class OptionsScreen extends React.Component {
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
                 <Text style={styles.textOption}>
-                {I18n.t('selectLang')} {this.props.language || "noHay"}
+                {I18n.t('selectLang')} {this.props.language}
                 </Text>
               </View>
               <View style={styles.switchContainer}>
@@ -129,7 +135,7 @@ export class OptionsScreen extends React.Component {
               </View>
               <View style={styles.switchContainer}>
                 <Button
-                  title="Delete"
+                  title= {del}
                   onPress={this.handleDeletePress}
                   style={styles.textOption}
                 />
@@ -161,7 +167,7 @@ export class OptionsScreen extends React.Component {
                 </View>
                 <View style={styles.switchContainer}>
                   <Button
-                    title="Bye :("
+                    title= {bye}
                     onPress={this.handleByePress}
                     style={styles.textOption}
                   />

@@ -146,6 +146,8 @@ export class Scanner extends React.Component {
   };
 
   render() {
+    const stop =  I18n.t("stop")
+    const start =  I18n.t("start")
     return (
       <ImageBackground
         source={require("./img/fondoapp.png")}
@@ -155,7 +157,7 @@ export class Scanner extends React.Component {
           <View>
             <Button
               // Propiedades del botón ("props")
-              title={this.state.scanning ? "Stop scanner" : "Start new scan"}
+              title={this.state.scanning ? stop : start }
               onPress={() => {
                 this.startStop();
               }}

@@ -17,20 +17,20 @@ export const Root = StackNavigator({
   Home: {
     screen: Scanner,
     navigationOptions: ({ navigation }) => ({
-      title: "Bluetooth Scanner",
+      title: I18n.t('scanner'),
       headerRight: <OptionsButton navigation={navigation} />
     })
   },
   Options: {
     screen: OptionsScreen,
     navigationOptions: {
-      title: <Text>{I18n.t('settings')}</Text>
+      title: I18n.t('settings')
     }
   },
   Device: {
     screen: DeviceTabs,
     navigationOptions: {
-      title: <Text>{I18n.t('controller')}</Text>
+      title: I18n.t('controller')
     }
   }
 });

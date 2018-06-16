@@ -4,15 +4,20 @@
   "settings": "Configuración",
   "controller": "Controlador del Dispositivo",
 
-  "start": "Empezar nuevo escaner",
+  "start": "Nuevo escaner",
   "stop": "Detener",
   "connected": "Nº Dispositivos Conectados: ",
   "found": "Nº Dispositivos Encontrados: ",
 
   "selectLang": "Seleccionar idioma: ",
   "deleteLD": "Borrar datos Locales ",
+  "delete": "Borrar",
+  "bye": "Adiós :(",
   "colorSchema": "Esquema de Colores: ",
   "closeApp": "Salir de la Aplicación ",
+  "wantToExit":  "Estas seguro de que quieres salir?",
+  "yes": "Si",
+  "no": "No",
   "findOut": "Averigua como me han hecho ;)",
 
   "name": "Nombre: ",
