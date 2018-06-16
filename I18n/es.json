@@ -2,7 +2,7 @@
   "welcome": "PERRO",
   "scanner": "Escaner Bluetooth",
   "settings": "Configuración",
-  "controller": "Controlador del Dispositivo",
+  "controller": "Controlador LED",
 
   "start": "Nuevo escaner",
   "stop": "Detener",

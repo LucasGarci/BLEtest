@@ -5,8 +5,8 @@ const LIGHT_THEME = "light";
 
 export const colorTheme = {
   light: {
-    buttonColor: "#70c600",
-    textColor: "#202020",
+    buttonColor: "#66b3ff",
+    textColor: "#404040",
     bgColor: "#cce6ff",
     bgLightColor: "#fafaff",
     cardColor: "#fbfbfb",
@@ -17,7 +17,7 @@ export const colorTheme = {
     pressedLinkColor: "#60b0fb"
   },
   dark: {
-    buttonColor: "#326430",
+    buttonColor: "rgb(2, 150, 136)",
     textColor: "#eeeeee",
     bgColor: "#003366",
     bgLightColor: "#004080",
