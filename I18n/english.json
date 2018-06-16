@@ -1,3 +1,24 @@
 {
-  "welcome": "Welcome"
+  "welcome": "Welcome",
+  "scanner": "Bluetooth Scanner",
+  "settings": "Settings",
+  "controller": "Device Controller",
+
+  "start": "Start new scan",
+  "stop": "Stop scanner",
+  "connected": "Nº Devices Connected: ",
+  "found": "Nª Devices Found: ",
+
+  "selectLang": "Select Language: ",
+  "deleteLD": "Delete local data ",
+  "colorSchema": "Color Theme: ",
+  "closeApp": "Close App ",
+  "findOut": "Find out how to made me ;)",
+
+  "name": "Name: ",
+  "status": "Connected",
+
+  "Brightness": "Brightness"
+
+
 }

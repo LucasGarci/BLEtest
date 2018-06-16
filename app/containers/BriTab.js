@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import BigSlider from "react-native-big-slider";
 import BleManager from "react-native-ble-manager";
+import I18n from '../../I18n/I18n';
 
 export class BriTab extends React.Component {
   constructor() {
@@ -68,7 +69,7 @@ const BrightnessLabel = props => {
       <Text style={[styles.brightnessLabel, props.style]}>
         {(() => {
           return props.power
-            ? `${formatNumber(props.brightness || 0)}%\n Brightness`
+            ? `${formatNumber(props.brightness || 0)}%\n ${I18n.t('Brightness')}`
             : "Off";
         })()}
       </Text>

@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Card } from "react-native-elements";
 import BleManager from "react-native-ble-manager";
+import I18n from '../../I18n/I18n';
 import Buffer from "buffer";
 import { bytesToString } from "convert-string";
 
@@ -93,7 +94,7 @@ export class DeviceItem extends React.Component {
       >
         <Card containerStyle={styles.list}>
           <Text> Id: {this.state.id} </Text>
-          <Text> Name: {this.state.name} </Text>
+          <Text> {I18n.t('name')} {this.state.name} </Text>
           <Text> Rssi: {this.state.rssi || "Connected"} </Text>
         </Card>
       </TouchableOpacity>

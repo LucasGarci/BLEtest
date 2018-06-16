@@ -11,6 +11,7 @@ import { EffectTab } from "../containers/EffectTab";
 import { OptionsScreen } from "../containers/OptionsScreen";
 import { DeviceTabs } from "../containers/DeviceTabs";
 import { OptionsButton } from "../components/OptionsButton";
+import I18n from '../../I18n/I18n';
 
 export const Root = StackNavigator({
   Home: {
@@ -23,13 +24,13 @@ export const Root = StackNavigator({
   Options: {
     screen: OptionsScreen,
     navigationOptions: {
-      title: "Options"
+      title: <Text>{I18n.t('settings')}</Text>
     }
   },
   Device: {
     screen: DeviceTabs,
     navigationOptions: {
-      title: "Device Controller"
+      title: <Text>{I18n.t('controller')}</Text>
     }
   }
 });
