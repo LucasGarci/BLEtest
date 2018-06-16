@@ -101,10 +101,8 @@ export class PrefabPicker extends Component {
               backgroundColor: this.state.color3,
               borderRadius: 45
             }}
-            onPress={() => { console.log("onPress") }}
-            delayLongPress={599}
-            onLongPress={() => { console.log("onLongPress") }}
-           
+            onPress={() => { this.onPress3() }}
+            onLongPress={() => { this.onLongPress3() }}
           >
             <Text>{JSON.stringify(this.state.color3)}</Text>
           </TouchableOpacity>
