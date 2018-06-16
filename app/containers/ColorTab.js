@@ -63,69 +63,6 @@ export class ColorTab extends React.Component {
     this.setState({ lastUpdateValue: data });
   }
 
-  verifications() {}
-
-  async handleOnPress(turn) {
-    BleManager.checkState();
-    const device = this.state.devicesConnected[0];
-    console.log({ CT_devConected: device });
-
-    //Sacamos los servicios
-    await BleManager.retrieveServices(device.id)
-      .then(deviceInfo => {
-        console.log({ CT_devInf: deviceInfo });
-        this.setState({ deviceInfo });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    const deviceInfo = this.state.deviceInfo;
-    // Esta es la unica caracteristica que responde a startNotific...
-    await BleManager.startNotification(
-      deviceInfo.id,
-      deviceInfo.characteristics[4].service,
-      deviceInfo.characteristics[4].characteristic
-    ).catch(errNotif => console.log({ errNotif }));
-
-    //Creamos enlace o certificamos que esta creado
-    await BleManager.createBond(deviceInfo.id)
-      .then(() => {
-        console.log("Bonding its OK");
-      })
-      .catch(() => {
-        console.log("Fail to bond");
-      });
-
-    const off = "CC2433";
-    const on = "CC2333";
-    if (switchOn==true){
-      go = off
-      switchOn=false;
-    } else {
-      go = on;
-      switchOn=true
-    }
-
-    const data = conversor.hexToBytes(go);
-
-    await BleManager.write(
-      deviceInfo.id,
-      deviceInfo.characteristics[3].service,
-      deviceInfo.characteristics[3].characteristic,
-      data
-    )
-      .then(() => {
-        index = 10;
-        // Success code
-        console.log("Writed: " + data);
-      })
-      .catch(error => {
-        // Failure code
-        console.log(error);
-      });
-  }
-
   async handleColorChange(color) {
     if (!this.writing) {
       this.writing = true;
@@ -212,13 +149,6 @@ export class ColorTab extends React.Component {
         <View style={styles.centerContainer}>
           <PrefabPicker color={this.state.currentColor} />
         </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            title="ON / OFF"
-            onPress={() => this.handleOnPress()}
-            style={styles.textOption}
-          />
-        </View>
       </View>
     );
   }
@@ -226,11 +156,6 @@ export class ColorTab extends React.Component {
 
 const styles = StyleSheet.create({
   centerContainer: {
-    flex: 2,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  buttonContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
@@ -244,11 +169,6 @@ const styles = StyleSheet.create({
     width: 30,
     borderRadius: 10
   },
-  textOption: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#606060"
-  }
 });
 
 secureByte = function(byteString) {
