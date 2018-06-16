@@ -1,6 +1,7 @@
 import React from "react";
 import { ImageBackground } from "react-native";
 import { DeviceNavigation } from "../navigation/router";
+import I18n from '../../I18n/I18n';
 
 export class DeviceTabs extends React.Component {
   render() {

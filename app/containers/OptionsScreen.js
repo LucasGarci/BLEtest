@@ -15,6 +15,7 @@ import { Card } from "react-native-elements";
 import { store } from "../redux/store";
 import { setLanguage, setTheme } from "../redux/actions";
 import { connect } from "react-redux";
+import I18n from '../../I18n/I18n';
 
 @connect(state => {
   return {
@@ -53,6 +54,7 @@ export class OptionsScreen extends React.Component {
   handleByePress() {
     console.log("BYE BYE MY FRIEND");
     Alert.alert(
+      // Language?
       "Exit App",
       "Do you want to exit?",
       [
@@ -91,7 +93,7 @@ export class OptionsScreen extends React.Component {
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
                 <Text style={styles.textOption}>
-                  Seleccionar idioma: {this.props.language || "noHay"}
+                {I18n.t('selectLang')} {this.props.language || "noHay"}
                 </Text>
               </View>
               <View style={styles.switchContainer}>
@@ -120,7 +122,7 @@ export class OptionsScreen extends React.Component {
           <Card containerStyle={styles.list}>
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
-                <Text style={styles.textOption}>Borrar datos locales:</Text>
+                <Text style={styles.textOption}>{I18n.t('deleteLD')}</Text>
               </View>
               <View style={styles.switchContainer}>
                 <Button
@@ -136,7 +138,7 @@ export class OptionsScreen extends React.Component {
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
                 <Text style={styles.textOption}>
-                  Esquema de colores: {this.props.theme}
+                {I18n.t('colorSchema')} {this.props.theme}
                 </Text>
               </View>
               <View style={styles.switchContainer}>
@@ -152,7 +154,7 @@ export class OptionsScreen extends React.Component {
             <Card containerStyle={styles.list}>
               <View style={styles.optionContainer}>
                 <View style={styles.descriptionContainer}>
-                  <Text style={styles.textOption}>Salir de la aplicación</Text>
+                  <Text style={styles.textOption}>{I18n.t('closeApp')}</Text>
                 </View>
                 <View style={styles.switchContainer}>
                   <Button
@@ -174,7 +176,7 @@ export class OptionsScreen extends React.Component {
                     }}
                     onPress={this.handleLinkPress}
                   >
-                    Averigua como me han hecho ;)
+                    {I18n.t('findOut')}
                   </Text>
                 </View>
               </View>

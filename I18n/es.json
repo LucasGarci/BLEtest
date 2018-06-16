@@ -1,3 +1,21 @@
 {
-  "welcome": "PERRO"
+  "welcome": "PERRO",
+  "scanner": "Escaner Bluetooth",
+  "settings": "Configuración",
+  "controller": "Controlador del Dispositivo",
+  "start": "Escanear",
+  "stop": "Detener",
+  "connected": "Nº Dispositivos Conectados: ",
+  "found": "Nº Dispositivos Encontrados: ",
+
+  "selectLang": "Seleccionar idioma: ",
+  "deleteLD": "Borrar datos Locales ",
+  "colorSchema": "Esquema de Colores: ",
+  "closeApp": "Salir de la Aplicación ",
+  "findOut": "Averigua como me han hecho ;)",
+
+  "name": "Nombre: ",
+  "status": "Conectado",
+
+  "Brightness": "Brillo"
 }
