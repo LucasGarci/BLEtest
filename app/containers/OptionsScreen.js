@@ -90,6 +90,8 @@ export class OptionsScreen extends React.Component {
 
 
   render() {
+    const del =  I18n.t("delete")
+    const bye =  I18n.t("bye")
     return (
       <ImageBackground
         source={require("../img/fondoapp.png")}
@@ -100,7 +102,7 @@ export class OptionsScreen extends React.Component {
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
                 <Text style={styles.textOption}>
-                {I18n.t('selectLang')} {this.props.language || "noHay"}
+                {I18n.t('selectLang')} {this.props.language}
                 </Text>
               </View>
               <View style={styles.switchContainer}>
@@ -129,7 +131,7 @@ export class OptionsScreen extends React.Component {
               </View>
               <View style={styles.switchContainer}>
                 <Button
-                  title="Delete"
+                  title= {del}
                   onPress={this.handleDeletePress}
                   style={styles.textOption}
                 />
@@ -161,7 +163,7 @@ export class OptionsScreen extends React.Component {
                 </View>
                 <View style={styles.switchContainer}>
                   <Button
-                    title="Bye :("
+                    title= {bye}
                     onPress={this.handleByePress}
                     style={styles.textOption}
                   />
