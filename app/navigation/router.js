@@ -11,7 +11,9 @@ import { EffectTab } from "../containers/EffectTab";
 import { OptionsScreen } from "../containers/OptionsScreen";
 import { DeviceTabs } from "../containers/DeviceTabs";
 import { OptionsButton } from "../components/OptionsButton";
+import { PowerButton } from "../components/PowerButton";
 import I18n from '../../I18n/I18n';
+import { store } from "../redux/store";
 
 export const Root = StackNavigator({
   Home: {
@@ -29,9 +31,10 @@ export const Root = StackNavigator({
   },
   Device: {
     screen: DeviceTabs,
-    navigationOptions: {
-      title: I18n.t('controller')
-    }
+    navigationOptions: ({ navigation }) => ({
+      title: I18n.t('controller'),
+      headerRight: <PowerButton navigation={navigation} />
+    })
   }
 });
 

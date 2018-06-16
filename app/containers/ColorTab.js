@@ -19,6 +19,8 @@ var conversor = require("convert-hex");
 const BleManagerModule = NativeModules.BleManager;
 //We create our events emitter
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+//Botón encendido o apagado
+const switchOn = true;
 
 export class ColorTab extends React.Component {
   constructor(props) {
@@ -97,7 +99,13 @@ export class ColorTab extends React.Component {
 
     const off = "CC2433";
     const on = "CC2333";
-    const go = turn === "ON" ? on : off;
+    if (switchOn==true){
+      go = off
+      switchOn=false;
+    } else {
+      go = on;
+      switchOn=true
+    }
 
     const data = conversor.hexToBytes(go);
 
@@ -206,13 +214,8 @@ export class ColorTab extends React.Component {
         </View>
         <View style={styles.buttonContainer}>
           <Button
-            title="ON"
-            onPress={() => this.handleOnPress("ON")}
-            style={styles.textOption}
-          />
-          <Button
-            title="OFF"
-            onPress={() => this.handleOnPress("OFF")}
+            title="ON / OFF"
+            onPress={() => this.handleOnPress()}
             style={styles.textOption}
           />
         </View>
