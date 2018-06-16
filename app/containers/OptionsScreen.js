@@ -82,6 +82,13 @@ export class OptionsScreen extends React.Component {
     return false;
   };
 
+  handlePicker(language){
+    store.dispatch(setLanguage(language));
+    I18n.locale=store.getState().language
+    console.log(this.state.language);
+  }
+
+
   render() {
     return (
       <ImageBackground
@@ -106,11 +113,7 @@ export class OptionsScreen extends React.Component {
                     width: 150,
                     borderWidth: 1
                   }}
-                  onValueChange={(itemValue, itemIndex) => {
-                    //CAMBIAMOS EL IDIOMA DE LA APP
-                    store.dispatch(setLanguage(itemValue));
-                    console.log(this.state.language);
-                  }}
+                  onValueChange={(itemValue, itemIndex) =>this.handlePicker(itemValue)}
                 >
                   <Picker.Item label="Español" value="es" />
                   <Picker.Item label="English" value="en" />
