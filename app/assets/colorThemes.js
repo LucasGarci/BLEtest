@@ -1,11 +1,11 @@
 import { store } from "../redux/store";
 
-const DARK_THEME = "DARK_THEME";
-const LIGHT_THEME = "LIGHT_THEME";
+const DARK_THEME = "dark";
+const LIGHT_THEME = "light";
 
 export const colorTheme = {
   light: {
-    buttonColor: "#99e6ff",
+    buttonColor: "#aae600",
     textColor: "#1a1a1a",
     bgColor: "#f2f2f2",
     cardColor: "#fbfbfb",
@@ -13,7 +13,7 @@ export const colorTheme = {
     iconColor: "#ffffff"
   },
   dark: {
-    buttonColor: "#99e6ff",
+    buttonColor: "#224420",
     textColor: "#1a1a1a",
     bgColor: "#f2f2f2",
     cardColor: "#fbfbfb",
@@ -24,9 +24,10 @@ export const colorTheme = {
 
 export function getCurrentTheme() {
   const chosen = store.getState().theme;
-  console.log({COLOR_THEME:chosen})
+  console.log({ chosenColor: chosen });
   switch (chosen) {
     case DARK_THEME:
+      console.log("Vamos oscurito");
       return colorTheme.dark;
     case LIGHT_THEME:
       return colorTheme.light;
@@ -35,12 +36,12 @@ export function getCurrentTheme() {
   }
 }
 
-export const theme = store.subscribe(getCurrentTheme);
+store.subscribe(getCurrentTheme);
 
-/* MODO DE EMPLEO
-
+/*
 import theme from './colorThemes'
 
+theme.buttonColor
 const styles = StyleSheet.create({
   optionContainer: {
     flexDirection: "row",
@@ -50,6 +51,4 @@ const styles = StyleSheet.create({
     backgroundColor: theme.bgColor
   }
 })
-
 */
-
