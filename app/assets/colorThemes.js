@@ -5,20 +5,28 @@ const LIGHT_THEME = "light";
 
 export const colorTheme = {
   light: {
-    buttonColor: "#aae600",
-    textColor: "#1a1a1a",
-    bgColor: "#f2f2f2",
+    buttonColor: "#70c600",
+    textColor: "#202020",
+    bgColor: "#cce6ff",
+    bgLightColor: "#fafaff",
     cardColor: "#fbfbfb",
     borderColor: "#bfbfbf",
-    iconColor: "#ffffff"
+    iconColor: "#ffffff",
+    bigSlider: "rgb(255, 186, 202)",
+    linkColor: "#60a0cb",
+    pressedLinkColor: "#60b0fb"
   },
   dark: {
-    buttonColor: "#224420",
-    textColor: "#1a1a1a",
-    bgColor: "#f2f2f2",
+    buttonColor: "#326430",
+    textColor: "#eeeeee",
+    bgColor: "#003366",
+    bgLightColor: "#004080",
     cardColor: "#fbfbfb",
     borderColor: "#bfbfbf",
-    iconColor: "#ffffff"
+    iconColor: "#ffffff",
+    bigSlider: "rgb(255, 066, 102)",
+    linkColor: "#a0b0fb",
+    pressedLinkColor: "#d0b0fb"
   }
 };
 

@@ -15,7 +15,8 @@ import { Card } from "react-native-elements";
 import { store } from "../redux/store";
 import { setLanguage, setTheme } from "../redux/actions";
 import { connect } from "react-redux";
-import I18n from '../../I18n/I18n';
+import I18n from "../../I18n/I18n";
+import { getCurrentTheme } from "../assets/colorThemes";
 
 @connect(state => {
   return {
@@ -29,7 +30,7 @@ export class OptionsScreen extends React.Component {
     this.state = {
       switchValue: props.theme === "dark" ? true : false,
       colorScheme: "izquierda",
-      linkColor: "#3040fB"
+      linkColor: getCurrentTheme().linkColor
     };
   }
   onPress = () => {
@@ -52,10 +53,10 @@ export class OptionsScreen extends React.Component {
   }
 
   handleByePress() {
-    const exit =  I18n.t("closeApp")
-    const wantToExit =  I18n.t("wantToExit")
-    const yes =  I18n.t("yes")
-    const no =  I18n.t("no")
+    const exit = I18n.t("closeApp");
+    const wantToExit = I18n.t("wantToExit");
+    const yes = I18n.t("yes");
+    const no = I18n.t("no");
     console.log("BYE BYE MY FRIEND");
     Alert.alert(
       // Language?
@@ -75,7 +76,7 @@ export class OptionsScreen extends React.Component {
   }
 
   handleLinkPress = () => {
-    this.setState({ linkColor: "#8040fb" });
+    this.setState({ linkColor: getCurrentTheme().pressedLinkColor });
     Linking.openURL("https://facebook.github.io/react-native/");
   };
 
@@ -86,27 +87,43 @@ export class OptionsScreen extends React.Component {
     return false;
   };
 
-  handlePicker(language){
+  handlePicker(language) {
     store.dispatch(setLanguage(language));
-    I18n.locale=store.getState().language
+    I18n.locale = store.getState().language;
     console.log(this.state.language);
   }
 
-
   render() {
-    const del =  I18n.t("delete")
-    const bye =  I18n.t("bye")
+    const del = I18n.t("delete");
+    const bye = I18n.t("bye");
     return (
       <ImageBackground
         source={require("../img/fondoapp.png")}
         style={{ width: "100%", height: "100%" }}
       >
-        <View style={styles.centerContainer}>
-          <Card containerStyle={styles.list}>
+        <View
+          style={[
+            styles.centerContainer,
+            { backgroundColor: getCurrentTheme().bgColor }
+          ]}
+        >
+          <Card
+            containerStyle={[
+              styles.list,
+              {
+                backgroundColor: getCurrentTheme().bgLightColor
+              }
+            ]}
+          >
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
-                <Text style={styles.textOption}>
-                {I18n.t('selectLang')} {this.props.language}
+                <Text
+                  style={[
+                    styles.textOption,
+                    { color: getCurrentTheme().textColor }
+                  ]}
+                >
+                  {I18n.t("selectLang")} {this.props.language}
                 </Text>
               </View>
               <View style={styles.switchContainer}>
@@ -119,7 +136,9 @@ export class OptionsScreen extends React.Component {
                     width: 150,
                     borderWidth: 1
                   }}
-                  onValueChange={(itemValue, itemIndex) =>this.handlePicker(itemValue)}
+                  onValueChange={(itemValue, itemIndex) =>
+                    this.handlePicker(itemValue)
+                  }
                 >
                   <Picker.Item label="Español" value="es" />
                   <Picker.Item label="English" value="en" />
@@ -128,26 +147,56 @@ export class OptionsScreen extends React.Component {
             </View>
           </Card>
 
-          <Card containerStyle={styles.list}>
+          <Card
+            containerStyle={[
+              styles.list,
+              {
+                backgroundColor: getCurrentTheme().bgLightColor
+              }
+            ]}
+          >
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
-                <Text style={styles.textOption}>{I18n.t('deleteLD')}</Text>
+                <Text
+                  style={[
+                    styles.textOption,
+                    { color: getCurrentTheme().textColor }
+                  ]}
+                >
+                  {I18n.t("deleteLD")}
+                </Text>
               </View>
               <View style={styles.switchContainer}>
                 <Button
-                  title= {del}
+                  color={getCurrentTheme().buttonColor}
+                  title={del}
                   onPress={this.handleDeletePress}
-                  style={styles.textOption}
+                  style={[
+                    styles.textOption,
+                    { color: getCurrentTheme().textColor }
+                  ]}
                 />
               </View>
             </View>
           </Card>
 
-          <Card containerStyle={styles.list}>
+          <Card
+            containerStyle={[
+              styles.list,
+              {
+                backgroundColor: getCurrentTheme().bgLightColor
+              }
+            ]}
+          >
             <View style={styles.optionContainer}>
               <View style={styles.descriptionContainer}>
-                <Text style={styles.textOption}>
-                {I18n.t('colorSchema')} {this.props.theme}
+                <Text
+                  style={[
+                    styles.textOption,
+                    { color: getCurrentTheme().textColor }
+                  ]}
+                >
+                  {I18n.t("colorSchema")} {this.props.theme}
                 </Text>
               </View>
               <View style={styles.switchContainer}>
@@ -160,22 +209,47 @@ export class OptionsScreen extends React.Component {
           </Card>
 
           <View style={styles.footer}>
-            <Card containerStyle={styles.list}>
+            <Card
+              containerStyle={[
+                styles.list,
+                {
+                  backgroundColor: getCurrentTheme().bgLightColor
+                }
+              ]}
+            >
               <View style={styles.optionContainer}>
                 <View style={styles.descriptionContainer}>
-                  <Text style={styles.textOption}>{I18n.t('closeApp')}</Text>
+                  <Text
+                    style={[
+                      styles.textOption,
+                      { color: getCurrentTheme().textColor }
+                    ]}
+                  >
+                    {I18n.t("closeApp")}
+                  </Text>
                 </View>
                 <View style={styles.switchContainer}>
                   <Button
-                    title= {bye}
+                    color={getCurrentTheme().buttonColor}
+                    title={bye}
                     onPress={this.handleByePress}
-                    style={styles.textOption}
+                    style={[
+                      styles.textOption,
+                      { color: getCurrentTheme().textColor }
+                    ]}
                   />
                 </View>
               </View>
             </Card>
 
-            <Card containerStyle={styles.list}>
+            <Card
+              containerStyle={[
+                styles.list,
+                {
+                  backgroundColor: getCurrentTheme().bgLightColor
+                }
+              ]}
+            >
               <View style={styles.optionContainer}>
                 <View style={styles.descriptionContainer}>
                   <Text
@@ -185,7 +259,7 @@ export class OptionsScreen extends React.Component {
                     }}
                     onPress={this.handleLinkPress}
                   >
-                    {I18n.t('findOut')}
+                    {I18n.t("findOut")}
                   </Text>
                 </View>
               </View>
@@ -201,17 +275,15 @@ const styles = StyleSheet.create({
   centerContainer: {
     flex: 1,
     flexDirection: "column",
-    margin: 5,
-    marginTop: 10,
-    marginBottom: 10,
-    borderRadius: 10
+    padding: 5,
+    paddingTop: 10,
+    paddingBottom: 10
   },
   optionContainer: {
     flexDirection: "row",
     justifyContent: "center",
     height: 70,
-    borderRadius: 10,
-    backgroundColor: "#fff"
+    borderRadius: 10
   },
   switchContainer: {
     flex: 1,
@@ -232,8 +304,7 @@ const styles = StyleSheet.create({
   },
   textOption: {
     fontSize: 16,
-    fontWeight: "bold",
-    color: "#606060"
+    fontWeight: "bold"
   },
   link: {
     fontSize: 19
