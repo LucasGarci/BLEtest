@@ -1,10 +1,9 @@
+import { store } from "../redux/store";
+
 const DARK_THEME = "DARK_THEME";
 const LIGHT_THEME = "LIGHT_THEME";
 
-//CARGAR ESTO DE REDUX
-const chosen = LIGHT_THEME;
-
-export const theme = {
+export const colorTheme = {
   light: {
     buttonColor: "#99e6ff",
     textColor: "#1a1a1a",
@@ -23,13 +22,34 @@ export const theme = {
   }
 };
 
-export function chosenTheme(chosen) {
+export function getCurrentTheme() {
+  const chosen = store.getState().theme;
+  console.log({COLOR_THEME:chosen})
   switch (chosen) {
     case DARK_THEME:
-      return theme.light;
+      return colorTheme.dark;
     case LIGHT_THEME:
-      return theme.dark;
+      return colorTheme.light;
     default:
-      return theme.default;
+      return colorTheme.light;
   }
 }
+
+export const theme = store.subscribe(getCurrentTheme);
+
+/* MODO DE EMPLEO
+
+import theme from './colorThemes'
+
+const styles = StyleSheet.create({
+  optionContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    height: 70,
+    borderRadius: 10,
+    backgroundColor: theme.bgColor
+  }
+})
+
+*/
+

@@ -16,7 +16,8 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "test": "jest",
-    "adb-reverse": "adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8097 tcp:8097"
+    "adb-reverse": "adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8097 tcp:8097",
+    "go": "npm run adb-reverse && npm run start"
   },
   "jest": {
     "preset": "react-native"

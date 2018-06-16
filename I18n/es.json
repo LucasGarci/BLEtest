@@ -3,7 +3,8 @@
   "scanner": "Escaner Bluetooth",
   "settings": "Configuración",
   "controller": "Controlador del Dispositivo",
-  "start": "Escanear",
+
+  "start": "Empezar nuevo escaner",
   "stop": "Detener",
   "connected": "Nº Dispositivos Conectados: ",
   "found": "Nº Dispositivos Encontrados: ",
