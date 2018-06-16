@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  Button,
-  TouchableOpacity
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import BigSlider from "react-native-big-slider";
 import BleManager from "react-native-ble-manager";
-import I18n from '../../I18n/I18n';
+import I18n from "../../I18n/I18n";
+import { getCurrentTheme } from "../assets/colorThemes";
 
 export class BriTab extends React.Component {
   constructor() {
@@ -42,11 +36,14 @@ export class BriTab extends React.Component {
   };
 
   render() {
+    const sliderColor = getCurrentTheme().bigSlider;
+    const labelColor = getCurrentTheme().textColor;
+    console.log({ COLOR: sliderColor });
     return (
       <View style={[styles.centerContainer]}>
         <BigSlider
           style={{ width: 110 }}
-          trackStyle={{ backgroundColor: "rgb(255, 166, 102)" }}
+          trackStyle={{ backgroundColor: sliderColor }}
           maximumValue={100}
           minimumValue={0}
           value={this.state.brightness}
@@ -55,6 +52,7 @@ export class BriTab extends React.Component {
             <BrightnessLabel
               brightness={this.state.brightness}
               power={this.state.power}
+              color={labelColor}
             />
           )}
         />
@@ -64,12 +62,17 @@ export class BriTab extends React.Component {
 }
 
 const BrightnessLabel = props => {
+  console.log('LABEL COLOR IS' , props.color)
   return (
     <View flex={1} justifyContent="center">
-      <Text style={[styles.brightnessLabel, props.style]}>
+      <Text
+        style={[styles.brightnessLabel, props.style, { color: props.color}]}
+      >
         {(() => {
           return props.power
-            ? `${formatNumber(props.brightness || 0)}%\n ${I18n.t('Brightness')}`
+            ? `${formatNumber(props.brightness || 0)}%\n ${I18n.t(
+                "Brightness"
+              )}`
             : "Off";
         })()}
       </Text>
@@ -80,8 +83,7 @@ const BrightnessLabel = props => {
 const styles = StyleSheet.create({
   brightnessLabel: {
     textAlign: "center",
-    padding: 20,
-    color: "white"
+    padding: 20
   },
   topButtons: {
     alignItems: "center",
