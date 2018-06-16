@@ -1,8 +1,6 @@
 export const initialState = {
-  lastSend: {
-    intensity: 1,
-    color: { r: 255, g: 255, b: 255 }
-  },
+  brightness: 1,
+  color: { r: 255, g: 255, b: 255 },
   theme: "light",
   language: "es",
   prefabs: {

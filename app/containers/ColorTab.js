@@ -13,14 +13,10 @@ import { ColorWheel } from "react-native-color-wheel";
 import { hsv2Rgb } from "colorsys";
 import { PrefabPicker } from "../components/PrefabPicker";
 import BleManager from "react-native-ble-manager";
+import { store } from "../redux/store";
+import { setColor } from "../redux/actions";
 
 var conversor = require("convert-hex");
-//We get the class to subscribe
-const BleManagerModule = NativeModules.BleManager;
-//We create our events emitter
-const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
-//Botón encendido o apagado
-const switchOn = true;
 
 export class ColorTab extends React.Component {
   constructor(props) {
@@ -32,17 +28,10 @@ export class ColorTab extends React.Component {
       lastUpdateValue: {}
     };
     this.writing = false;
-    this.handleBleManagerDidUpdateState = this.handleBleManagerDidUpdateState.bind(
-      this
-    );
   }
 
   componentDidMount() {
     this.retrieveConnected();
-    this.handlerUpdate = bleManagerEmitter.addListener(
-      "BleManagerDidUpdateState",
-      this.handleBleManagerDidUpdateState
-    );
   }
 
   retrieveConnected() {
@@ -52,29 +41,14 @@ export class ColorTab extends React.Component {
     });
   }
 
-  handleBleManagerDidUpdateState(data) {
-    console.log(
-      "Received data from " +
-        data.peripheral +
-        " characteristic " +
-        data.characteristic,
-      data.value
-    );
-    this.setState({ lastUpdateValue: data });
-  }
-
   async handleColorChange(color) {
     this.setState({ currentColor: color });
-    console.log(this.state.currentColor);
     if (!this.writing) {
       this.writing = true;
       BleManager.checkState();
       const rgbColor = hsv2Rgb(color.h, color.s, color.v);
       this.setState({ currentColor: rgbColor });
-      console.log({ colorIs: this.state.currentColor });
       const device = this.state.devicesConnected[0];
-      console.log({ CT_devConected: device });
-
       //Sacamos los servicios
       await BleManager.retrieveServices(device.id)
         .then(deviceInfo => {
@@ -102,7 +76,9 @@ export class ColorTab extends React.Component {
           console.log("Fail to bond");
         });
 
+      const brightness = store.getState().brightness;
       const mode = "0x56";
+
       // Debemos pasar la cadena a hexadecimal y que sea un valor de dos dígitos
       const r = secureByte(rgbColor.r.toString(16));
       const g = secureByte(rgbColor.g.toString(16));
@@ -114,6 +90,10 @@ export class ColorTab extends React.Component {
       const data = conversor.hexToBytes(colorToWrite);
       console.log({ dataToWrite: data });
 
+      data[1] = Math.round(data[1] * brightness);
+      data[2] = Math.round(data[2] * brightness);
+      data[3] = Math.round(data[3] * brightness);
+
       //  BleManager.checkState
 
       await BleManager.write(
@@ -123,7 +103,7 @@ export class ColorTab extends React.Component {
         data
       )
         .then(() => {
-          index = 10;
+          store.dispatch(setColor(rgbColor));
           // Success code
           console.log("Writed: " + data);
         })
