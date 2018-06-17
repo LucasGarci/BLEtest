@@ -12,21 +12,23 @@ export const colorTheme = {
     cardColor: "#fbfbfb",
     borderColor: "#bfbfbf",
     iconColor: "#ffffff",
-    bigSlider: "rgb(255, 186, 202)",
+    bigSliderBot: "#fafafa",
+    bigSliderTop: "#007AF5",
     linkColor: "#60a0cb",
     pressedLinkColor: "#60b0fb"
   },
   dark: {
     buttonColor: "rgb(2, 150, 136)",
-    textColor: "#eeeeee",
-    bgColor: "#003366",
-    bgLightColor: "#004080",
+    textColor: "#fafafa",
+    bgColor: "#003870",
+    bgLightColor: "#002447",
     cardColor: "#fbfbfb",
     borderColor: "#bfbfbf",
     iconColor: "#ffffff",
-    bigSlider: "rgb(255, 066, 102)",
-    linkColor: "#a0b0fb",
-    pressedLinkColor: "#d0b0fb"
+    bigSliderBot: "#007AF5",
+    bigSliderTop: "#fafafa",
+    linkColor: "#D0D8FD",
+    pressedLinkColor: "#F4D0FD"
   }
 };
 
@@ -43,18 +45,3 @@ export function theme() {
 }
 
 store.subscribe(theme);
-
-/*
-import theme from './colorThemes'
-
-theme.buttonColor
-const styles = StyleSheet.create({
-  optionContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    height: 70,
-    borderRadius: 10,
-    backgroundColor: theme.bgColor
-  }
-})
-*/

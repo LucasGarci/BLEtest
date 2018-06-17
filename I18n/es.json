@@ -8,6 +8,7 @@
   "stop": "Detener",
   "connected": "Nº Dispositivos Conectados: ",
   "found": "Nº Dispositivos Encontrados: ",
+  "anonymous": "Anónimo",
 
   "selectLang": "Seleccionar idioma: ",
   "deleteLD": "Borrar datos Locales ",
@@ -25,5 +26,5 @@
   "name": "Nombre: ",
   "status": "Conectado",
 
-  "Brightness": "Brillo"
+  "Brightness": "BRILLO"
 }

@@ -1,7 +1,8 @@
 import React from "react";
-import { ImageBackground } from "react-native";
+import { View } from "react-native";
 import { DeviceNavigation } from "../navigation/router";
-import I18n from '../../I18n/I18n';
+import I18n from "../../I18n/I18n";
+import { theme } from "../assets/colorThemes";
 
 export class DeviceTabs extends React.Component {
   render() {
@@ -9,12 +10,15 @@ export class DeviceTabs extends React.Component {
     const device = navigation.getParam("device", "NOT FOUND");
     console.log({ deviceInDeviceTabs: device });
     return (
-      <ImageBackground
-        source={require("../img/fondoapp.png")}
-        style={{ width: "100%", height: "100%" }}
+      <View
+        style={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: theme().bgColor
+        }}
       >
         <DeviceNavigation device={device} />
-      </ImageBackground>
+      </View>
     );
   }
 }
