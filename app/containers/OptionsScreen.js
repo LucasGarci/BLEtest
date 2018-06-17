@@ -46,7 +46,21 @@ export class OptionsScreen extends React.Component {
   }
 
   handleDeletePress() {
-    store.dispatch(clearData())
+    const this_may_cause = I18n.t("this_may_cause");
+    const are_you_sure = I18n.t("are_you_sure");
+    const yes = I18n.t("yes");
+    const no = I18n.t("no");
+    Alert.alert(
+      this_may_cause,
+      are_you_sure,
+      [
+        {
+          text: no
+        },
+        { text: yes, onPress: () => store.dispatch(clearData()) }
+      ],
+      { cancelable: false }
+    );
   }
 
   handleByePress() {
@@ -55,20 +69,16 @@ export class OptionsScreen extends React.Component {
     const yes = I18n.t("yes");
     const no = I18n.t("no");
     Alert.alert(
-      // Language?
       exit,
       wantToExit,
       [
         {
-          text: no,
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
+          text: no
         },
         { text: yes, onPress: () => RNExitApp.exitApp() }
       ],
       { cancelable: false }
     );
-    return true;
   }
 
   handleLinkPress = () => {
@@ -199,7 +209,7 @@ export class OptionsScreen extends React.Component {
                 <Switch
                   onValueChange={value => this.onSwitch(value)}
                   value={this.state.switchValue}
-                  thumbTintColor={ getCurrentTheme().textColor}
+                  thumbTintColor={getCurrentTheme().textColor}
                 />
               </View>
             </View>
