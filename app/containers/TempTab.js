@@ -14,6 +14,7 @@ import { Icon } from "react-native-elements";
 import { tempScale } from "../assets/tempScale";
 import BleManager from "react-native-ble-manager";
 import { store } from "../redux/store";
+import { theme } from "../assets/colorThemes";
 
 var conversor = require("convert-hex");
 
@@ -49,7 +50,7 @@ export class TempTab extends React.Component {
     const newOffset = event.nativeEvent.contentOffset.x;
     this.setState({ xOffset: newOffset });
     if (!this.writing) {
-      const fraction = 2050 / tempScale.length;
+      const fraction = 2060 / tempScale.length;
       const indexItem = Math.round(newOffset / fraction);
       const colorRGB = tempScale[indexItem];
       this.writing = true;
@@ -162,20 +163,20 @@ export class TempTab extends React.Component {
         </ScrollView>
         <View style={styles.restContainer}>
           <View style={styles.midContainer}>
-            <Icon name="change-history" color="black" size={32} />
+            <Icon name="change-history" color={theme().iconsTemp} size={32} />
           </View>
           <View style={styles.buttonContainer}>
-            <View style={styles.buttonContainerExt}>
+          <View style={[styles.buttonContainerExt, {borderColor: theme().iconsTemp}]}>
               <TouchableOpacity onPress={() => this.onPressLeft()}>
-                <Icon name="chevron-left" color="black" size={64} />
+                <Icon name="chevron-left" color={theme().iconsTemp} size={64} />
               </TouchableOpacity>
             </View>
             <View style={styles.buttonContainerCenter}>
-              <Icon name="highlight" color="black" size={64} />
+              <Icon name="highlight" color={theme().iconsTemp} size={64} />
             </View>
-            <View style={styles.buttonContainerExt}>
+            <View style={[styles.buttonContainerExt, {borderColor: theme().iconsTemp}]}>
               <TouchableOpacity onPress={() => this.onPressRight()}>
-                <Icon name="chevron-right" color="black" size={64} />
+                <Icon name="chevron-right" color={theme().iconsTemp} size={64} />
               </TouchableOpacity>
             </View>
           </View>
@@ -189,13 +190,12 @@ const styles = StyleSheet.create({
   allContainer: {
     flex: 1,
     flexDirection: "column",
-    margin: 5,
     marginTop: 5,
     borderRadius: 10
   },
   imageContainer: {
     flex: 1,
-    margin: 1,
+    margin: -1,
     borderRadius: 200
   },
   restContainer: {
