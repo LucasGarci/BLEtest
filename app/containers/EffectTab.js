@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import I18n from "../../I18n/I18n";
-import { getCurrentTheme } from "../assets/colorThemes";
+import { theme } from "../assets/colorThemes";
 
 export class EffectTab extends React.Component {
   onPress = () => {
@@ -16,7 +16,7 @@ export class EffectTab extends React.Component {
   };
 
   render() {
-    const buttonColor = getCurrentTheme().buttonColor;
+    const buttonColor = theme().buttonColor;
 
     return (
       <View style={styles.centerContainer}>

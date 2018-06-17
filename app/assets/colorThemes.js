@@ -30,11 +30,10 @@ export const colorTheme = {
   }
 };
 
-export function getCurrentTheme() {
+export function theme() {
   const chosen = store.getState().theme;
   switch (chosen) {
     case DARK_THEME:
-      console.log("Vamos oscurito");
       return colorTheme.dark;
     case LIGHT_THEME:
       return colorTheme.light;
@@ -43,7 +42,7 @@ export function getCurrentTheme() {
   }
 }
 
-store.subscribe(getCurrentTheme);
+store.subscribe(theme);
 
 /*
 import theme from './colorThemes'

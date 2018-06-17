@@ -16,7 +16,7 @@ import { store } from "../redux/store";
 import { setLanguage, setTheme, clearData } from "../redux/actions";
 import { connect } from "react-redux";
 import I18n from "../../I18n/I18n";
-import { getCurrentTheme } from "../assets/colorThemes";
+import { theme } from "../assets/colorThemes";
 
 @connect(state => {
   return {
@@ -30,7 +30,7 @@ export class OptionsScreen extends React.Component {
     this.state = {
       switchValue: props.theme === "dark" ? true : false,
       colorScheme: "izquierda",
-      linkColor: getCurrentTheme().linkColor
+      linkColor: theme().linkColor
     };
   }
 
@@ -82,7 +82,7 @@ export class OptionsScreen extends React.Component {
   }
 
   handleLinkPress = () => {
-    this.setState({ linkColor: getCurrentTheme().pressedLinkColor });
+    this.setState({ linkColor: theme().pressedLinkColor });
     Linking.openURL("https://facebook.github.io/react-native/");
   };
 
@@ -109,14 +109,14 @@ export class OptionsScreen extends React.Component {
         <View
           style={[
             styles.centerContainer,
-            { backgroundColor: getCurrentTheme().bgColor }
+            { backgroundColor: theme().bgColor }
           ]}
         >
           <Card
             containerStyle={[
               styles.list,
               {
-                backgroundColor: getCurrentTheme().bgLightColor
+                backgroundColor: theme().bgLightColor
               }
             ]}
           >
@@ -125,7 +125,7 @@ export class OptionsScreen extends React.Component {
                 <Text
                   style={[
                     styles.textOption,
-                    { color: getCurrentTheme().textColor }
+                    { color: theme().textColor }
                   ]}
                 >
                   {I18n.t("selectLang")} {this.props.language}
@@ -140,7 +140,7 @@ export class OptionsScreen extends React.Component {
                     height: 50,
                     width: 150,
                     borderWidth: 1,
-                    color: getCurrentTheme().textColor
+                    color: theme().textColor
                   }}
                   onValueChange={(itemValue, itemIndex) =>
                     this.handlePicker(itemValue)
@@ -157,7 +157,7 @@ export class OptionsScreen extends React.Component {
             containerStyle={[
               styles.list,
               {
-                backgroundColor: getCurrentTheme().bgLightColor
+                backgroundColor: theme().bgLightColor
               }
             ]}
           >
@@ -166,7 +166,7 @@ export class OptionsScreen extends React.Component {
                 <Text
                   style={[
                     styles.textOption,
-                    { color: getCurrentTheme().textColor }
+                    { color: theme().textColor }
                   ]}
                 >
                   {I18n.t("deleteLD")}
@@ -174,12 +174,12 @@ export class OptionsScreen extends React.Component {
               </View>
               <View style={styles.switchContainer}>
                 <Button
-                  color={getCurrentTheme().buttonColor}
+                  color={theme().buttonColor}
                   title={del}
                   onPress={this.handleDeletePress}
                   style={[
                     styles.textOption,
-                    { color: getCurrentTheme().textColor }
+                    { color: theme().textColor }
                   ]}
                 />
               </View>
@@ -190,7 +190,7 @@ export class OptionsScreen extends React.Component {
             containerStyle={[
               styles.list,
               {
-                backgroundColor: getCurrentTheme().bgLightColor
+                backgroundColor: theme().bgLightColor
               }
             ]}
           >
@@ -199,7 +199,7 @@ export class OptionsScreen extends React.Component {
                 <Text
                   style={[
                     styles.textOption,
-                    { color: getCurrentTheme().textColor }
+                    { color: theme().textColor }
                   ]}
                 >
                   {I18n.t("colorSchema")} {this.props.theme}
@@ -209,7 +209,7 @@ export class OptionsScreen extends React.Component {
                 <Switch
                   onValueChange={value => this.onSwitch(value)}
                   value={this.state.switchValue}
-                  thumbTintColor={getCurrentTheme().textColor}
+                  thumbTintColor={theme().textColor}
                 />
               </View>
             </View>
@@ -220,7 +220,7 @@ export class OptionsScreen extends React.Component {
               containerStyle={[
                 styles.list,
                 {
-                  backgroundColor: getCurrentTheme().bgLightColor
+                  backgroundColor: theme().bgLightColor
                 }
               ]}
             >
@@ -229,7 +229,7 @@ export class OptionsScreen extends React.Component {
                   <Text
                     style={[
                       styles.textOption,
-                      { color: getCurrentTheme().textColor }
+                      { color: theme().textColor }
                     ]}
                   >
                     {I18n.t("closeApp")}
@@ -237,12 +237,12 @@ export class OptionsScreen extends React.Component {
                 </View>
                 <View style={styles.switchContainer}>
                   <Button
-                    color={getCurrentTheme().buttonColor}
+                    color={theme().buttonColor}
                     title={bye}
                     onPress={this.handleByePress}
                     style={[
                       styles.textOption,
-                      { color: getCurrentTheme().textColor }
+                      { color: theme().textColor }
                     ]}
                   />
                 </View>
@@ -253,7 +253,7 @@ export class OptionsScreen extends React.Component {
               containerStyle={[
                 styles.list,
                 {
-                  backgroundColor: getCurrentTheme().bgLightColor
+                  backgroundColor: theme().bgLightColor
                 }
               ]}
             >
