@@ -86,7 +86,7 @@ export class PowerButton extends React.Component {
         onPress={() => this.handleOnPress()}
       >
         <View>
-          <Icon name={iconName} color="grey" size={32} />
+          <Icon name={iconName} color="white" size={32} />
         </View>
       </TouchableOpacity>
     );

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import BigSlider from "react-native-big-slider";
 import BleManager from "react-native-ble-manager";
 import I18n from "../../I18n/I18n";
-import { getCurrentTheme } from "../assets/colorThemes";
+import { theme } from "../assets/colorThemes";
 import { store } from "../redux/store";
 import { setBrightness } from "../redux/actions";
 import { connect } from "react-redux";
@@ -106,8 +106,8 @@ export class BriTab extends React.Component {
   }
 
   render() {
-    const sliderColor = getCurrentTheme().bigSlider;
-    const labelColor = getCurrentTheme().textColor;
+    const sliderColor = theme().bigSlider;
+    const labelColor = theme().textColor;
     return (
       <View style={[styles.centerContainer]}>
         <BigSlider

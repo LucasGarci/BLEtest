@@ -14,7 +14,7 @@ export class OptionsButton extends React.Component {
         <View>
           <Icon 
             name= 'settings'
-            color= 'grey'
+            color= 'white'
             size= {32}
           />
         </View>
