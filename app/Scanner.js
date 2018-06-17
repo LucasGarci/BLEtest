@@ -134,11 +134,13 @@ export class Scanner extends React.Component {
           />
         </View>
 
-        <Card containerStyle={styles.titles}>
-          <Text style={{ fontSize: 18 }}>
-            {I18n.t("connected")} {this.state.devicesConnected.length}
-          </Text>
-        </Card>
+        {this.state.devicesConnected.length > 0 ? (
+          <Card containerStyle={styles.titles}>
+            <Text style={{ fontSize: 18 }}>
+              {I18n.t("connected")} {this.state.devicesConnected.length}
+            </Text>
+          </Card>
+        ) : null}
         <View>
           <ScrollView style={styles.container}>
             <FlatList
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
   titles: {
     margin: 0,
     padding: 5,
-    paddingLeft: 10,
+    paddingLeft: 10
   }
 });
 
