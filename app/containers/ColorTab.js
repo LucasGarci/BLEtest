@@ -103,7 +103,7 @@ export class ColorTab extends React.Component {
             thumbStyle={styles.thumb}
           />
         </View>
-        <View style={styles.centerContainer}>
+        <View style={styles.prefabContainer}>
           <PrefabPicker color={this.state.currentColor} />
         </View>
       </View>
@@ -113,7 +113,12 @@ export class ColorTab extends React.Component {
 
 const styles = StyleSheet.create({
   centerContainer: {
-    flex: 1,
+    flex: 3,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  prefabContainer: {
+    flex: 2,
     justifyContent: "center",
     alignItems: "center"
   },

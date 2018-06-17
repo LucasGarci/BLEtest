@@ -19,6 +19,7 @@ import {
   Dimensions
 } from "react-native";
 import I18n from "react-native-i18n";
+import { Card, Icon } from "react-native-elements";
 import BleManager from "react-native-ble-manager";
 import { DeviceItem } from "./components/DeviceItem";
 
@@ -39,16 +40,7 @@ export class Scanner extends React.Component {
       devicesConnectedIds: [],
       devicesConnected: []
     };
-
     this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
-    this.handleStopScan = this.handleStopScan.bind(this);
-    this.handleUpdateValueForCharacteristic = this.handleUpdateValueForCharacteristic.bind(
-      this
-    );
-    this.handleDisconnectedPeripheral = this.handleDisconnectedPeripheral.bind(
-      this
-    );
-    this.handleAppStateChange = this.handleAppStateChange.bind(this);
   }
 
   handleDiscoverPeripheral(device) {
@@ -62,8 +54,6 @@ export class Scanner extends React.Component {
     }
   }
 
-  handleAppStateChange() {}
-
   componentWillUnmount() {
     BleManager.stopScan().then(() => {
       // Success code
@@ -72,14 +62,7 @@ export class Scanner extends React.Component {
     this.handlerDiscover.remove();
     this.handlerStop.remove();
     this.handlerDisconnect.remove();
-    this.handlerUpdate.remove();
   }
-
-  handleDisconnectedPeripheral() {}
-
-  handleUpdateValueForCharacteristic() {}
-
-  handleStopScan() {}
 
   componentDidMount() {
     // We set listeners to our events to our api events
@@ -131,18 +114,6 @@ export class Scanner extends React.Component {
       "BleManagerDiscoverPeripheral",
       this.handleDiscoverPeripheral
     );
-    this.handlerStop = bleManagerEmitter.addListener(
-      "BleManagerStopScan",
-      this.handleStopScan
-    );
-    this.handlerDisconnect = bleManagerEmitter.addListener(
-      "BleManagerDisconnectPeripheral",
-      this.handleDisconnectedPeripheral
-    );
-    this.handlerUpdate = bleManagerEmitter.addListener(
-      "BleManagerDidUpdateValueForCharacteristic",
-      this.handleUpdateValueForCharacteristic
-    );
   };
 
   render() {
@@ -153,47 +124,56 @@ export class Scanner extends React.Component {
         source={require("./img/fondoapp.png")}
         style={{ width: "100%", height: "100%" }}
       >
+        <View style={{ paddingTop: 10, paddingBottom: 10 }}>
+          <Button
+            style={{ padding: 10 }}
+            title={this.state.scanning ? stop : start}
+            onPress={() => {
+              this.startStop();
+            }}
+          />
+        </View>
+
+        <Card containerStyle={styles.titles}>
+          <Text style={{ fontSize: 18 }}>
+            {I18n.t("connected")} {this.state.devicesConnected.length}
+          </Text>
+        </Card>
         <View>
-          <View style={{ paddingTop: 10 }}>
-            <Button
-              style={{ padding: 10 }}
-              // Propiedades del botón ("props")
-              title={this.state.scanning ? stop : start}
-              onPress={() => {
-                this.startStop();
-              }}
+          <ScrollView style={styles.container}>
+            <FlatList
+              // Recogemos el array de dispositivos conectados de nuetro estado
+              data={this.state.devicesConnected}
+              renderItem={({ item }) => (
+                <DeviceItem
+                  device={item}
+                  navigation={this.props.navigation}
+                  parent={this}
+                />
+              )}
             />
-            <ScrollView style={styles.container}>
-              <Text>
-                {I18n.t("connected")} {this.state.devicesConnected.length}
-              </Text>
-              <FlatList
-                // Le pasamos el array de dispositivos de nuetro estado
-                data={this.state.devicesConnected}
-                renderItem={({ item }) => (
-                  <DeviceItem
-                    device={item}
-                    navigation={this.props.navigation}
-                    parent={this}
-                  />
-                )}
-              />
-              <Text>
-                {I18n.t("found")} {this.state.devicesIds.length}
-              </Text>
-              <FlatList
-                // Le pasamos el array de dispositivos de nuetro estado
-                data={this.state.devices}
-                renderItem={({ item }) => (
-                  <DeviceItem
-                    device={item}
-                    navigation={this.props.navigation}
-                    parent={this}
-                  />
-                )}
-              />
-            </ScrollView>
-          </View>
+          </ScrollView>
+        </View>
+
+        <Card containerStyle={styles.titles}>
+          <Text style={{ fontSize: 18 }}>
+            {I18n.t("found")} {this.state.devicesIds.length}
+          </Text>
+        </Card>
+        <View>
+          <ScrollView style={styles.container}>
+            <FlatList
+              // Recogemos el array de dispositivos encontrados de nuetro estado
+              data={this.state.devices}
+              renderItem={({ item }) => (
+                <DeviceItem
+                  device={item}
+                  navigation={this.props.navigation}
+                  parent={this}
+                />
+              )}
+            />
+          </ScrollView>
         </View>
       </ImageBackground>
     );
@@ -202,8 +182,13 @@ export class Scanner extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
+    padding: 0,
     borderColor: "#d6d7da"
+  },
+  titles: {
+    margin: 0,
+    padding: 5,
+    paddingLeft: 10,
   }
 });
 
