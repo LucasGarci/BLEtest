@@ -15,10 +15,12 @@ export const colorTheme = {
     bigSliderBot: "#fafafa",
     bigSliderTop: "#007AF5",
     linkColor: "#60a0cb",
-    pressedLinkColor: "#60b0fb"
+    pressedLinkColor: "#60b0fb",
+    iconsTemp: "#002447",
+    bluethoot: "#029688"
   },
   dark: {
-    buttonColor: "rgb(2, 150, 136)",
+    buttonColor: "#029688",
     textColor: "#fafafa",
     bgColor: "#003870",
     bgLightColor: "#002447",
@@ -28,7 +30,9 @@ export const colorTheme = {
     bigSliderBot: "#007AF5",
     bigSliderTop: "#fafafa",
     linkColor: "#D0D8FD",
-    pressedLinkColor: "#F4D0FD"
+    pressedLinkColor: "#F4D0FD",
+    iconsTemp: "#cce6ff",
+    bluethoot: "#029688"
   }
 };
 

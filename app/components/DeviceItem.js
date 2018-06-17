@@ -93,7 +93,7 @@ export class DeviceItem extends React.Component {
             <View style={{ flex: 1 }}>
               <Icon
                 name="bluetooth-searching"
-                color={this.state.rssi ? "grey" : "green"}
+                color={this.state.rssi ? "grey" : theme().bluethoot}
                 size={48}
                 style={{ alignItems: "center" }}
               />
