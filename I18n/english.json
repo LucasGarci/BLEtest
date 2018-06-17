@@ -14,8 +14,10 @@
   "delete": "Delete",
   "bye": "Bye :(",
   "colorSchema": "Color Theme: ",
+  "this_may_cause": "This may cause several errors",
+  "are_you_sure": "Are you sure to do this?",
   "closeApp": "Close App ",
-  "wantToExit":  "Do you really want to exit?",
+  "wantToExit": "Do you really want to exit?",
   "yes": "Yes",
   "no": "No",
   "findOut": "Find out how to made me ;)",
@@ -24,6 +26,4 @@
   "status": "Connected",
 
   "Brightness": "Brightness"
-
-
 }

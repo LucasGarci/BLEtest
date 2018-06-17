@@ -14,6 +14,8 @@
   "delete": "Borrar",
   "bye": "Adiós :(",
   "colorSchema": "Esquema de Colores: ",
+  "this_may_cause": "Esto puede causar varios errores",
+  "are_you_sure": "Estás seguro?",
   "closeApp": "Salir de la Aplicación ",
   "wantToExit":  "Estas seguro de que quieres salir?",
   "yes": "Si",
