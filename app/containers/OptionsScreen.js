@@ -13,7 +13,7 @@ import {
 import RNExitApp from "react-native-exit-app";
 import { Card } from "react-native-elements";
 import { store } from "../redux/store";
-import { setLanguage, setTheme } from "../redux/actions";
+import { setLanguage, setTheme, clearData } from "../redux/actions";
 import { connect } from "react-redux";
 import I18n from "../../I18n/I18n";
 import { getCurrentTheme } from "../assets/colorThemes";
@@ -33,9 +33,6 @@ export class OptionsScreen extends React.Component {
       linkColor: getCurrentTheme().linkColor
     };
   }
-  onPress = () => {
-    console.log("OpptionsTab");
-  };
 
   onSwitch(value) {
     if (value) {
@@ -49,7 +46,7 @@ export class OptionsScreen extends React.Component {
   }
 
   handleDeletePress() {
-    console.log("DELETING LOCAL DATA");
+    store.dispatch(clearData())
   }
 
   handleByePress() {
@@ -57,7 +54,6 @@ export class OptionsScreen extends React.Component {
     const wantToExit = I18n.t("wantToExit");
     const yes = I18n.t("yes");
     const no = I18n.t("no");
-    console.log("BYE BYE MY FRIEND");
     Alert.alert(
       // Language?
       exit,
@@ -90,7 +86,6 @@ export class OptionsScreen extends React.Component {
   handlePicker(language) {
     store.dispatch(setLanguage(language));
     I18n.locale = store.getState().language;
-    console.log(this.state.language);
   }
 
   render() {

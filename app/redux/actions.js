@@ -38,3 +38,9 @@ export const setColor = color =>({
     color,
     type: SET_COLOR,
 })
+
+export const SET_POWER = 'SET_POWER'
+export const setPower = power =>({
+    power,
+    type: SET_POWER,
+})

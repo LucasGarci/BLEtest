@@ -25,7 +25,6 @@ export class ColorTab extends React.Component {
       currentColor: "",
       devicesConnected: {},
       deviceInfo: {},
-      lastUpdateValue: {}
     };
     this.writing = false;
   }
@@ -60,22 +59,6 @@ export class ColorTab extends React.Component {
         });
 
       const deviceInfo = this.state.deviceInfo;
-      // Esta es la unica caracteristica que responde a startNotific...
-      await BleManager.startNotification(
-        deviceInfo.id,
-        deviceInfo.characteristics[4].service,
-        deviceInfo.characteristics[4].characteristic
-      ).catch(errNotif => console.log({ errNotif }));
-
-      //Creamos enlace o certificamos que esta creado
-      await BleManager.createBond(deviceInfo.id)
-        .then(() => {
-          console.log("Bonding its OK");
-        })
-        .catch(() => {
-          console.log("Fail to bond");
-        });
-
       const brightness = store.getState().brightness;
       const mode = "0x56";
 
@@ -86,15 +69,12 @@ export class ColorTab extends React.Component {
       //concatenamos mode+r+g+b+constant
       const colorToWrite = mode.concat(r, g, b, "00f0aa");
       console.log({ colorToWrite: colorToWrite });
-
       const data = conversor.hexToBytes(colorToWrite);
       console.log({ dataToWrite: data });
 
       data[1] = Math.round(data[1] * brightness);
       data[2] = Math.round(data[2] * brightness);
       data[3] = Math.round(data[3] * brightness);
-
-      //  BleManager.checkState
 
       await BleManager.write(
         deviceInfo.id,
