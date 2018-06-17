@@ -8,6 +8,7 @@
   "stop": "Stop scanner",
   "connected": "Nº Devices Connected: ",
   "found": "Nª Devices Found: ",
+  "anonymous": "Anonymous",
 
   "selectLang": "Select Language: ",
   "deleteLD": "Delete local data ",
@@ -25,5 +26,5 @@
   "name": "Name: ",
   "status": "Connected",
 
-  "Brightness": "Brightness"
+  "Brightness": "BRIGHTNESS"
 }

@@ -22,12 +22,21 @@ import I18n from "react-native-i18n";
 import { Card, Icon } from "react-native-elements";
 import BleManager from "react-native-ble-manager";
 import { DeviceItem } from "./components/DeviceItem";
+import { connect } from "react-redux";
+import { store } from "./redux/store";
+import { theme } from "./assets/colorThemes";
 
 //We get the class to subscribe
 const BleManagerModule = NativeModules.BleManager;
 //We create our events emitter
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
+@connect(state => {
+  return {
+    language: state.language,
+    theme: state.theme
+  };
+})
 export class Scanner extends React.Component {
   constructor() {
     super();
@@ -120,64 +129,77 @@ export class Scanner extends React.Component {
     const stop = I18n.t("stop");
     const start = I18n.t("start");
     return (
-      <ImageBackground
-        source={require("./img/fondoapp.png")}
-        style={{ width: "100%", height: "100%" }}
-      >
-        <View style={{ paddingTop: 10, paddingBottom: 10 }}>
-          <Button
-            style={{ padding: 10 }}
-            title={this.state.scanning ? stop : start}
-            onPress={() => {
-              this.startStop();
-            }}
-          />
-        </View>
+      <View style={{ backgroundColor: theme().bgColor, flex: 1 }}>
+        <View>
+          <View style={{ paddingTop: 10, paddingBottom: 10 }}>
+            <Button
+              color={theme().buttonColor}
+              title={this.state.scanning ? stop : start}
+              onPress={() => {
+                this.startStop();
+              }}
+            />
+          </View>
 
-        {this.state.devicesConnected.length > 0 ? (
-          <Card containerStyle={styles.titles}>
-            <Text style={{ fontSize: 18 }}>
-              {I18n.t("connected")} {this.state.devicesConnected.length}
+          {this.state.devicesConnected.length > 0 ? (
+            <Card
+              containerStyle={[
+                styles.titles,
+                {
+                  backgroundColor: theme().bgLightColor
+                }
+              ]}
+            >
+              <Text style={[{ fontSize: 18 }, { color: theme().textColor }]}>
+                {I18n.t("connected")} {this.state.devicesConnected.length}
+              </Text>
+            </Card>
+          ) : null}
+          <View>
+            <ScrollView style={styles.container}>
+              <FlatList
+                // Recogemos el array de dispositivos conectados de nuetro estado
+                data={this.state.devicesConnected}
+                renderItem={({ item }) => (
+                  <DeviceItem
+                    device={item}
+                    navigation={this.props.navigation}
+                    parent={this}
+                  />
+                )}
+              />
+            </ScrollView>
+          </View>
+
+          <Card
+            containerStyle={[
+              styles.titles,
+              {
+                backgroundColor: theme().bgLightColor
+              }
+            ]}
+          >
+            <Text style={[{ fontSize: 18 }, { color: theme().textColor }]}>
+              {I18n.t("found")} {this.state.devicesIds.length}
             </Text>
           </Card>
-        ) : null}
-        <View>
-          <ScrollView style={styles.container}>
-            <FlatList
-              // Recogemos el array de dispositivos conectados de nuetro estado
-              data={this.state.devicesConnected}
-              renderItem={({ item }) => (
-                <DeviceItem
-                  device={item}
-                  navigation={this.props.navigation}
-                  parent={this}
-                />
-              )}
-            />
-          </ScrollView>
+          <View>
+            <ScrollView style={styles.container}>
+              <FlatList
+                // Recogemos el array de dispositivos encontrados de nuetro estado
+                data={this.state.devices}
+                renderItem={({ item }) => (
+                  <DeviceItem
+                    device={item}
+                    navigation={this.props.navigation}
+                    parent={this}
+                  />
+                )}
+              />
+            </ScrollView>
+          </View>
         </View>
-
-        <Card containerStyle={styles.titles}>
-          <Text style={{ fontSize: 18 }}>
-            {I18n.t("found")} {this.state.devicesIds.length}
-          </Text>
-        </Card>
-        <View>
-          <ScrollView style={styles.container}>
-            <FlatList
-              // Recogemos el array de dispositivos encontrados de nuetro estado
-              data={this.state.devices}
-              renderItem={({ item }) => (
-                <DeviceItem
-                  device={item}
-                  navigation={this.props.navigation}
-                  parent={this}
-                />
-              )}
-            />
-          </ScrollView>
-        </View>
-      </ImageBackground>
+      </View>
     );
   }
 }
@@ -189,8 +211,10 @@ const styles = StyleSheet.create({
   },
   titles: {
     margin: 0,
+    marginLeft: -3,
+    marginRight: -3,
     padding: 5,
-    paddingLeft: 10
+    paddingLeft: 15
   }
 });
 

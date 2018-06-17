@@ -106,12 +106,13 @@ export class BriTab extends React.Component {
   }
 
   render() {
-    const sliderColor = theme().bigSlider;
+    const bgColor = theme().bigSliderTop;
+    const sliderColor = theme().bigSliderBot;
     const labelColor = theme().textColor;
     return (
       <View style={[styles.centerContainer]}>
         <BigSlider
-          style={{ width: 110 }}
+          style={{ width: 125, backgroundColor: bgColor }}
           trackStyle={{ backgroundColor: sliderColor }}
           maximumValue={100}
           minimumValue={0}

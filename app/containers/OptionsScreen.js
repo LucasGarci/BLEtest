@@ -102,10 +102,6 @@ export class OptionsScreen extends React.Component {
     const del = I18n.t("delete");
     const bye = I18n.t("bye");
     return (
-      <ImageBackground
-        source={require("../img/fondoapp.png")}
-        style={{ width: "100%", height: "100%" }}
-      >
         <View
           style={[
             styles.centerContainer,
@@ -128,7 +124,7 @@ export class OptionsScreen extends React.Component {
                     { color: theme().textColor }
                   ]}
                 >
-                  {I18n.t("selectLang")} {this.props.language}
+                  {I18n.t("selectLang")}
                 </Text>
               </View>
               <View style={styles.switchContainer}>
@@ -262,7 +258,7 @@ export class OptionsScreen extends React.Component {
                   <Text
                     style={{
                       fontSize: 19,
-                      color: this.state.linkColor
+                      color: theme().linkColor
                     }}
                     onPress={this.handleLinkPress}
                   >
@@ -273,7 +269,6 @@ export class OptionsScreen extends React.Component {
             </Card>
           </View>
         </View>
-      </ImageBackground>
     );
   }
 }
@@ -310,8 +305,7 @@ const styles = StyleSheet.create({
     flexDirection: "column"
   },
   textOption: {
-    fontSize: 16,
-    fontWeight: "bold"
+    fontSize: 18,
   },
   link: {
     fontSize: 19
