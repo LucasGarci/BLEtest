@@ -15,10 +15,6 @@ import { store } from "../redux/store";
 import { setColor } from "../redux/actions";
 
 var conversor = require("convert-hex");
-//We get the class to subscribe
-const BleManagerModule = NativeModules.BleManager;
-//We create our events emitter
-const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 export class PrefabPicker extends Component {
   constructor() {
@@ -30,7 +26,6 @@ export class PrefabPicker extends Component {
       color4: "#ffff00",
       devicesConnected: {},
       deviceInfo: {},
-      lastUpdateValue: {}
     };
   }
 
@@ -60,7 +55,6 @@ export class PrefabPicker extends Component {
       });
 
     const deviceInfo = this.state.deviceInfo;
-    const brightness = store.getState().brightness;
     const mode = "0x56";
     // Debemos pasar la cadena a hexadecimal y que sea un valor de dos dígitos
     const r = secureByte(rgbColor.r.toString(16));
@@ -69,6 +63,7 @@ export class PrefabPicker extends Component {
     //concatenamos mode+r+g+b+constant
     const colorToWrite = mode.concat(r, g, b, "00f0aa");
     const data = conversor.hexToBytes(colorToWrite);
+    const brightness = store.getState().brightness;
 
     data[1] = Math.round(data[1] * brightness);
     data[2] = Math.round(data[2] * brightness);
@@ -89,26 +84,29 @@ export class PrefabPicker extends Component {
         console.log(error);
       });
   }
-  getColor = () => {
-    return hsv2Hex(this.props.color.h, this.props.color.s, this.props.color.v);
-  };
 
   onLongPress = key => {
+    const color = hsv2Hex(
+      this.props.color.h,
+      this.props.color.s,
+      this.props.color.v
+    );
     switch (key) {
       case 1:
-        this.setState({ color1: this.getColor });
+        this.setState({ color1: color });
         break;
       case 2:
-        this.setState({ color2: this.getColor });
+        this.setState({ color2: color });
         break;
       case 3:
-        this.setState({ color3: this.getColor });
+        this.setState({ color3: color });
         break;
       case 4:
-        this.setState({ color4: this.getColor });
+        this.setState({ color4: color });
         break;
     }
   };
+
   render() {
     return (
       <View

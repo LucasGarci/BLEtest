@@ -51,7 +51,6 @@ export class ColorTab extends React.Component {
       //Sacamos los servicios
       await BleManager.retrieveServices(device.id)
         .then(deviceInfo => {
-          console.log({ CT_devInf: deviceInfo });
           this.setState({ deviceInfo });
         })
         .catch(error => {
@@ -59,7 +58,6 @@ export class ColorTab extends React.Component {
         });
 
       const deviceInfo = this.state.deviceInfo;
-      const brightness = store.getState().brightness;
       const mode = "0x56";
 
       // Debemos pasar la cadena a hexadecimal y que sea un valor de dos dígitos
@@ -68,9 +66,8 @@ export class ColorTab extends React.Component {
       const b = secureByte(rgbColor.b.toString(16));
       //concatenamos mode+r+g+b+constant
       const colorToWrite = mode.concat(r, g, b, "00f0aa");
-      console.log({ colorToWrite: colorToWrite });
       const data = conversor.hexToBytes(colorToWrite);
-      console.log({ dataToWrite: data });
+      const brightness = store.getState().brightness;
 
       data[1] = Math.round(data[1] * brightness);
       data[2] = Math.round(data[2] * brightness);
@@ -92,8 +89,6 @@ export class ColorTab extends React.Component {
           console.log(error);
         });
       this.writing = false;
-    } else {
-      console.log("no ha escrito");
     }
   }
 
