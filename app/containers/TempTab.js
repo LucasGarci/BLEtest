@@ -11,24 +11,6 @@ export class TempTab extends React.Component {
     }
   }
 
-
-  /*
-  changeTemp(angle) {
-    const temperature = this.calcTempFromAngle(angle)
-    this.setState({ temperature })
-    console.log({ temperature })
-    console.log({ angle })
-  }
-
-  calcTempFromAngle = (angle) => {
-    let aux
-    if (angle < 0) aux = angle + 360
-    aux = 360 - (angle | 0) % 360
-    const result =
-      aux / 360 * (this.props.maxTemp - this.props.minTemp) + this.props.minTemp
-    return result | 0
-  }
-*/
 componentDidMount() {
   setTimeout(() => this.refs.test.scrollTo({ x: this.state.xOffset, y: 0 }) , 0);
 }  
