@@ -2,13 +2,9 @@ import React from "react";
 import {
   StyleSheet,
   Image,
-  ImageBackground,
-  Text,
   View,
   ScrollView,
-  Button,
   TouchableOpacity,
-  Dimensions
 } from "react-native";
 import { Icon } from "react-native-elements";
 import { tempScale } from "../assets/tempScale";

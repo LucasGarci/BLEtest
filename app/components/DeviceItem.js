@@ -3,15 +3,11 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Card, Icon } from "react-native-elements";
 import BleManager from "react-native-ble-manager";
 import I18n from "../../I18n/I18n";
-import Buffer from "buffer";
-import { bytesToString } from "convert-string";
-import { connect } from "react-redux";
-import { store } from "../redux/store";
 import { theme } from "../assets/colorThemes";
+import { connect } from "react-redux";
 
 var conversor = require("convert-hex");
 // Documentación: https://www.npmjs.com/package/convert-hex
-
 @connect(state => {
   return {
     language: state.language,
@@ -92,26 +88,27 @@ export class DeviceItem extends React.Component {
           <View style={styles.cardStyle}>
             <View style={{ flex: 1 }}>
               <Icon
-                name="bluetooth-searching"
+                name={
+                  this.state.rssi
+                    ? "bluetooth-searching"
+                    : "bluetooth-connected"
+                }
                 color={this.state.rssi ? "grey" : theme().bluethoot}
                 size={48}
                 style={{ alignItems: "center" }}
               />
             </View>
             <View style={{ flex: 3 }}>
-              <Text style={[
-                    {fontSize: 16},
-                    { color: theme().textColor }
-                  ]}>Id: {this.state.id} </Text>
-              <Text style={[
-                    {fontSize: 16},
-                    { color: theme().textColor }
-                  ]}>{I18n.t("name")} {this.state.name}</Text>
+              <Text style={[{ fontSize: 16 }, { color: theme().textColor }]}>
+                Id: {this.state.id}{" "}
+              </Text>
+              <Text style={[{ fontSize: 16 }, { color: theme().textColor }]}>
+                {I18n.t("name")} {this.state.name}
+              </Text>
               {this.state.rssi ? (
-                <Text style={[
-                  {fontSize: 16},
-                  { color: theme().textColor }
-                ]}>Rssi: {this.state.rssi} </Text>
+                <Text style={[{ fontSize: 16 }, { color: theme().textColor }]}>
+                  Rssi: {this.state.rssi}{" "}
+                </Text>
               ) : null}
             </View>
           </View>

@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TouchableOpacity,
-  Dimensions,
-  NativeEventEmitter,
-  NativeModules
-} from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import { ColorWheel } from "react-native-color-wheel";
 import { hsv2Rgb } from "colorsys";
 import { PrefabPicker } from "../components/PrefabPicker";
@@ -24,7 +15,7 @@ export class ColorTab extends React.Component {
     this.state = {
       currentColor: "",
       devicesConnected: {},
-      deviceInfo: {},
+      deviceInfo: {}
     };
     this.writing = false;
   }
