@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { ColorWheel } from 'react-native-color-wheel';
 
 export default class RGBWheel extends Component {

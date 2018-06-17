@@ -3,9 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
-  ImageBackground,
-  TouchableOpacity
 } from "react-native";
 import I18n from "../../I18n/I18n";
 import { theme } from "../assets/colorThemes";

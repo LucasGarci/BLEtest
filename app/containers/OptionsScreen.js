@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ImageBackground,
   Picker,
   Button,
   Switch,

@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "react-native";
 import { DeviceNavigation } from "../navigation/router";
-import I18n from "../../I18n/I18n";
 import { theme } from "../assets/colorThemes";
 
 export class DeviceTabs extends React.Component {

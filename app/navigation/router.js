@@ -1,8 +1,6 @@
 import React from "react";
 import { TabNavigator, StackNavigator } from "react-navigation";
-import { Text } from "react-native";
 import { Icon } from "react-native-elements";
-
 import { Scanner } from "../Scanner";
 import { BriTab } from "../containers/BriTab";
 import { ColorTab } from "../containers/ColorTab";
@@ -13,7 +11,6 @@ import { DeviceTabs } from "../containers/DeviceTabs";
 import { OptionsButton } from "../components/OptionsButton";
 import { PowerButton } from "../components/PowerButton";
 import I18n from "../../I18n/I18n";
-import { store } from "../redux/store";
 
 export const Root = StackNavigator({
   Home: {
