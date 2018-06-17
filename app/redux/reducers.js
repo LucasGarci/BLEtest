@@ -1,9 +1,10 @@
 import * as actions from "./actions";
+import { initialState } from "./initialState";
 
 export default function goblalReducer(state, action) {
   switch (action.type) {
     case actions.CLEAR_DATA:
-      return state;
+      return initialState;
     case actions.CLEAR_PREFAB:
       return state;
     case actions.SET_PREFAB:
@@ -16,6 +17,8 @@ export default function goblalReducer(state, action) {
       return { ...state, theme: action.theme };
     case actions.SET_LANGUAGE:
       return { ...state, language: action.language };
+    case actions.SET_POWER:
+      return { ...state, power: action.power };
     default:
       return state;
   }

@@ -11,12 +11,10 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import BleManager from "react-native-ble-manager";
+import { store } from "../redux/store";
+import { setPower } from "../redux/actions";
 
 var conversor = require("convert-hex");
-// Obtenemos la clase para suscribirnos
-const BleManagerModule = NativeModules.BleManager;
-//Creamos el emisor de eventos
-const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 //Botón encendido o apagado
 const switchOn = true;
 
@@ -26,19 +24,11 @@ export class PowerButton extends React.Component {
     this.state = {
       devicesConnected: {},
       deviceInfo: {},
-      lastUpdateValue: {}
     };
-    this.handleBleManagerDidUpdateState = this.handleBleManagerDidUpdateState.bind(
-      this
-    );
   }
 
   componentDidMount() {
     this.retrieveConnected();
-    this.handlerUpdate = bleManagerEmitter.addListener(
-      "BleManagerDidUpdateState",
-      this.handleBleManagerDidUpdateState
-    );
   }
 
   retrieveConnected() {
@@ -48,21 +38,9 @@ export class PowerButton extends React.Component {
     });
   }
 
-  handleBleManagerDidUpdateState(data) {
-    console.log(
-      "Received data from " +
-        data.peripheral +
-        " characteristic " +
-        data.characteristic,
-      data.value
-    );
-    this.setState({ lastUpdateValue: data });
-  }
-
   async handleOnPress() {
     BleManager.checkState();
     const device = this.state.devicesConnected[0];
-    console.log({ CT_devConected: device });
 
     //Sacamos los servicios
     await BleManager.retrieveServices(device.id)
@@ -75,28 +53,11 @@ export class PowerButton extends React.Component {
       });
 
     const deviceInfo = this.state.deviceInfo;
-    // Esta es la unica caracteristica que responde a startNotific...
-    await BleManager.startNotification(
-      deviceInfo.id,
-      deviceInfo.characteristics[4].service,
-      deviceInfo.characteristics[4].characteristic
-    ).catch(errNotif => console.log({ errNotif }));
-
-    //Creamos enlace o certificamos que esta creado
-    await BleManager.createBond(deviceInfo.id)
-      .then(() => {
-        console.log("Bonding its OK");
-      })
-      .catch(() => {
-        console.log("Fail to bond");
-      });
-
     const off = "CC2433";
     const on = "CC2333";
     go = switchOn ? off : on;
-    switchOn = !switchOn;
-
     const data = conversor.hexToBytes(go);
+    switchOn = !switchOn;
 
     await BleManager.write(
       deviceInfo.id,
@@ -105,7 +66,7 @@ export class PowerButton extends React.Component {
       data
     )
       .then(() => {
-        index = 10;
+        store.dispatch(setPower(switchOn));
         // Success code
         console.log("Writed: " + data);
       })

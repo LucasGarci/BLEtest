@@ -6,18 +6,23 @@ import I18n from "../../I18n/I18n";
 import { getCurrentTheme } from "../assets/colorThemes";
 import { store } from "../redux/store";
 import { setBrightness } from "../redux/actions";
+import { connect } from "react-redux";
 
 var conversor = require("convert-hex");
 
+@connect(state => {
+  return {
+    power: state.power,
+  };
+})
 export class BriTab extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      power: true,
+      power: this.props.power,
       brightness: 30,
       devicesConnected: {},
       deviceInfo: {},
-      lastUpdateValue: {}
     };
     this.writing = false;
   }
@@ -40,15 +45,12 @@ export class BriTab extends React.Component {
     if (!this.writing) {
       this.writing = true;
       BleManager.checkState();
-   
       const device = this.state.devicesConnected[0];
-      console.log("UNO");
 
       //Sacamos los servicios
       await BleManager.retrieveServices(device.id)
         .then(deviceInfo => {
           this.setState({ deviceInfo });
-          console.log("DOS");
         })
         .catch(error => {
           console.log(error);
@@ -65,7 +67,6 @@ export class BriTab extends React.Component {
           console.log("Fail to bond");
         });
 
-      console.log("TRES");
       const rgbColor = store.getState().color;
       const mode = "0x56";
       // Debemos pasar la cadena a hexadecimal y que sea un valor de dos dígitos
@@ -99,11 +100,8 @@ export class BriTab extends React.Component {
           // Failure code
           console.log(error);
         });
-      console.log("CUATRO");
 
       this.writing = false;
-    } else {
-      console.log("no ha escrito");
     }
   }
 

@@ -11,6 +11,8 @@ import {
 import { Card } from "react-native-elements";
 import { hsv2Hex, hsv2Rgb, hex2Rgb, hex2Hsv } from "colorsys";
 import BleManager from "react-native-ble-manager";
+import { store } from "../redux/store";
+import { setColor } from "../redux/actions";
 
 var conversor = require("convert-hex");
 //We get the class to subscribe
@@ -30,17 +32,10 @@ export class PrefabPicker extends Component {
       deviceInfo: {},
       lastUpdateValue: {}
     };
-    this.handleBleManagerDidUpdateState = this.handleBleManagerDidUpdateState.bind(
-      this
-    );
   }
 
   componentDidMount() {
     this.retrieveConnected();
-    this.handlerUpdate = bleManagerEmitter.addListener(
-      "BleManagerDidUpdateState",
-      this.handleBleManagerDidUpdateState
-    );
   }
 
   retrieveConnected() {
@@ -50,28 +45,14 @@ export class PrefabPicker extends Component {
     });
   }
 
-  handleBleManagerDidUpdateState(data) {
-    console.log(
-      "Received data from " +
-        data.peripheral +
-        " characteristic " +
-        data.characteristic,
-      data.value
-    );
-    this.setState({ lastUpdateValue: data });
-  }
-
   async handleColorChange(color) {
-    this.setState({ currentColor: color });
     BleManager.checkState();
     const rgbColor = hex2Rgb(color);
-    this.setState({ currentColor: rgbColor });
+    store.dispatch(setColor(rgbColor));
     const device = this.state.devicesConnected[0];
-
     //Sacamos los servicios
     await BleManager.retrieveServices(device.id)
       .then(deviceInfo => {
-        console.log({ CT_devInf: deviceInfo });
         this.setState({ deviceInfo });
       })
       .catch(error => {
@@ -79,22 +60,7 @@ export class PrefabPicker extends Component {
       });
 
     const deviceInfo = this.state.deviceInfo;
-
-    await BleManager.startNotification(
-      deviceInfo.id,
-      deviceInfo.characteristics[4].service,
-      deviceInfo.characteristics[4].characteristic
-    ).catch(errNotif => console.log({ errNotif }));
-
-    //Creamos enlace o certificamos que esta creado
-    await BleManager.createBond(deviceInfo.id)
-      .then(() => {
-        console.log("Bonding its OK");
-      })
-      .catch(() => {
-        console.log("Fail to bond");
-      });
-
+    const brightness = store.getState().brightness;
     const mode = "0x56";
     // Debemos pasar la cadena a hexadecimal y que sea un valor de dos dígitos
     const r = secureByte(rgbColor.r.toString(16));
@@ -102,10 +68,11 @@ export class PrefabPicker extends Component {
     const b = secureByte(rgbColor.b.toString(16));
     //concatenamos mode+r+g+b+constant
     const colorToWrite = mode.concat(r, g, b, "00f0aa");
-    console.log({ colorToWrite: colorToWrite });
-
     const data = conversor.hexToBytes(colorToWrite);
-    console.log({ dataToWrite: data });
+
+    data[1] = Math.round(data[1] * brightness);
+    data[2] = Math.round(data[2] * brightness);
+    data[3] = Math.round(data[3] * brightness);
 
     await BleManager.write(
       deviceInfo.id,
@@ -114,7 +81,6 @@ export class PrefabPicker extends Component {
       data
     )
       .then(() => {
-        index = 10;
         // Success code
         console.log("Writed: " + data);
       })
@@ -122,56 +88,26 @@ export class PrefabPicker extends Component {
         // Failure code
         console.log(error);
       });
-    this.writing = false;
   }
+  getColor = () => {
+    return hsv2Hex(this.props.color.h, this.props.color.s, this.props.color.v);
+  };
 
-  onPress1 = () => {
-    console.log("Pulsado 1 ");
-  };
-  onLongPress1 = () => {
-    console.log("Pulsado 1 ");
-    const color = hsv2Hex(
-      this.props.color.h,
-      this.props.color.s,
-      this.props.color.v
-    );
-    this.setState({ color1: color });
-  };
-  onPress2 = () => {
-    console.log("Pulsado 2 ");
-  };
-  onLongPress2 = () => {
-    console.log("Pulsado 2 ");
-    const color = hsv2Hex(
-      this.props.color.h,
-      this.props.color.s,
-      this.props.color.v
-    );
-    this.setState({ color2: color });
-  };
-  onPress3 = () => {
-    console.log("Pulsado 3");
-  };
-  onLongPress3 = () => {
-    console.log("Manten Pulsado 3");
-    const color = hsv2Hex(
-      this.props.color.h,
-      this.props.color.s,
-      this.props.color.v
-    );
-    this.setState({ color3: color });
-  };
-  onPress4 = () => {
-    console.log("Pulsado 4");
-  };
-  onLongPress4 = () => {
-    console.log("Pulsado 4");
-    const color = hsv2Hex(
-      this.props.color.h,
-      this.props.color.s,
-      this.props.color.v
-    );
-    this.setState({ color4: color });
+  onLongPress = key => {
+    switch (key) {
+      case 1:
+        this.setState({ color1: this.getColor });
+        break;
+      case 2:
+        this.setState({ color2: this.getColor });
+        break;
+      case 3:
+        this.setState({ color3: this.getColor });
+        break;
+      case 4:
+        this.setState({ color4: this.getColor });
+        break;
+    }
   };
   render() {
     return (
@@ -192,11 +128,10 @@ export class PrefabPicker extends Component {
               borderRadius: 45
             }}
             onPress={() => {
-              this.onPress1();
-              this.handleColorChange(this.state.color1)
+              this.handleColorChange(this.state.color1);
             }}
             onLongPress={() => {
-              this.onLongPress1();
+              this.onLongPress(1);
             }}
           >
             <Text>{JSON.stringify(this.state.color1)}</Text>
@@ -212,10 +147,10 @@ export class PrefabPicker extends Component {
               borderRadius: 45
             }}
             onPress={() => {
-              this.handleColorChange(this.state.color2)
+              this.handleColorChange(this.state.color2);
             }}
             onLongPress={() => {
-              this.onLongPress2();
+              this.onLongPress(2);
             }}
           >
             <Text>{JSON.stringify(this.state.color2)}</Text>
@@ -231,10 +166,10 @@ export class PrefabPicker extends Component {
               borderRadius: 45
             }}
             onPress={() => {
-              this.handleColorChange(this.state.color3)
+              this.handleColorChange(this.state.color3);
             }}
             onLongPress={() => {
-              this.onLongPress3();
+              this.onLongPress(3);
             }}
           >
             <Text>{JSON.stringify(this.state.color3)}</Text>
@@ -250,10 +185,10 @@ export class PrefabPicker extends Component {
               borderRadius: 45
             }}
             onPress={() => {
-              this.handleColorChange(this.state.color4)
+              this.handleColorChange(this.state.color4);
             }}
             onLongPress={() => {
-              this.onLongPress4();
+              this.onLongPress(4);
             }}
           >
             <Text>{JSON.stringify(this.state.color4)}</Text>
