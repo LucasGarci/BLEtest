@@ -63,16 +63,6 @@ export class Scanner extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    BleManager.stopScan().then(() => {
-      // Success code
-      console.log("Scan stopped on Unmount");
-    });
-    this.handlerDiscover.remove();
-    this.handlerStop.remove();
-    this.handlerDisconnect.remove();
-  }
-
   componentDidMount() {
     // We set listeners to our events to our api events
     this.setListeners();

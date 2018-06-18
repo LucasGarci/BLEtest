@@ -57,21 +57,6 @@ export class DeviceItem extends React.Component {
       .catch(error => {
         console.log("Connection error", error);
       });
-
-    await BleManager.connect(device.id)
-      .then(() => {
-        let devices = this.state.devices;
-        let p = devices.get(device.id);
-        if (p) {
-          p.connected = true;
-          devices.set(device.id, p);
-          this.setState({ devices });
-        }
-        console.log("Connected to " + device.id);
-      })
-      .catch(error => {
-        console.log("Connection error", error);
-      });
   };
 
   render() {
