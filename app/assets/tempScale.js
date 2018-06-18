@@ -1,5 +1,5 @@
 export const tempScale = [
-  "ff8912",
+  "ff8912", //2500K
   "ff921d",
   "ff8e21",
   "ff9829",
@@ -138,5 +138,5 @@ export const tempScale = [
   "d8e3ff",
   "dae2ff",
   "d7e2ff",
-  "d9e1ff"
+  "d9e1ff" //9000K
 ];

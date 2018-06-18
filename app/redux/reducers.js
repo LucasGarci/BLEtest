@@ -5,10 +5,6 @@ export default function goblalReducer(state, action) {
   switch (action.type) {
     case actions.CLEAR_DATA:
       return initialState;
-    case actions.CLEAR_PREFAB:
-      return state;
-    case actions.SET_PREFAB:
-      return state;
     case actions.SET_BRIGHTNESS:
       return { ...state, brightness: action.brightness };
     case actions.SET_COLOR:
