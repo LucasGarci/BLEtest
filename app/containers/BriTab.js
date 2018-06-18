@@ -174,3 +174,10 @@ function formatNumber(x) {
     .toFixed(1)
     .replace(/.?0*$/, "");
 }
+
+secureByte = function(byteString) {
+  if (byteString.length === 1) {
+    byteString = "0".concat(byteString);
+  }
+  return byteString;
+};
