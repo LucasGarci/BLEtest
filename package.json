@@ -4,12 +4,12 @@
   "private": true,
   "devDependencies": {
     "babel-preset-react-native-stage-0": "^1.0.1",
-    "grunt": "^1.0.3",
+    "grunt": "^1.0.4",
     "grunt-contrib-jshint": "^1.1.0",
-    "jest": "^22.4.4",
+    "jest": "^25.0.0",
     "jest-react-native": "^18.0.0",
     "react-test-renderer": "16.3.1",
-    "redux-devtools": "^3.4.1"
+    "redux-devtools": "^3.5.0"
   },
   "scripts": {
     "start": "react-native start",
@@ -24,11 +24,12 @@
   },
   "dependencies": {
     "buffer": "^5.1.0",
+    "canvas": "^2.6.1",
     "colorsys": "^1.0.21",
     "convert-hex": "^0.1.0",
     "convert-string": "^0.1.0",
-    "react": "16.3.1",
-    "react-native": "^0.55.4",
+    "react": "^16.12.0",
+    "react-native": "^0.61.5",
     "react-native-big-slider": "^0.1.1",
     "react-native-ble-manager": "^6.3.1",
     "react-native-color-wheel": "^0.1.5",
@@ -36,7 +37,7 @@
     "react-native-elements": "^0.19.1",
     "react-native-exit-app": "^1.0.0",
     "react-native-i18n": "^2.0.12",
-    "react-native-vector-icons": "^4.6.0",
+    "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^2.0.4",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
